@@ -1,0 +1,159 @@
+{
+  "lastUpdated": "2026-02-28",
+  "source": "综合公开信息整理",
+  "models": [
+    {
+      "name": "GPT-4o",
+      "company": "OpenAI",
+      "release": "2024",
+      "params": { "display": "未公开", "valueB": null },
+      "context": { "display": "128K", "valueK": 128 },
+      "strengths": ["多模态", "推理能力", "代码生成"],
+      "weaknesses": ["成本较高", "不透明"],
+      "scores": {
+        "reasoning": 96,
+        "coding": 94,
+        "multilingual": 90,
+        "speed": 85,
+        "cost": 55
+      },
+      "color": "#FF6B35"
+    },
+    {
+      "name": "GPT-4",
+      "company": "OpenAI",
+      "release": "2023",
+      "params": { "display": "~1.76T", "valueB": 1760 },
+      "context": { "display": "128K", "valueK": 128 },
+      "strengths": ["推理能力", "代码生成", "稳定性"],
+      "weaknesses": ["成本较高", "不透明"],
+      "scores": {
+        "reasoning": 93,
+        "coding": 90,
+        "multilingual": 88,
+        "speed": 70,
+        "cost": 40
+      },
+      "color": "#00A67E"
+    },
+    {
+      "name": "Claude 3.7",
+      "company": "Anthropic",
+      "release": "2025",
+      "params": { "display": "未公开", "valueB": null },
+      "context": { "display": "200K", "valueK": 200 },
+      "strengths": ["推理深度", "代码能力", "长文本", "安全性"],
+      "weaknesses": ["响应速度", "成本"],
+      "scores": {
+        "reasoning": 97,
+        "coding": 95,
+        "multilingual": 85,
+        "speed": 70,
+        "cost": 50
+      },
+      "color": "#10b981"
+    },
+    {
+      "name": "Claude 3.5",
+      "company": "Anthropic",
+      "release": "2024",
+      "params": { "display": "未公开", "valueB": null },
+      "context": { "display": "200K", "valueK": 200 },
+      "strengths": ["长文本", "安全性", "分析能力"],
+      "weaknesses": ["数学较弱", "创意有限"],
+      "scores": {
+        "reasoning": 92,
+        "coding": 90,
+        "multilingual": 84,
+        "speed": 80,
+        "cost": 65
+      },
+      "color": "#059669"
+    },
+    {
+      "name": "Gemini 2.0",
+      "company": "Google",
+      "release": "2024",
+      "params": { "display": "未公开", "valueB": null },
+      "context": { "display": "1M", "valueK": 1000 },
+      "strengths": ["多模态", "超长上下文", "搜索集成"],
+      "weaknesses": ["一致性", "中文支持"],
+      "scores": {
+        "reasoning": 94,
+        "coding": 90,
+        "multilingual": 88,
+        "speed": 85,
+        "cost": 70
+      },
+      "color": "#8b5cf6"
+    },
+    {
+      "name": "Gemini 1.5 Pro",
+      "company": "Google",
+      "release": "2024",
+      "params": { "display": "未公开", "valueB": null },
+      "context": { "display": "2M", "valueK": 2000 },
+      "strengths": ["超长上下文", "多模态", "搜索集成"],
+      "weaknesses": ["一致性", "创意有限"],
+      "scores": {
+        "reasoning": 88,
+        "coding": 85,
+        "multilingual": 86,
+        "speed": 80,
+        "cost": 72
+      },
+      "color": "#7c3aed"
+    },
+    {
+      "name": "Llama 3.3",
+      "company": "Meta",
+      "release": "2024",
+      "params": { "display": "70B", "valueB": 70 },
+      "context": { "display": "128K", "valueK": 128 },
+      "strengths": ["开源", "可本地部署", "隐私", "性价比"],
+      "weaknesses": ["硬件要求高", "生态较小"],
+      "scores": {
+        "reasoning": 88,
+        "coding": 86,
+        "multilingual": 80,
+        "speed": 88,
+        "cost": 95
+      },
+      "color": "#f59e0b"
+    },
+    {
+      "name": "DeepSeek-V3",
+      "company": "DeepSeek",
+      "release": "2024",
+      "params": { "display": "671B", "valueB": 671 },
+      "context": { "display": "128K", "valueK": 128 },
+      "strengths": ["性价比高", "代码能力强", "开源"],
+      "weaknesses": ["生态较新", "英文为主"],
+      "scores": {
+        "reasoning": 92,
+        "coding": 94,
+        "multilingual": 75,
+        "speed": 85,
+        "cost": 92
+      },
+      "color": "#0ea5e9"
+    },
+    {
+      "name": "Qwen2.5",
+      "company": "阿里",
+      "release": "2024",
+      "params": { "display": "72B", "valueB": 72 },
+      "context": { "display": "128K", "valueK": 128 },
+      "strengths": ["中文能力", "多语言", "开源"],
+      "weaknesses": ["推理较弱", "生态较小"],
+      "scores": {
+        "reasoning": 85,
+        "coding": 82,
+        "multilingual": 92,
+        "speed": 88,
+        "cost": 90
+      },
+      "color": "#ef4444"
+    }
+  ]
+}
