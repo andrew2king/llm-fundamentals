@@ -2,6 +2,9 @@ import { useEffect, useState, Suspense, lazy } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+// User Context Provider
+import { UserProvider } from './contexts/UserContext';
+
 // Critical components - loaded immediately
 import Navbar from './sections/Navbar';
 import Hero from './sections/Hero';
@@ -11,6 +14,7 @@ import SectionNav from './sections/SectionNav';
 
 // Lazy loaded components - loaded on demand
 const LearningPath = lazy(() => import('./sections/LearningPath'));
+const Courses = lazy(() => import('./sections/Courses'));
 const CoreKnowledgeHub = lazy(() => import('./sections/CoreKnowledgeHub'));
 const WhatIsLLM = lazy(() => import('./sections/WhatIsLLM'));
 const CoreConcepts = lazy(() => import('./sections/CoreConcepts'));
@@ -45,6 +49,8 @@ const SkillEcosystem = lazy(() => import('./sections/SkillEcosystem'));
 const MultimodalHub = lazy(() => import('./sections/MultimodalHub'));
 const MultimodalSections = lazy(() => import('./sections/MultimodalSections'));
 const MultimodalPlaybook = lazy(() => import('./sections/MultimodalPlaybook'));
+const Progress = lazy(() => import('./sections/Progress'));
+const Certificate = lazy(() => import('./sections/Certificate'));
 const PaperLibrary = lazy(() => import('./sections/PaperLibrary'));
 const VideoTutorials = lazy(() => import('./sections/VideoTutorials'));
 const Glossary = lazy(() => import('./sections/Glossary'));
@@ -101,7 +107,8 @@ function App() {
   }, []);
 
   return (
-    <div className="relative bg-black text-white min-h-screen overflow-x-hidden">
+    <UserProvider>
+      <div className="relative bg-black text-white min-h-screen overflow-x-hidden">
       {/* Background gradient overlay */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div
@@ -131,6 +138,10 @@ function App() {
         {/* Lazy loaded sections with Suspense */}
         <Suspense fallback={<SectionSkeleton />}>
           <LearningPath />
+        </Suspense>
+
+        <Suspense fallback={<SectionSkeleton cardCount={3} />}>
+          <Courses />
         </Suspense>
 
         <Suspense fallback={<SectionSkeleton />}>
@@ -300,6 +311,14 @@ function App() {
         <Suspense fallback={<SectionSkeleton />}>
           <Resources />
         </Suspense>
+
+        <Suspense fallback={<SectionSkeleton />}>
+          <Progress />
+        </Suspense>
+
+        <Suspense fallback={<SectionSkeleton />}>
+          <Certificate />
+        </Suspense>
       </main>
 
       {/* Footer */}
@@ -311,6 +330,7 @@ function App() {
       {/* Mobile Section Nav */}
       <SectionNav />
     </div>
+    </UserProvider>
   );
 }
 
