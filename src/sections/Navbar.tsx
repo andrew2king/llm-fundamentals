@@ -3,11 +3,11 @@ import { Menu, X, ChevronRight, BookOpen, Code, Play, Map, Search } from 'lucide
 
 const navLinks = [
   { label: '学习路径', href: '#learning-path' },
-  { label: '核心知识', href: '#core-knowledge' },
   { label: '付费课程', href: '#courses' },
+  { label: '课程学习', href: '#course-viewer' },
+  { label: '核心知识', href: '#core-knowledge' },
   { label: 'Agent 系统', href: '#agent-system' },
   { label: 'Prompt & Skill', href: '#prompt-skill' },
-  { label: '多模态', href: '#multimodal' },
   { label: '资源库', href: '#resource-hub' },
 ];
 

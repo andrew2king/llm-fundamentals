@@ -59,6 +59,7 @@ const ParamCalculator = lazy(() => import('./sections/ParamCalculator'));
 const ResourceHub = lazy(() => import('./sections/ResourceHub'));
 const ResourceLibrary = lazy(() => import('./sections/ResourceLibrary'));
 const Resources = lazy(() => import('./sections/Resources'));
+const CourseViewer = lazy(() => import('./sections/CourseViewer'));
 
 // Loading fallback component
 import SectionSkeleton from './components/SectionSkeleton';
@@ -142,6 +143,10 @@ function App() {
 
         <Suspense fallback={<SectionSkeleton cardCount={3} />}>
           <Courses />
+        </Suspense>
+
+        <Suspense fallback={<SectionSkeleton />}>
+          <CourseViewer />
         </Suspense>
 
         <Suspense fallback={<SectionSkeleton />}>

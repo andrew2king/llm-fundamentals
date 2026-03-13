@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { BookOpen, Clock, ArrowRight, CheckCircle, Lock } from 'lucide-react';
+import { BookOpen, Clock, ArrowRight, CheckCircle, Lock, Play } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -197,15 +197,26 @@ export default function Courses() {
 
                 {/* CTA */}
                 {course.status === 'available' ? (
-                  <a
-                    href={course.buyUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-3 rounded-xl bg-spacex-orange text-white font-medium hover:bg-spacex-orange/80 transition-colors flex items-center justify-center gap-2"
-                  >
-                    立即购买
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => {
+                        document.querySelector('#course-viewer')?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      className="flex-1 py-3 rounded-xl bg-white/10 text-white font-medium hover:bg-white/20 transition-colors flex items-center justify-center gap-2"
+                    >
+                      <Play className="w-4 h-4" />
+                      开始学习
+                    </button>
+                    <a
+                      href={course.buyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 py-3 rounded-xl bg-spacex-orange text-white font-medium hover:bg-spacex-orange/80 transition-colors flex items-center justify-center gap-2"
+                    >
+                      购买完整版
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </div>
                 ) : (
                   <button
                     disabled
