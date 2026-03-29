@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X, ChevronRight, BookOpen, Code, Play, Map, Search } from 'lucide-react';
 
 const navLinks = [
+  { label: 'AI日报', href: '#daily-news' },
   { label: '学习路径', href: '#learning-path' },
   { label: '付费课程', href: '#courses' },
   { label: '课程学习', href: '#course-viewer' },
