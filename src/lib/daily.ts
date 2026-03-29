@@ -1,8 +1,9 @@
 import type { DailyData } from '@/types/daily';
+import { dailyData as embeddedDailyData } from '@/data/daily';
 
 /**
  * 获取最新日报数据
- * 从 public/daily-YYYY-MM-DD.json 读取最新的 JSON 文件
+ * 优先从 public/daily-YYYY-MM-DD.json 读取，失败时使用嵌入的数据
  */
 export async function getLatestDaily(): Promise<DailyData | null> {
   try {
@@ -32,10 +33,13 @@ export async function getLatestDaily(): Promise<DailyData | null> {
       }
     }
     
-    return null;
+    // 如果都失败了，使用嵌入的数据
+    console.log('Using embedded daily data');
+    return embeddedDailyData;
   } catch (error) {
     console.error('Failed to load daily news:', error);
-    return null;
+    // 出错时也使用嵌入的数据
+    return embeddedDailyData;
   }
 }
 
