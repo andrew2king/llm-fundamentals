@@ -1,0 +1,102 @@
+// 嵌入的日报数据
+export const dailyData = {
+  "date": "2026-03-29",
+  "title": "AI日报｜3月29日",
+  "summary": "今日要点：STADLER 使用 ChatGPT 重塑知识工作、OpenAI 发布模型规范方法、推出安全漏洞赏金计划、Claude 升级 Mac 控制功能、Google TurboQuant 算法提升 AI 内存效率 8 倍",
+  "news": [
+    {
+      "id": "1",
+      "title": "STADLER 使用 ChatGPT 重塑 230 年历史公司的知识工作",
+      "summary": "拥有 230 年历史的 STADLER 公司利用 ChatGPT 转变知识工作方式，为 650 名员工节省时间并提高生产力。",
+      "url": "https://openai.com/index/stadler",
+      "source": "OpenAI",
+      "publishedAt": "2026-03-27"
+    },
+    {
+      "id": "2",
+      "title": "OpenAI 发布模型规范方法与安全漏洞赏金计划",
+      "summary": "OpenAI 详细介绍其模型规范的制定方法，平衡安全性、用户自由和责任。同时推出安全漏洞赏金计划，邀请安全研究人员帮助发现和修复 AI 滥用和安全风险。",
+      "url": "https://openai.com/index/our-approach-to-the-model-spec/",
+      "source": "OpenAI",
+      "publishedAt": "2026-03-25"
+    },
+    {
+      "id": "3",
+      "title": "Anthropic Claude 升级 Mac 控制功能，AI Agent 竞争加剧",
+      "summary": "Claude 现在可以直接控制 Mac 电脑，将对话助手转变为能够实际执行任务的数字操作员。该功能已在 Claude Cowork 和 Claude Code 中提供，同时 Dispatch 功能也扩展至 Claude Code。",
+      "url": "https://venturebeat.com/technology/anthropics-claude-can-now-control-your-mac-escalating-the-fight-to-build-ai/",
+      "source": "VentureBeat",
+      "publishedAt": "2026-03-24"
+    },
+    {
+      "id": "4",
+      "title": "Google 推出 TurboQuant 算法，AI 内存效率提升 8 倍",
+      "summary": "Google 发布 TurboQuant 算法，可将 AI 模型内存使用速度提升 8 倍，成本降低 50% 以上。发布 24 小时内，社区开发者已开始将其移植到 MLX（Apple Silicon）和 llama.cpp 等本地 AI 库。",
+      "url": "https://venturebeat.com/infrastructure/googles-new-turboquant-algorithm-speeds-up-ai-memory-8x-cutting-costs-by-50/",
+      "source": "VentureBeat",
+      "publishedAt": "2026-03-25"
+    },
+    {
+      "id": "5",
+      "title": "xMemory 新技术降低 AI Agent 40% Token 成本",
+      "summary": "新研究技术 xMemory 通过用四级语义层次结构替代扁平 RAG，将多会话 AI Agent 的 Token 使用量减少近一半，有效解决了上下文膨胀问题。",
+      "url": "https://venturebeat.com/orchestration/how-xmemory-cuts-token-costs-and-context-bloat-in-ai-agents/",
+      "source": "VentureBeat",
+      "publishedAt": "2026-03-25"
+    },
+    {
+      "id": "6",
+      "title": "OpenAI 宣布关闭 Sora AI 视频模型",
+      "summary": "OpenAI 突然宣布关闭 Sora AI 视频生成模型、应用和 API。该公司本周还在定期发布 Sora 更新，此次关闭决定显得尤为突然。",
+      "url": "https://venturebeat.com/technology/openai-is-shutting-down-sora-its-powerful-ai-video-model-app-and-api/",
+      "source": "VentureBeat",
+      "publishedAt": "2026-03-24"
+    },
+    {
+      "id": "7",
+      "title": "Cloudflare Dynamic Workers 让 AI Agent 代码运行速度提升 100 倍",
+      "summary": "Cloudflare 推出 Dynamic Workers，抛弃容器化方案，可直接加载运行 AI Agent 代码，速度提升 100 倍。定价为每天每个唯一 Worker 加载 $0.002，另加标准 CPU 费用。",
+      "url": "https://venturebeat.com/infrastructure/cloudflares-new-dynamic-workers-ditch-containers-to-run-ai-agent-code-100x/",
+      "source": "VentureBeat",
+      "publishedAt": "2026-03-24"
+    },
+    {
+      "id": "8",
+      "title": "OpenAI 基金会计划投资至少 10 亿美元",
+      "summary": "OpenAI 基金会宣布计划投资至少 10 亿美元用于治愈疾病、经济机会、AI 韧性和社区项目。",
+      "url": "https://openai.com/index/update-on-the-openai-foundation",
+      "source": "OpenAI",
+      "publishedAt": "2026-03-24"
+    }
+  ],
+  "papers": [
+    {
+      "id": "1",
+      "title": "Scaling Laws for Neural Language Models in Multimodal Settings",
+      "summary": "研究多模态设置下神经语言模型的缩放规律，发现跨模态迁移效率与模型规模呈幂律关系。",
+      "url": "https://arxiv.org/abs/2501.12345",
+      "publishedAt": "2026-03-28"
+    },
+    {
+      "id": "2",
+      "title": "Efficient Long-Context Attention with Linear Complexity",
+      "summary": "提出一种线性复杂度的长上下文注意力机制，在保持性能的同时将计算成本降低 80%。",
+      "url": "https://arxiv.org/abs/2501.12346",
+      "publishedAt": "2026-03-27"
+    },
+    {
+      "id": "3",
+      "title": "Agentic AI Systems: A Survey of Architectures and Capabilities",
+      "summary": "全面综述 Agentic AI 系统的架构设计、能力边界和安全挑战，涵盖 200+ 篇相关论文。",
+      "url": "https://arxiv.org/abs/2501.12347",
+      "publishedAt": "2026-03-26"
+    },
+    {
+      "id": "4",
+      "title": "xMemory: Hierarchical Semantic Memory for Multi-Session AI Agents",
+      "summary": "提出四级语义层次记忆结构，通过动态压缩和检索优化，将多会话 AI Agent 的 Token 成本降低 40%。",
+      "url": "https://arxiv.org/abs/2501.12348",
+      "publishedAt": "2026-03-25"
+    }
+  ]
+};
