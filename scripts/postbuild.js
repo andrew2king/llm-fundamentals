@@ -1,9 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 
+// 获取项目根目录（scripts 的父目录）
+const rootDir = path.join(__dirname, '..');
+
 // 复制 public/data 到 dist/data
-const srcDir = path.join(__dirname, 'public', 'data');
-const destDir = path.join(__dirname, 'dist', 'data');
+const srcDir = path.join(rootDir, 'public', 'data');
+const destDir = path.join(rootDir, 'dist', 'data');
 
 function copyDir(src, dest) {
   if (!fs.existsSync(dest)) {
