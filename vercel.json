@@ -1,15 +1,8 @@
 {
   "version": 2,
   "name": "llm-fundamentals",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
+  "buildCommand": "npm run build && node scripts/postbuild.js",
+  "outputDirectory": "dist",
   "routes": [
     {
       "src": "/data/(.*)",
