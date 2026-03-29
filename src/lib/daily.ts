@@ -2,15 +2,15 @@ import type { DailyData } from '@/types/daily';
 
 /**
  * 获取最新日报数据
- * 从 public/data/daily/ 目录读取最新的 JSON 文件
+ * 从 public/daily-YYYY-MM-DD.json 读取最新的 JSON 文件
  */
 export async function getLatestDaily(): Promise<DailyData | null> {
   try {
     // 获取今天的日期作为默认
     const today = new Date().toISOString().split('T')[0];
     
-    // 尝试获取今天的日报
-    const response = await fetch(`/data/daily/${today}.json`);
+    // 尝试获取今天的日报（使用扁平化路径）
+    const response = await fetch(`/daily-${today}.json`);
     if (response.ok) {
       return await response.json();
     }
@@ -23,7 +23,7 @@ export async function getLatestDaily(): Promise<DailyData | null> {
       const dateStr = date.toISOString().split('T')[0];
       
       try {
-        const resp = await fetch(`/data/daily/${dateStr}.json`);
+        const resp = await fetch(`/daily-${dateStr}.json`);
         if (resp.ok) {
           return await resp.json();
         }
