@@ -15,8 +15,23 @@ export async function getLatestDaily(): Promise<DailyData | null> {
       return await response.json();
     }
     
-    // 如果今天没有，尝试获取最近一天的
-    // 这里简化处理，实际可以通过 index.json 或 API 获取最新日期
+    // 如果今天没有，尝试获取最近几天的
+    // 尝试昨天、前天等
+    for (let i = 1; i <= 7; i++) {
+      const date = new Date();
+      date.setDate(date.getDate() - i);
+      const dateStr = date.toISOString().split('T')[0];
+      
+      try {
+        const resp = await fetch(`/data/daily/${dateStr}.json`);
+        if (resp.ok) {
+          return await resp.json();
+        }
+      } catch {
+        // 继续尝试下一天
+      }
+    }
+    
     return null;
   } catch (error) {
     console.error('Failed to load daily news:', error);
