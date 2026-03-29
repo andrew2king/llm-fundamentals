@@ -29,18 +29,7 @@ type UserContextType = {
   getOverallProgress: () => number;
 };
 
-// 默认学习进度
-const defaultProgress: LearningProgress = {
-  visitedSections: [],
-  completedSections: [],
-  quizScores: {},
-  lastVisit: new Date().toISOString(),
-};
-
-// 创建上下文
-const UserContext = createContext<UserContextType | undefined>(undefined);
-
-// 所有 section ID 列表（用于计算进度）
+// 所有 section ID 列表（用于计算进度）- 必须在使用前定义
 const ALL_SECTIONS = [
   'learning-path',
   'core-knowledge',
@@ -83,6 +72,27 @@ const ALL_SECTIONS = [
   'resources',
 ];
 
+// 默认学习进度
+const defaultProgress: LearningProgress = {
+  visitedSections: [],
+  completedSections: [],
+  quizScores: {},
+  lastVisit: new Date().toISOString(),
+};
+
+// 创建上下文 - 提供默认值
+const UserContext = createContext<UserContextType>({
+  user: null,
+  isAuthenticated: false,
+  learningProgress: defaultProgress,
+  login: () => {},
+  logout: () => {},
+  markSectionVisited: () => {},
+  markSectionCompleted: () => {},
+  saveQuizScore: () => {},
+  getOverallProgress: () => 0,
+});
+
 // LocalStorage keys
 const STORAGE_KEYS = {
   USER: 'llm_user',
@@ -98,10 +108,18 @@ function loadFromStorage<T>(key: string, defaultValue: T): T {
   try {
     const saved = localStorage.getItem(key);
     if (saved) {
-      return JSON.parse(saved) as T;
+      const parsed = JSON.parse(saved) as T;
+      // 验证解析的数据是否有效
+      if (parsed && typeof parsed === 'object') {
+        return parsed;
+      }
     }
-  } catch {
-    // 忽略解析错误
+  } catch (e) {
+    console.warn(`Failed to load ${key} from localStorage:`, e);
+    // 清除损坏的数据
+    try {
+      localStorage.removeItem(key);
+    } catch {}
   }
   return defaultValue;
 }
@@ -194,8 +212,19 @@ export function UserProvider({ children }: UserProviderProps) {
 // Hook for using user context
 export function useUser() {
   const context = useContext(UserContext);
-  if (context === undefined) {
-    throw new Error('useUser must be used within a UserProvider');
+  // 确保永远不会返回 null/undefined
+  if (!context) {
+    return {
+      user: null,
+      isAuthenticated: false,
+      learningProgress: defaultProgress,
+      login: () => {},
+      logout: () => {},
+      markSectionVisited: () => {},
+      markSectionCompleted: () => {},
+      saveQuizScore: () => {},
+      getOverallProgress: () => 0,
+    };
   }
   return context;
 }
