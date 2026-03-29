@@ -1,4 +1,6 @@
 {
   "version": 2,
-  "name": "llm-fundamentals"
+  "name": "llm-fundamentals",
+  "buildCommand": "rm -rf node_modules/.vite dist && npm install && npm run build",
+  "outputDirectory": "dist"
 }
