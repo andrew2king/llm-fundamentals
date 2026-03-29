@@ -5,15 +5,15 @@
   "outputDirectory": "dist",
   "routes": [
     {
+      "handle": "filesystem"
+    },
+    {
       "src": "/data/(.*)",
       "dest": "/data/$1",
       "headers": {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*"
       }
-    },
-    {
-      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
