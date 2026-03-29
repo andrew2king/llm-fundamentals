@@ -2,9 +2,52 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TrendingUp, Award, BookOpen, CheckCircle, Circle } from 'lucide-react';
-import { useUser, ALL_SECTIONS } from '@/contexts/UserContext';
+import { useUser } from '@/contexts/UserContext';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// 所有 section 列表 - 直接定义避免导入问题
+const ALL_SECTIONS = [
+  'learning-path',
+  'core-knowledge',
+  'what-is-llm',
+  'core-concepts',
+  'architecture',
+  'visualizer',
+  'training',
+  'code',
+  'stats',
+  'compare',
+  'benchmarks',
+  'safety',
+  'applications',
+  'rag',
+  'rag-evaluation',
+  'tool-calling',
+  'structured-output',
+  'long-context',
+  'deployment',
+  'cases',
+  'agent-system',
+  'agents',
+  'agent-flow',
+  'agent-teams',
+  'prompt-skill',
+  'prompt-advanced',
+  'prompt-library',
+  'skills',
+  'skill-library',
+  'skill-ecosystem',
+  'multimodal',
+  'papers',
+  'videos',
+  'glossary',
+  'quiz',
+  'calculator',
+  'resource-hub',
+  'resource-library',
+  'resources',
+];
 
 const sectionNames: Record<string, string> = {
   'learning-path': '学习路径',
@@ -50,12 +93,36 @@ const sectionNames: Record<string, string> = {
 
 export default function Progress() {
   const sectionRef = useRef<HTMLElement>(null);
-  const { learningProgress, getOverallProgress } = useUser();
+  const userContext = useUser();
   const [showAll, setShowAll] = useState(false);
 
+  // 确保 learningProgress 有默认值 - 使用多重保护
+  const learningProgress = userContext?.learningProgress;
+  const getOverallProgress = userContext?.getOverallProgress || (() => 0);
+  const progress = {
+    completedSections: learningProgress?.completedSections || [],
+    visitedSections: learningProgress?.visitedSections || [],
+    quizScores: learningProgress?.quizScores || {},
+    lastVisit: learningProgress?.lastVisit || '',
+  };
+
+  // 如果 userContext 为 null，显示默认状态
+  if (!userContext) {
+    return (
+      <section ref={sectionRef} id="progress" className="relative py-24 bg-black">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-white mb-4">学习进度</h2>
+            <p className="text-white/60">加载中...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   const overallProgress = getOverallProgress();
-  const visitedCount = learningProgress.visitedSections.length;
-  const completedCount = learningProgress.completedSections.length;
+  const visitedCount = progress.visitedSections.length;
+  const completedCount = progress.completedSections.length;
 
   const displayedSections = showAll
     ? ALL_SECTIONS
@@ -129,7 +196,7 @@ export default function Progress() {
           </div>
           <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10 text-center">
             <div className="text-4xl font-bold text-purple-400 mb-2">
-              {Object.keys(learningProgress.quizScores).length}
+              {Object.keys(progress.quizScores).length}
             </div>
             <div className="text-sm text-white/60">完成测验</div>
           </div>
@@ -157,8 +224,8 @@ export default function Progress() {
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
             {displayedSections.map((sectionId) => {
-              const isCompleted = learningProgress.completedSections.includes(sectionId);
-              const isVisited = learningProgress.visitedSections.includes(sectionId);
+              const isCompleted = progress.completedSections.includes(sectionId);
+              const isVisited = progress.visitedSections.includes(sectionId);
               const name = sectionNames[sectionId] || sectionId;
 
               return (
