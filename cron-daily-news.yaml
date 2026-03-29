@@ -1,0 +1,63 @@
+# OpenClaw Cron 配置：每日 AI 日报自动生成
+# 将此配置添加到 OpenClaw 的 config.yaml 中
+
+cron:
+  jobs:
+    - name: "daily-ai-news"
+      # 每天上午 8:00 执行（北京时间）
+      schedule: 
+        kind: "cron"
+        expr: "0 8 * * *"
+        tz: "Asia/Shanghai"
+      
+      # 生成日报并推送到网站
+      payload:
+        kind: "agentTurn"
+        message: |
+          请生成今天的 AI 日报，格式要求如下：
+          
+          1. 收集最新 AI 行业新闻（4-6 条）
+             - 来源：OpenAI、Anthropic、Google、Hacker News 等
+             - 包含：标题、摘要、链接、量年、量年、日期
+          
+          2. 收集最新 arXiv 论文（3-5 篇）
+             - 领域：LLM、Agent、多模态、安全
+             - 包含：标题、摘要、链接、日期
+          
+          3. 输出 JSON 格式：
+          {
+            "date": "YYYY-MM-DD",
+            "title": "AI日报｜M月D日",
+            "summary": "一句话总结今日要点",
+            "news": [
+              {
+                "id": "1",
+                "title": "新闻标题",
+                "summary": "2-3句摘要",
+                "url": "https://...",
+                "source": "来源名称",
+                "publishedAt": "YYYY-MM-DD"
+              }
+            ],
+            "papers": [
+              {
+                "id": "1",
+                "title": "论文标题",
+                "summary": "核心贡献",
+                "url": "https://arxiv.org/abs/...",
+                "publishedAt": "YYYY-MM-DD"
+              }
+            ]
+          }
+          
+          4. 生成后执行以下命令推送：
+          cd /Users/long/Downloads/AICode/website && node scripts/add-daily.js '<生成的JSON>'
+          
+          注意：
+          - 确保 JSON 格式正确，使用单引号包裹整个 JSON
+          - 如果命令执行失败，请手动检查并提交
+      
+      # 完成后通知
+      delivery:
+        mode: "announce"
+        channel: "webchat"
