@@ -13,6 +13,7 @@ import SiteSearch from './components/SiteSearch';
 import SectionNav from './sections/SectionNav';
 
 // Lazy loaded components - loaded on demand
+const DailyNews = lazy(() => import('./sections/DailyNews'));
 const LearningPath = lazy(() => import('./sections/LearningPath'));
 const Courses = lazy(() => import('./sections/Courses'));
 const CoreKnowledgeHub = lazy(() => import('./sections/CoreKnowledgeHub'));
@@ -135,6 +136,11 @@ function App() {
       <main className="relative z-10">
         {/* Hero is critical - loaded immediately */}
         <Hero />
+
+        {/* Daily News - AI日报 */}
+        <Suspense fallback={<SectionSkeleton />}>
+          <DailyNews />
+        </Suspense>
 
         {/* Lazy loaded sections with Suspense */}
         <Suspense fallback={<SectionSkeleton />}>
