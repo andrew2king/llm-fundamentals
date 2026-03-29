@@ -1,27 +1,4 @@
 {
   "version": 2,
-  "name": "llm-fundamentals",
-  "buildCommand": "npm run build && node scripts/postbuild.js",
-  "outputDirectory": "dist",
-  "routes": [
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/data/(.*)",
-      "dest": "/data/$1",
-      "headers": {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
-      }
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    },
-    {
-      "src": "/.*",
-      "dest": "/index.html"
-    }
-  ]
+  "name": "llm-fundamentals"
 }
