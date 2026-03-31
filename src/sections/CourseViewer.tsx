@@ -405,7 +405,7 @@ export default function CourseViewer() {
 
   const currentLessonData = courseData.modules[currentModule]?.items[currentLesson];
   const isCompleted = (lessonId: string) =>
-    learningProgress.completedSections.includes(lessonId);
+    (learningProgress?.completedSections || []).includes(lessonId);
 
   const handleNextLesson = () => {
     const module = courseData.modules[currentModule];
