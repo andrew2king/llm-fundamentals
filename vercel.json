@@ -1,4 +1,7 @@
 {
   "version": 2,
-  "name": "llm-fundamentals"
+  "name": "llm-fundamentals",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite"
 }
