@@ -1,0 +1,92 @@
+{
+  "date": "2026-03-31",
+  "title": "AI日报｜3月31日",
+  "summary": "OpenAI推出安全漏洞赏金计划，Anthropic Claude新增Mac控制功能，Mistral发布免费TTS模型，OpenAI宣布关闭Sora视频模型",
+  "news": [
+    {
+      "id": "1",
+      "title": "OpenAI推出安全漏洞赏金计划",
+      "summary": "OpenAI启动安全漏洞赏金计划，旨在识别AI滥用和安全风险，包括智能体漏洞、提示注入和数据泄露等问题。该计划邀请安全研究人员帮助发现和修复潜在安全问题。",
+      "url": "https://openai.com/index/safety-bug-bounty",
+      "source": "OpenAI",
+      "publishedAt": "2026-03-25"
+    },
+    {
+      "id": "2",
+      "title": "OpenAI基金会承诺投资至少10亿美元",
+      "summary": "OpenAI基金会宣布计划投资至少10亿美元用于疾病治疗、经济机会、AI韧性和社区项目等领域，展示了OpenAI在社会责任方面的长期承诺。",
+      "url": "https://openai.com/index/update-on-the-openai-foundation",
+      "source": "OpenAI",
+      "publishedAt": "2026-03-24"
+    },
+    {
+      "id": "3",
+      "title": "Anthropic Claude新增Mac控制功能",
+      "summary": "Anthropic更新Claude，新增Mac电脑控制功能，将Claude从对话助手转变为更接近远程数字操作员的工具。该功能在Claude Cowork和Claude Code中可用，付费订阅用户可立即体验。",
+      "url": "https://www.anthropic.com/news",
+      "source": "VentureBeat",
+      "publishedAt": "2026-03-24"
+    },
+    {
+      "id": "4",
+      "title": "Mistral AI发布免费开源TTS模型",
+      "summary": "Mistral AI发布文本转语音模型，声称性能超越ElevenLabs，并免费开源模型权重。企业语音AI市场正处于激烈竞争中，Google、OpenAI、IBM等巨头纷纷加码。",
+      "url": "https://venturebeat.com/ai/",
+      "source": "VentureBeat",
+      "publishedAt": "2026-03-26"
+    },
+    {
+      "id": "5",
+      "title": "OpenAI宣布关闭Sora视频模型",
+      "summary": "OpenAI宣布将关闭Sora视频生成模型及其API服务。尽管本周还在定期发布Sora更新，但关闭决定来得突然。Sora曾是OpenAI在视频生成领域的重要产品。",
+      "url": "https://venturebeat.com/ai/",
+      "source": "VentureBeat",
+      "publishedAt": "2026-03-24"
+    },
+    {
+      "id": "6",
+      "title": "Google发布TurboQuant算法提速AI内存8倍",
+      "summary": "Google新发布的TurboQuant算法将AI内存速度提升8倍，成本降低50%以上。发布后24小时内，社区成员开始将该算法移植到MLX和llama.cpp等本地AI库。",
+      "url": "https://venturebeat.com/ai/",
+      "source": "VentureBeat",
+      "publishedAt": "2026-03-25"
+    }
+  ],
+  "papers": [
+    {
+      "id": "1",
+      "title": "PAPO: 通过解耦优势归一化稳定评分标准集成训练",
+      "summary": "提出Process-Aware Policy Optimization方法，通过解耦优势归一化将过程级评估集成到GRPO中，解决结果奖励模型和过程奖励模型的局限性。在OlympiadBench上达到51.3%，优于ORM的46.3%。",
+      "url": "https://arxiv.org/abs/2603.26535",
+      "publishedAt": "2026-03-27"
+    },
+    {
+      "id": "2",
+      "title": "CADSmith: 多智能体CAD生成与程序化几何验证",
+      "summary": "提出多智能体流水线CADSmith，从自然语言生成CadQuery代码，通过内外双层校正循环进行迭代优化。结合OpenCASCADE内核精确测量和视觉语言模型评估，实现高质量CAD模型生成。",
+      "url": "https://arxiv.org/abs/2603.26512",
+      "publishedAt": "2026-03-27"
+    },
+    {
+      "id": "3",
+      "title": "AIRA2: 克服AI研究智能体的性能瓶颈",
+      "summary": "识别AI研究智能体的三大结构瓶颈：同步单GPU执行、验证选择导致的泛化差距、固定单轮LLM操作符能力有限。AIRA2通过异步多GPU工作池、隐藏一致性评估协议和ReAct智能体解决这些问题。",
+      "url": "https://arxiv.org/abs/2603.26499",
+      "publishedAt": "2026-03-27"
+    },
+    {
+      "id": "4",
+      "title": "GUIDE: 通过实时网络视频检索解决GUI智能体领域偏差",
+      "summary": "提出GUIDE框架，通过从网络教程视频中自主获取领域专业知识来解决GUI智能体领域偏差。引入字幕驱动的Video-RAG流水线和基于逆动力学的全自动标注流程，在OSWorld上实现5%以上性能提升。",
+      "url": "https://arxiv.org/abs/2603.26266",
+      "publishedAt": "2026-03-27"
+    },
+    {
+      "id": "5",
+      "title": "AutoB2G: 大语言模型驱动的建筑-电网协同仿真智能体框架",
+      "summary": "提出AutoB2G自动化建筑-电网协同仿真框架，基于自然语言任务描述完成整个仿真工作流。扩展CityLearn V2支持B2G交互，采用LLM-based SOCIA框架自动生成、执行和迭代优化仿真器。",
+      "url": "https://arxiv.org/abs/2603.26005",
+      "publishedAt": "2026-03-27"
+    }
+  ]
+}
