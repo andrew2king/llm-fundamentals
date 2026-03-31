@@ -466,7 +466,7 @@ export default function CourseViewer() {
 
   // 计算进度
   const totalLessons = courseData.totalLessons;
-  const completedLessons = learningProgress.completedSections.filter(id =>
+  const completedLessons = (learningProgress?.completedSections || []).filter(id =>
     id.startsWith('lesson-')
   ).length;
   const progressPercent = Math.round((completedLessons / totalLessons) * 100);
