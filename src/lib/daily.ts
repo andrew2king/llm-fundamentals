@@ -1,40 +1,44 @@
 import type { DailyData } from '@/types/daily';
 import { dailyData as embeddedDailyData } from '@/data/daily';
+import { fetchWithRetry, type FetchRetryOptions } from '@/lib/fetchWithRetry';
 
 /**
- * 获取最新日报数据
+ * 获取最新日报数据（带重试机制）
  * 优先从 public/data/daily/YYYY-MM-DD.json 读取，失败时使用嵌入的数据
  */
-export async function getLatestDaily(): Promise<DailyData | null> {
+export async function getLatestDaily(options?: FetchRetryOptions): Promise<DailyData | null> {
   try {
     // 获取今天的日期作为默认
     const today = new Date().toISOString().split('T')[0];
 
-    // 尝试获取今天的日报
-    const response = await fetch(`/data/daily/${today}.json`);
-    if (response.ok) {
-      return await response.json();
+    // 尝试获取今天的日报（带重试）
+    const todayResult = await fetchWithRetry<DailyData>(
+      `/data/daily/${today}.json`,
+      { ...options, cache: 'no-store' }
+    );
+
+    if (todayResult.success && todayResult.data) {
+      return todayResult.data;
     }
 
     // 如果今天没有，尝试获取最近几天的
-    // 尝试昨天、前天等
     for (let i = 1; i <= 7; i++) {
       const date = new Date();
       date.setDate(date.getDate() - i);
       const dateStr = date.toISOString().split('T')[0];
 
-      try {
-        const resp = await fetch(`/data/daily/${dateStr}.json`);
-        if (resp.ok) {
-          return await resp.json();
-        }
-      } catch {
-        // 继续尝试下一天
+      const result = await fetchWithRetry<DailyData>(
+        `/data/daily/${dateStr}.json`,
+        { maxRetries: 1, cache: 'no-store' }
+      );
+
+      if (result.success && result.data) {
+        return result.data;
       }
     }
 
     // 如果都失败了，使用嵌入的数据
-    console.log('Using embedded daily data');
+    console.log('Using embedded daily data as fallback');
     return embeddedDailyData;
   } catch (error) {
     console.error('Failed to load daily news:', error);
@@ -44,19 +48,23 @@ export async function getLatestDaily(): Promise<DailyData | null> {
 }
 
 /**
- * 获取指定日期的日报
+ * 获取指定日期的日报（带重试机制）
  */
-export async function getDailyByDate(date: string): Promise<DailyData | null> {
-  try {
-    const response = await fetch(`/data/daily/${date}.json`);
-    if (response.ok) {
-      return await response.json();
-    }
-    return null;
-  } catch (error) {
-    console.error(`Failed to load daily news for ${date}:`, error);
-    return null;
+export async function getDailyByDate(
+  date: string,
+  options?: FetchRetryOptions
+): Promise<DailyData | null> {
+  const result = await fetchWithRetry<DailyData>(
+    `/data/daily/${date}.json`,
+    { ...options, maxRetries: 2, cache: 'no-store' }
+  );
+
+  if (result.success && result.data) {
+    return result.data;
   }
+
+  console.error(`Failed to load daily news for ${date}:`, result.error);
+  return null;
 }
 
 /**

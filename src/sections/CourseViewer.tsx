@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
@@ -10,6 +10,7 @@ import {
   Circle,
 } from 'lucide-react';
 import { useUser } from '@/contexts/UserContext';
+import { useAnalytics, useLearningProgressFunnel } from '@/hooks/useAnalytics';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -401,13 +402,64 @@ export default function CourseViewer() {
   const [currentModule, setCurrentModule] = useState(0);
   const [currentLesson, setCurrentLesson] = useState(0);
   const [showSidebar, setShowSidebar] = useState(true);
+  const [lessonStartTime, setLessonStartTime] = useState<number>(Date.now());
   const { markSectionCompleted, learningProgress } = useUser();
+  const {
+    trackLessonStart,
+    trackLessonComplete,
+    trackCTA,
+  } = useAnalytics();
 
+  // Learning progress funnel for current lesson
   const currentLessonData = courseData.modules[currentModule]?.items[currentLesson];
+  const progressFunnel = useLearningProgressFunnel(
+    courseData.id,
+    currentLessonData?.id || '',
+    currentLessonData?.title || ''
+  );
+
   const isCompleted = (lessonId: string) =>
     (learningProgress?.completedSections || []).includes(lessonId);
 
-  const handleNextLesson = () => {
+  // Track lesson start when switching lessons
+  useEffect(() => {
+    if (currentLessonData && !isCompleted(currentLessonData.id)) {
+      setLessonStartTime(Date.now());
+      trackLessonStart(courseData.id, currentLessonData.id, currentLessonData.title, {
+        moduleName: courseData.modules[currentModule].title,
+        moduleIndex: currentModule,
+        lessonIndex: currentLesson,
+      });
+      progressFunnel.trackStart({
+        moduleName: courseData.modules[currentModule].title,
+        moduleIndex: currentModule,
+        lessonIndex: currentLesson,
+      });
+    }
+  }, [currentModule, currentLesson, currentLessonData?.id]);
+
+  // Track progress based on time spent (simulated progress)
+  useEffect(() => {
+    if (!currentLessonData || isCompleted(currentLessonData.id)) return;
+
+    const interval = setInterval(() => {
+      const timeSpent = Date.now() - lessonStartTime;
+      const estimatedDuration = parseInt(currentLessonData.duration.replace('分钟', ''), 10) * 60 * 1000;
+      const progressPercent = Math.min(100, Math.round((timeSpent / estimatedDuration) * 100));
+
+      if (progressPercent > 0) {
+        progressFunnel.trackProgress(progressPercent, {
+          moduleName: courseData.modules[currentModule].title,
+          moduleIndex: currentModule,
+          lessonIndex: currentLesson,
+        });
+      }
+    }, 30000); // Check every 30 seconds
+
+    return () => clearInterval(interval);
+  }, [currentModule, currentLesson, currentLessonData, lessonStartTime]);
+
+  const handleNextLesson = useCallback(() => {
     const module = courseData.modules[currentModule];
     if (currentLesson < module.items.length - 1) {
       setCurrentLesson(currentLesson + 1);
@@ -417,9 +469,9 @@ export default function CourseViewer() {
     }
     // 滚动到课程区域而不是页面顶部
     document.getElementById('course-viewer')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, [currentModule, currentLesson]);
 
-  const handlePrevLesson = () => {
+  const handlePrevLesson = useCallback(() => {
     if (currentLesson > 0) {
       setCurrentLesson(currentLesson - 1);
     } else if (currentModule > 0) {
@@ -428,20 +480,37 @@ export default function CourseViewer() {
       setCurrentLesson(prevModule.items.length - 1);
     }
     document.getElementById('course-viewer')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, [currentModule, currentLesson]);
 
-  const handleMarkComplete = () => {
+  const handleMarkComplete = useCallback(() => {
     if (currentLessonData) {
       markSectionCompleted(currentLessonData.id);
+      trackLessonComplete(courseData.id, currentLessonData.id, currentLessonData.title, {
+        moduleName: courseData.modules[currentModule].title,
+        moduleIndex: currentModule,
+        lessonIndex: currentLesson,
+      });
+      progressFunnel.trackComplete({
+        moduleName: courseData.modules[currentModule].title,
+        moduleIndex: currentModule,
+        lessonIndex: currentLesson,
+      });
     }
     handleNextLesson();
-  };
+  }, [currentLessonData, currentModule, currentLesson, handleNextLesson, markSectionCompleted, trackLessonComplete, progressFunnel]);
 
-  const handleSelectLesson = (moduleIndex: number, lessonIndex: number) => {
+  const handleSelectLesson = useCallback((moduleIndex: number, lessonIndex: number) => {
     setCurrentModule(moduleIndex);
     setCurrentLesson(lessonIndex);
+    // Track CTA click for lesson selection
+    trackCTA('select_lesson', 'course_sidebar', undefined, {
+      courseId: courseData.id,
+      lessonId: courseData.modules[moduleIndex].items[lessonIndex].id,
+      moduleIndex,
+      lessonIndex,
+    });
     document.getElementById('course-viewer')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, [trackCTA]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -478,7 +547,7 @@ export default function CourseViewer() {
         {/* Header */}
         <div className="course-item text-center mb-12 opacity-0">
           <div className="inline-flex items-center gap-2 text-sm font-mono text-spacex-orange mb-4">
-            <BookOpen className="w-4 h-4" />
+            <BookOpen className="w-4 h-4" aria-hidden="true" />
             <span>Agent 开发实战</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -486,7 +555,7 @@ export default function CourseViewer() {
           </h2>
           <div className="flex items-center justify-center gap-4 text-white/60">
             <span className="flex items-center gap-1">
-              <Clock className="w-4 h-4" />
+              <Clock className="w-4 h-4" aria-hidden="true" />
               {courseData.totalHours} 小时
             </span>
             <span>•</span>
@@ -516,16 +585,17 @@ export default function CourseViewer() {
                           <button
                             key={lesson.id}
                             onClick={() => handleSelectLesson(mIdx, lIdx)}
-                            className={`w-full text-left px-3 py-2 rounded-lg text-xs transition-colors flex items-center gap-2 ${
+                            className={`w-full text-left px-3 py-2 min-h-[44px] rounded-lg text-xs transition-all flex items-center gap-2 ${
                               currentModule === mIdx && currentLesson === lIdx
                                 ? 'bg-spacex-orange/20 text-spacex-orange'
-                                : 'text-white/60 hover:bg-white/5 hover:text-white/80'
+                                : 'text-white/60 hover:bg-white/5 hover:text-white/80 active:scale-95'
                             }`}
+                            aria-current={currentModule === mIdx && currentLesson === lIdx ? 'page' : undefined}
                           >
                             {isCompleted(lesson.id) ? (
-                              <CheckCircle className="w-3 h-3 text-green-500" />
+                              <CheckCircle className="w-3 h-3 text-green-500" aria-hidden="true" />
                             ) : (
-                              <Circle className="w-3 h-3" />
+                              <Circle className="w-3 h-3" aria-hidden="true" />
                             )}
                             <span className="truncate">{lesson.title}</span>
                           </button>
@@ -554,7 +624,7 @@ export default function CourseViewer() {
                   </div>
                   <button
                     onClick={() => setShowSidebar(!showSidebar)}
-                    className="lg:hidden text-white/60 hover:text-white"
+                    className="lg:hidden text-white/60 hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center active:scale-95 transition-transform"
                   >
                     <BookOpen className="w-5 h-5" />
                   </button>
@@ -564,12 +634,12 @@ export default function CourseViewer() {
                 </h1>
                 <div className="flex items-center gap-4 mt-2 text-sm text-white/60">
                   <span className="flex items-center gap-1">
-                    <Clock className="w-4 h-4" />
+                    <Clock className="w-4 h-4" aria-hidden="true" />
                     {currentLessonData?.duration}
                   </span>
                   {isCompleted(currentLessonData?.id || '') && (
                     <span className="flex items-center gap-1 text-green-500">
-                      <CheckCircle className="w-4 h-4" />
+                      <CheckCircle className="w-4 h-4" aria-hidden="true" />
                       已完成
                     </span>
                   )}
@@ -584,28 +654,30 @@ export default function CourseViewer() {
               </div>
 
               {/* Navigation */}
-              <div className="bg-white/[0.02] border-t border-white/10 px-6 py-4">
-                <div className="flex items-center justify-between">
+              <div className="bg-white/[0.02] border-t border-white/10 px-4 md:px-6 py-4">
+                <div className="flex items-center justify-between gap-2">
                   <button
                     onClick={handlePrevLesson}
                     disabled={currentModule === 0 && currentLesson === 0}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 text-white/80 hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                    className="flex items-center gap-2 px-3 md:px-4 py-2 min-h-[44px] rounded-lg bg-white/5 text-white/80 hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed active:scale-95 transition-all"
                   >
                     <ChevronLeft className="w-4 h-4" />
-                    上一课
+                    <span className="hidden sm:inline">上一课</span>
+                    <span className="sm:hidden">上</span>
                   </button>
 
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 md:gap-3">
                     <button
                       onClick={handleMarkComplete}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                      className={`flex items-center gap-2 px-3 md:px-4 py-2 min-h-[44px] rounded-lg active:scale-95 transition-all ${
                         isCompleted(currentLessonData?.id || '')
                           ? 'bg-green-500/20 text-green-400'
                           : 'bg-spacex-orange text-white hover:bg-spacex-orange/80'
                       }`}
                     >
                       <CheckCircle className="w-4 h-4" />
-                      {isCompleted(currentLessonData?.id || '') ? '已完成' : '标记完成'}
+                      <span className="hidden sm:inline">{isCompleted(currentLessonData?.id || '') ? '已完成' : '标记完成'}</span>
+                      <span className="sm:hidden">完成</span>
                     </button>
 
                     <button
@@ -615,9 +687,10 @@ export default function CourseViewer() {
                         currentLesson ===
                           courseData.modules[currentModule].items.length - 1
                       }
-                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 text-white/80 hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                      className="flex items-center gap-2 px-3 md:px-4 py-2 min-h-[44px] rounded-lg bg-white/5 text-white/80 hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed active:scale-95 transition-all"
                     >
-                      下一课
+                      <span className="hidden sm:inline">下一课</span>
+                      <span className="sm:hidden">下</span>
                       <ChevronRight className="w-4 h-4" />
                     </button>
                   </div>
@@ -626,17 +699,19 @@ export default function CourseViewer() {
             </div>
 
             {/* Mobile Sidebar Toggle */}
-            <div className="lg:hidden mt-4">
+            <div className="lg:hidden mt-4 mb-[80px]">
               <button
                 onClick={() => setShowSidebar(!showSidebar)}
-                className="w-full py-3 rounded-xl bg-white/5 border border-white/10 text-white/80 flex items-center justify-center gap-2"
+                className="w-full py-3 min-h-[44px] rounded-xl bg-white/5 border border-white/10 text-white/80 flex items-center justify-center gap-2 active:scale-95 transition-all"
+                aria-expanded={showSidebar}
+                aria-controls="mobile-course-nav"
               >
-                <BookOpen className="w-4 h-4" />
+                <BookOpen className="w-4 h-4" aria-hidden="true" />
                 {showSidebar ? '隐藏目录' : '显示目录'}
               </button>
 
               {showSidebar && (
-                <div className="mt-4 bg-white/[0.03] rounded-xl border border-white/10 p-4">
+                <div id="mobile-course-nav" className="mt-4 bg-white/[0.03] rounded-xl border border-white/10 p-4">
                   {courseData.modules.map((module, mIdx) => (
                     <div key={module.id} className="mb-4">
                       <div className="text-xs font-mono text-spacex-orange mb-1">
@@ -645,16 +720,18 @@ export default function CourseViewer() {
                       <div className="text-sm font-medium text-white mb-2">
                         {module.title}
                       </div>
-                      <div className="grid grid-cols-4 gap-1">
-                        {module.items.map((_, lIdx) => (
+                      <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
+                        {module.items.map((lesson, lIdx) => (
                           <button
                             key={lIdx}
                             onClick={() => handleSelectLesson(mIdx, lIdx)}
-                            className={`px-2 py-1 rounded text-xs ${
+                            className={`px-2 py-2 min-h-[44px] min-w-[44px] rounded-lg text-xs font-medium active:scale-90 transition-all ${
                               currentModule === mIdx && currentLesson === lIdx
                                 ? 'bg-spacex-orange text-white'
-                                : 'bg-white/5 text-white/60'
+                                : 'bg-white/5 text-white/60 hover:bg-white/10'
                             }`}
+                            aria-label={`课时 ${lIdx + 1}: ${lesson.title}`}
+                            aria-current={currentModule === mIdx && currentLesson === lIdx ? 'page' : undefined}
                           >
                             {lIdx + 1}
                           </button>

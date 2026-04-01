@@ -92,25 +92,33 @@ export default function SiteSearch({ isOpen, onClose }: SiteSearchProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-start justify-center bg-black/70 backdrop-blur-sm">
+    <div
+      className="fixed inset-0 z-[60] flex items-start justify-center bg-black/70 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-label="搜索"
+    >
       <div className="mt-24 w-full max-w-2xl mx-4 rounded-2xl border border-white/10 bg-[#0b0b14] shadow-xl">
         <div className="flex items-center gap-3 px-5 py-4 border-b border-white/10">
-          <Search className="w-5 h-5 text-white/60" />
+          <Search className="w-5 h-5 text-white/60" aria-hidden="true" />
           <input
             ref={inputRef}
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="搜索页面内容..."
             className="flex-1 bg-transparent text-white placeholder:text-white/40 focus:outline-none"
+            aria-label="搜索"
+            autoComplete="off"
           />
           <button
             onClick={onClose}
             className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10"
+            aria-label="关闭搜索"
           >
-            <X className="w-4 h-4" />
+            <X className="w-4 h-4" aria-hidden="true" />
           </button>
         </div>
-        <div className="max-h-[60vh] overflow-y-auto">
+        <div className="max-h-[60vh] overflow-y-auto" role="listbox" aria-label="搜索结果">
           {results.map((item) => (
             <button
               key={item.id}
@@ -122,16 +130,19 @@ export default function SiteSearch({ isOpen, onClose }: SiteSearchProps) {
                 onClose();
               }}
               className="w-full text-left px-5 py-4 border-b border-white/5 hover:bg-white/[0.04] transition-colors"
+              role="option"
             >
               <div className="text-white font-medium">{item.title}</div>
               <div className="text-xs text-white/40 mt-1">#{item.id}</div>
             </button>
           ))}
           {results.length === 0 && (
-            <div className="px-5 py-8 text-center text-white/40">没有找到匹配结果</div>
+            <div className="px-5 py-8 text-center text-white/40" role="status">
+              没有找到匹配结果
+            </div>
           )}
         </div>
-        <div className="px-5 py-3 text-xs text-white/40 flex items-center justify-between">
+        <div className="px-5 py-3 text-xs text-white/40 flex items-center justify-between" aria-hidden="true">
           <span>快捷键: ⌘/Ctrl + K</span>
           <span>输入 / 打开搜索</span>
         </div>

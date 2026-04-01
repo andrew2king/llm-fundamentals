@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ChevronRight, BookOpen, Code, Play, Map, Search } from 'lucide-react';
+import { Menu, X, ChevronRight, BookOpen, Code, Play, Map, Search, Home, Newspaper, Compass } from 'lucide-react';
 
 const navLinks = [
   { label: 'AI日报', href: '#daily-news' },
@@ -10,6 +10,14 @@ const navLinks = [
   { label: 'Agent 系统', href: '#agent-system' },
   { label: 'Prompt & Skill', href: '#prompt-skill' },
   { label: '资源库', href: '#resource-hub' },
+];
+
+// Mobile bottom navigation - key items with icons
+const mobileNavLinks = [
+  { label: '日报', href: '#daily-news', icon: Newspaper },
+  { label: '路径', href: '#learning-path', icon: Map },
+  { label: '课程', href: '#courses', icon: BookOpen },
+  { label: '学习', href: '#course-viewer', icon: Play },
 ];
 
 const quickLinks = [
@@ -26,10 +34,24 @@ type NavbarProps = {
 export default function Navbar({ onOpenSearch }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
+
+      // Detect active section for mobile nav highlighting
+      const sections = mobileNavLinks.map(l => l.href.replace('#', ''));
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 150 && rect.bottom >= 150) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -46,6 +68,7 @@ export default function Navbar({ onOpenSearch }: NavbarProps) {
 
   return (
     <>
+      {/* Desktop/Tablet Top Navigation */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
@@ -60,13 +83,14 @@ export default function Navbar({ onOpenSearch }: NavbarProps) {
           {/* Logo */}
           <a
             href="#"
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-3 group active:scale-95 transition-transform min-h-[44px]"
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
+            aria-label="返回首页"
           >
-            <div className="relative">
+            <div className="relative" aria-hidden="true">
               <svg
                 width="32"
                 height="32"
@@ -99,7 +123,7 @@ export default function Navbar({ onOpenSearch }: NavbarProps) {
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className="relative text-sm font-medium text-white/80 hover:text-white transition-colors duration-200 group"
+                className="relative text-sm font-medium text-white/80 hover:text-white transition-colors duration-200 group min-h-[44px] flex items-center active:scale-95"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-1/2 w-0 h-[2px] bg-spacex-orange transition-all duration-300 group-hover:w-full group-hover:left-0" />
@@ -111,61 +135,69 @@ export default function Navbar({ onOpenSearch }: NavbarProps) {
           <div className="hidden lg:flex items-center gap-3">
             <button
               onClick={() => onOpenSearch?.()}
-              className="px-3 py-2 text-sm font-medium border border-white/30 rounded hover:bg-white hover:text-black transition-all duration-300 flex items-center gap-2"
-              title="搜索"
+              className="px-3 py-2 min-h-[44px] text-sm font-medium border border-white/30 rounded hover:bg-white hover:text-black transition-all duration-300 flex items-center gap-2 active:scale-95"
+              aria-label="搜索"
             >
-              <Search className="w-4 h-4" />
+              <Search className="w-4 h-4" aria-hidden="true" />
               搜索
             </button>
             {quickLinks.slice(0, 3).map((link) => (
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className="p-2 rounded-lg bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all"
-                title={link.label}
+                className="p-2 min-w-[44px] min-h-[44px] rounded-lg bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all active:scale-95"
+                aria-label={link.label}
               >
-                <link.icon className="w-5 h-5" />
+                <link.icon className="w-5 h-5" aria-hidden="true" />
               </button>
             ))}
             <button
               onClick={() => scrollToSection('#quiz')}
-              className="px-4 py-2 text-sm font-medium border border-white/30 rounded hover:bg-white hover:text-black transition-all duration-300 flex items-center gap-2 group"
+              className="px-4 py-2 min-h-[44px] text-sm font-medium border border-white/30 rounded hover:bg-white hover:text-black transition-all duration-300 flex items-center gap-2 group active:scale-95"
+              aria-label="开始测验"
             >
               开始测验
-              <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button (hidden on lg, visible on smaller screens) */}
           <button
-            className="lg:hidden p-2"
+            className="lg:hidden p-2 min-w-[44px] min-h-[44px] flex items-center justify-center active:scale-95 transition-transform"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? '关闭菜单' : '打开菜单'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
+              <X className="w-6 h-6" aria-hidden="true" />
             ) : (
-              <Menu className="w-6 h-6" />
+              <Menu className="w-6 h-6" aria-hidden="true" />
             )}
           </button>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Full-Screen Menu */}
       <div
+        id="mobile-menu"
         className={`fixed inset-0 z-40 bg-black/98 backdrop-blur-xl transition-transform duration-500 lg:hidden ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         style={{
           transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
         }}
+        aria-hidden={!isMobileMenuOpen}
+        role="dialog"
+        aria-label="导航菜单"
       >
-        <div className="flex flex-col items-center justify-center h-full gap-4 p-6">
+        <div className="flex flex-col items-center justify-center h-full gap-3 p-6 pb-[80px]">
           <div className="text-sm text-white/40 mb-4">快速导航</div>
           {navLinks.map((link, index) => (
             <button
               key={link.href}
               onClick={() => scrollToSection(link.href)}
-              className="text-xl font-semibold text-white/80 hover:text-white transition-colors duration-200"
+              className="text-xl font-semibold text-white/80 hover:text-white active:scale-95 transition-all duration-200 min-h-[48px] flex items-center px-8"
               style={{
                 animationDelay: `${index * 50}ms`,
               }}
@@ -173,12 +205,16 @@ export default function Navbar({ onOpenSearch }: NavbarProps) {
               {link.label}
             </button>
           ))}
-          <div className="mt-8 pt-8 border-t border-white/10 w-full max-w-xs">
+          <div className="mt-6 pt-6 border-t border-white/10 w-full max-w-xs">
             <button
-              onClick={() => onOpenSearch?.()}
-              className="w-full mb-4 flex items-center justify-center gap-2 p-3 rounded-xl bg-white/5 text-white/70 hover:bg-white/10 transition-colors"
+              onClick={() => {
+                onOpenSearch?.();
+                setIsMobileMenuOpen(false);
+              }}
+              className="w-full mb-3 flex items-center justify-center gap-2 p-4 min-h-[48px] rounded-xl bg-white/5 text-white/70 hover:bg-white/10 active:scale-95 transition-all"
+              aria-label="搜索"
             >
-              <Search className="w-5 h-5" />
+              <Search className="w-5 h-5" aria-hidden="true" />
               搜索
             </button>
             <div className="grid grid-cols-2 gap-3">
@@ -186,9 +222,10 @@ export default function Navbar({ onOpenSearch }: NavbarProps) {
                 <button
                   key={link.href}
                   onClick={() => scrollToSection(link.href)}
-                  className="flex items-center gap-2 p-3 rounded-xl bg-white/5 text-white/70 hover:bg-white/10 transition-colors"
+                  className="flex items-center gap-2 p-4 min-h-[48px] rounded-xl bg-white/5 text-white/70 hover:bg-white/10 active:scale-95 transition-all"
+                  aria-label={link.label}
                 >
-                  <link.icon className="w-5 h-5" />
+                  <link.icon className="w-5 h-5" aria-hidden="true" />
                   <span className="text-sm">{link.label}</span>
                 </button>
               ))}
@@ -196,6 +233,57 @@ export default function Navbar({ onOpenSearch }: NavbarProps) {
           </div>
         </div>
       </div>
+
+      {/* Mobile Bottom Navigation - Fixed at bottom */}
+      <nav
+        className={`fixed bottom-0 left-0 right-0 z-50 lg:hidden transition-all duration-300 ${
+          isScrolled || window.scrollY > 50
+            ? 'bg-black/95 backdrop-blur-xl border-t border-white/10'
+            : 'bg-black/80 backdrop-blur-md'
+        }`}
+        aria-label="移动端底部导航"
+      >
+        <div className="flex items-center justify-around h-[60px] px-2 safe-area-inset-bottom">
+          {/* Home */}
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className={`flex flex-col items-center justify-center min-w-[44px] min-h-[44px] transition-all gap-1 ${
+              activeSection === '' ? 'text-spacex-orange' : 'text-white/60 hover:text-white'
+            } active:scale-90`}
+            aria-label="首页"
+          >
+            <Home className="w-5 h-5" aria-hidden="true" />
+            <span className="text-xs">首页</span>
+          </button>
+
+          {/* Main Nav Links */}
+          {mobileNavLinks.map((link) => (
+            <button
+              key={link.href}
+              onClick={() => scrollToSection(link.href)}
+              className={`flex flex-col items-center justify-center min-w-[44px] min-h-[44px] transition-all gap-1 ${
+                activeSection === link.href.replace('#', '')
+                  ? 'text-spacex-orange'
+                  : 'text-white/60 hover:text-white'
+              } active:scale-90`}
+              aria-label={link.label}
+            >
+              <link.icon className="w-5 h-5" aria-hidden="true" />
+              <span className="text-xs truncate max-w-[60px]">{link.label}</span>
+            </button>
+          ))}
+
+          {/* Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] text-white/60 hover:text-white active:scale-90 transition-all gap-1"
+            aria-label="更多导航"
+          >
+            <Compass className="w-5 h-5" aria-hidden="true" />
+            <span className="text-xs">更多</span>
+          </button>
+        </div>
+      </nav>
     </>
   );
 }

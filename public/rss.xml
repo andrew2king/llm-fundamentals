@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>LLM基础 - 大语言模型学习平台</title>
+    <link>https://llm101.vercel.app/</link>
+    <atom:link href="https://llm101.vercel.app/rss.xml" rel="self" type="application/rss+xml"/>
+    <description>通过沉浸式、视觉化的学习体验，理解大语言模型。涵盖Transformer架构、注意力机制、训练方法、RAG、Agent系统等核心知识。</description>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 01 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <generator>LLM基础 RSS Generator</generator>
+    <webMaster>contact@llm101.vercel.app</webMaster>
+    <ttl>60</ttl>
+    <image>
+      <url>https://llm101.vercel.app/favicon.svg</url>
+      <title>LLM基础</title>
+      <link>https://llm101.vercel.app/</link>
+    </image>
+
+    <!-- 主站点更新 -->
+    <item>
+      <title>LLM基础 - 学习平台上线</title>
+      <link>https://llm101.vercel.app/</link>
+      <guid isPermaLink="true">https://llm101.vercel.app/</guid>
+      <description>大语言模型学习平台正式上线，提供全面的LLM学习资源，包括Transformer架构、注意力机制、RAG、Agent系统等核心内容。</description>
+      <pubDate>Tue, 01 Apr 2026 00:00:00 +0000</pubDate>
+      <category>公告</category>
+    </item>
+
+    <!-- 核心知识模块 -->
+    <item>
+      <title>核心知识 - Transformer架构详解</title>
+      <link>https://llm101.vercel.app/#architecture</link>
+      <guid isPermaLink="true">https://llm101.vercel.app/#architecture</guid>
+      <description><![CDATA[
+        深入了解Transformer架构的核心组件：
+        - 多头注意力机制
+        - 前馈神经网络
+        - 位置编码
+        - 层归一化
+      ]]></description>
+      <pubDate>Tue, 01 Apr 2026 00:00:00 +0000</pubDate>
+      <category>核心知识</category>
+    </item>
+
+    <!-- Agent系统模块 -->
+    <item>
+      <title>Agent系统 - 构建智能代理</title>
+      <link>https://llm101.vercel.app/#agent-system</link>
+      <guid isPermaLink="true">https://llm101.vercel.app/#agent-system</guid>
+      <description><![CDATA[
+        学习如何构建AI Agent系统：
+        - Agent架构设计
+        - 工具调用与集成
+        - 多Agent协作
+        - Agent工作流可视化
+      ]]></description>
+      <pubDate>Tue, 01 Apr 2026 00:00:00 +0000</pubDate>
+      <category>Agent系统</category>
+    </item>
+
+    <!-- RAG模块 -->
+    <item>
+      <title>RAG - 检索增强生成技术</title>
+      <link>https://llm101.vercel.app/#rag</link>
+      <guid isPermaLink="true">https://llm101.vercel.app/#rag</guid>
+      <description><![CDATA[
+        深入学习RAG技术：
+        - 向量数据库选型
+        - 文档切分策略
+        - 检索优化技巧
+        - RAG评估方法
+      ]]></description>
+      <pubDate>Tue, 01 Apr 2026 00:00:00 +0000</pubDate>
+      <category>应用开发</category>
+    </item>
+
+    <!-- Prompt工程模块 -->
+    <item>
+      <title>Prompt工程 - 提示词优化技巧</title>
+      <link>https://llm101.vercel.app/#prompt-advanced</link>
+      <guid isPermaLink="true">https://llm101.vercel.app/#prompt-advanced</guid>
+      <description><![CDATA[
+        掌握Prompt工程的核心技巧：
+        - 提示词设计原则
+        - Few-shot学习
+        - Chain-of-Thought
+        - 提示词模板库
+      ]]></description>
+      <pubDate>Tue, 01 Apr 2026 00:00:00 +0000</pubDate>
+      <category>Prompt工程</category>
+    </item>
+
+    <!-- 资源库模块 -->
+    <item>
+      <title>资源库 - 精选学习资料</title>
+      <link>https://llm101.vercel.app/#resource-hub</link>
+      <guid isPermaLink="true">https://llm101.vercel.app/#resource-hub</guid>
+      <description><![CDATA[
+        精选LLM学习资源：
+        - 论文库：经典论文解读
+        - 视频教程：系统化学习
+        - 代码示例：实战项目
+        - 术语表：专业词汇解释
+      ]]></description>
+      <pubDate>Tue, 01 Apr 2026 00:00:00 +0000</pubDate>
+      <category>学习资源</category>
+    </item>
+
+    <!-- 多模态模块 -->
+    <item>
+      <title>多模态 - 图像与文本融合</title>
+      <link>https://llm101.vercel.app/#multimodal</link>
+      <guid isPermaLink="true">https://llm101.vercel.app/#multimodal</guid>
+      <description><![CDATA[
+        探索多模态AI技术：
+        - 视觉语言模型
+        - 图像理解与生成
+        - 多模态应用场景
+        - 最佳实践指南
+      ]]></description>
+      <pubDate>Tue, 01 Apr 2026 00:00:00 +0000</pubDate>
+      <category>多模态</category>
+    </item>
+
+    <!-- 模型对比 -->
+    <item>
+      <title>模型对比 - 主流LLM评测</title>
+      <link>https://llm101.vercel.app/#compare</link>
+      <guid isPermaLink="true">https://llm101.vercel.app/#compare</guid>
+      <description><![CDATA[
+        对比主流大语言模型：
+        - GPT系列
+        - Claude系列
+        - 开源模型
+        - 性能基准测试
+      ]]></description>
+      <pubDate>Tue, 01 Apr 2026 00:00:00 +0000</pubDate>
+      <category>模型评测</category>
+    </item>
+  </channel>
+</rss>

@@ -101,7 +101,7 @@ export default function DailyNews() {
       className="relative py-24 bg-black overflow-hidden"
     >
       {/* Background gradient */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div
           className="absolute inset-0"
           style={{
@@ -116,7 +116,7 @@ export default function DailyNews() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
-              <Newspaper className="w-4 h-4 text-spacex-orange" />
+              <Newspaper className="w-4 h-4 text-spacex-orange" aria-hidden="true" />
               <span className="text-sm font-medium text-white/80">
                 每日更新
               </span>
@@ -129,7 +129,7 @@ export default function DailyNews() {
             </p>
           </div>
           <div className="mt-6 md:mt-0 flex items-center gap-3 text-white/50">
-            <Calendar className="w-4 h-4" />
+            <Calendar className="w-4 h-4" aria-hidden="true" />
             <span className="text-sm">
               {isLoading ? '加载中...' : formatDate(dailyData.date)}
             </span>
@@ -142,11 +142,13 @@ export default function DailyNews() {
         {/* Content */}
         {isLoading ? (
           <div className="flex items-center justify-center py-20">
-            <div className="w-8 h-8 border-2 border-spacex-orange border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-2 border-spacex-orange border-t-transparent rounded-full animate-spin" role="status" aria-label="加载中">
+              <span className="sr-only">加载中...</span>
+            </div>
           </div>
         ) : !hasData ? (
-          <div className="text-center py-20 text-white/50">
-            <Newspaper className="w-12 h-12 mx-auto mb-4 opacity-50" />
+          <div className="text-center py-20 text-white/50" role="status">
+            <Newspaper className="w-12 h-12 mx-auto mb-4 opacity-50" aria-hidden="true" />
             <p>今日日报正在准备中...</p>
           </div>
         ) : (
@@ -155,7 +157,7 @@ export default function DailyNews() {
             {dailyData.news.length > 0 && (
               <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
                 <div className="px-6 py-4 border-b border-white/10 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-spacex-orange/20 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-spacex-orange/20 flex items-center justify-center" aria-hidden="true">
                     <Newspaper className="w-5 h-5 text-spacex-orange" />
                   </div>
                   <h3 className="text-lg font-semibold text-white">
@@ -177,7 +179,7 @@ export default function DailyNews() {
             {dailyData.papers.length > 0 && (
               <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
                 <div className="px-6 py-4 border-b border-white/10 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center" aria-hidden="true">
                     <BookOpen className="w-5 h-5 text-blue-400" />
                   </div>
                   <h3 className="text-lg font-semibold text-white">
@@ -198,48 +200,55 @@ export default function DailyNews() {
         )}
 
         {/* Archive Link */}
-        <div className="mt-12 text-center">
+        <div className="mt-12 text-center mb-[80px]">
           <button
             onClick={handleOpenArchive}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/20 text-white/70 hover:bg-white/5 hover:text-white transition-all duration-300 group"
+            className="inline-flex items-center gap-2 px-6 py-3 min-h-[44px] rounded-lg border border-white/20 text-white/70 hover:bg-white/5 hover:text-white active:scale-95 transition-all duration-300 group"
+            aria-label="查看历史日报"
           >
-            <Calendar className="w-4 h-4" />
+            <Calendar className="w-4 h-4" aria-hidden="true" />
             <span>查看历史日报</span>
-            <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
           </button>
         </div>
       </div>
 
       {/* Archive Modal */}
       {showArchive && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label="历史日报"
+        >
           <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-gray-900 rounded-2xl border border-white/10">
             {/* Modal Header */}
-            <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 bg-gray-900/95 border-b border-white/10 backdrop-blur-sm">
-              <div className="flex items-center gap-4">
+            <div className="sticky top-0 z-10 flex items-center justify-between px-4 md:px-6 py-4 bg-gray-900/95 border-b border-white/10 backdrop-blur-sm">
+              <div className="flex items-center gap-2 md:gap-4">
                 <button
                   onClick={handlePrevDay}
-                  className="p-2 rounded-lg hover:bg-white/10 transition-colors"
-                  title="前一天"
+                  className="p-2 min-w-[44px] min-h-[44px] rounded-lg hover:bg-white/10 active:scale-95 transition-all"
+                  aria-label="前一天"
                 >
-                  <ChevronLeft className="w-5 h-5" />
+                  <ChevronLeft className="w-5 h-5" aria-hidden="true" />
                 </button>
-                <h3 className="text-lg font-semibold">
+                <h3 className="text-base md:text-lg font-semibold">
                   {archiveLoading ? '加载中...' : archiveData ? formatDate(currentArchiveDate) : '历史日报'}
                 </h3>
                 <button
                   onClick={handleNextDay}
-                  className="p-2 rounded-lg hover:bg-white/10 transition-colors"
-                  title="后一天"
+                  className="p-2 min-w-[44px] min-h-[44px] rounded-lg hover:bg-white/10 active:scale-95 transition-all"
+                  aria-label="后一天"
                 >
-                  <ChevronRight className="w-5 h-5" />
+                  <ChevronRight className="w-5 h-5" aria-hidden="true" />
                 </button>
               </div>
               <button
                 onClick={() => setShowArchive(false)}
-                className="p-2 rounded-lg hover:bg-white/10 transition-colors"
+                className="p-2 min-w-[44px] min-h-[44px] rounded-lg hover:bg-white/10 active:scale-95 transition-all"
+                aria-label="关闭"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5" aria-hidden="true" />
               </button>
             </div>
 
@@ -247,11 +256,13 @@ export default function DailyNews() {
             <div className="p-6">
               {archiveLoading ? (
                 <div className="flex items-center justify-center py-20">
-                  <div className="w-8 h-8 border-2 border-spacex-orange border-t-transparent rounded-full animate-spin" />
+                  <div className="w-8 h-8 border-2 border-spacex-orange border-t-transparent rounded-full animate-spin" role="status" aria-label="加载中">
+                    <span className="sr-only">加载中...</span>
+                  </div>
                 </div>
               ) : !archiveData ? (
-                <div className="text-center py-20 text-white/50">
-                  <Newspaper className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                <div className="text-center py-20 text-white/50" role="status">
+                  <Newspaper className="w-12 h-12 mx-auto mb-4 opacity-50" aria-hidden="true" />
                   <p>该日期暂无日报</p>
                 </div>
               ) : (
@@ -262,7 +273,7 @@ export default function DailyNews() {
                   {archiveData.news.length > 0 && (
                     <div>
                       <h4 className="flex items-center gap-2 text-lg font-semibold mb-4">
-                        <Newspaper className="w-5 h-5 text-spacex-orange" />
+                        <Newspaper className="w-5 h-5 text-spacex-orange" aria-hidden="true" />
                         行业新闻 ({archiveData.news.length})
                       </h4>
                       <div className="space-y-3">
@@ -277,7 +288,7 @@ export default function DailyNews() {
                   {archiveData.papers.length > 0 && (
                     <div>
                       <h4 className="flex items-center gap-2 text-lg font-semibold mb-4">
-                        <BookOpen className="w-5 h-5 text-blue-400" />
+                        <BookOpen className="w-5 h-5 text-blue-400" aria-hidden="true" />
                         arXiv 论文 ({archiveData.papers.length})
                       </h4>
                       <div className="space-y-3">
@@ -304,7 +315,7 @@ function NewsCard({ item, index }: { item: DailyNewsItem; index: number }) {
       href={item.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block p-4 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all duration-300"
+      className="group block p-4 min-h-[44px] rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 active:scale-95 transition-all duration-300"
     >
       <div className="flex items-start gap-3">
         <span className="flex-shrink-0 w-6 h-6 rounded-full bg-spacex-orange/20 text-spacex-orange text-xs font-bold flex items-center justify-center">
@@ -319,7 +330,7 @@ function NewsCard({ item, index }: { item: DailyNewsItem; index: number }) {
           </p>
           <div className="flex items-center gap-3 text-xs text-white/40">
             <span className="flex items-center gap-1">
-              <ExternalLink className="w-3 h-3" />
+              <ExternalLink className="w-3 h-3" aria-hidden="true" />
               {item.source}
             </span>
             <span>·</span>
@@ -338,7 +349,7 @@ function PaperCard({ item, index }: { item: DailyPaperItem; index: number }) {
       href={item.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block p-4 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all duration-300"
+      className="group block p-4 min-h-[44px] rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 active:scale-95 transition-all duration-300"
     >
       <div className="flex items-start gap-3">
         <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold flex items-center justify-center">
@@ -353,7 +364,7 @@ function PaperCard({ item, index }: { item: DailyPaperItem; index: number }) {
           </p>
           <div className="flex items-center gap-3 text-xs text-white/40">
             <span className="flex items-center gap-1">
-              <BookOpen className="w-3 h-3" />
+              <BookOpen className="w-3 h-3" aria-hidden="true" />
               arXiv
             </span>
             <span>·</span>

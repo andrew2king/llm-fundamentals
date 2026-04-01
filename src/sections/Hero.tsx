@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, ChevronDown, Play } from 'lucide-react';
+import OptimizedImage, { IMAGE_DIMENSIONS } from '@/components/OptimizedImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -114,28 +115,41 @@ export default function Hero() {
       ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <img
+      {/* Background Image - Critical for LCP, eager loading */}
+      <div className="absolute inset-0 z-0" aria-hidden="true">
+        <OptimizedImage
           src="/hero-bg.jpg"
-          alt="Neural Network"
+          alt=""
+          width={IMAGE_DIMENSIONS['hero-bg'].width}
+          height={IMAGE_DIMENSIONS['hero-bg'].height}
           className="w-full h-full object-cover scale-110"
+          loading="eager"
+          priority={true}
+          placeholder={false}
+          fadeIn={false}
+          aria-hidden
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent" />
       </div>
 
-      {/* Floating Elements */}
+      {/* Floating Elements - Lazy loaded */}
       <div
         ref={floatingRef}
         className="absolute right-[5%] top-1/2 -translate-y-1/2 w-[400px] h-[400px] z-10 hidden lg:block"
         style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}
+        aria-hidden="true"
       >
-        <img
+        <OptimizedImage
           src="/hero-float.png"
-          alt="AI Processing"
-          loading="lazy"
+          alt=""
+          width={IMAGE_DIMENSIONS['hero-float'].width}
+          height={IMAGE_DIMENSIONS['hero-float'].height}
           className="w-full h-full object-contain animate-float"
+          loading="lazy"
+          placeholder={true}
+          fadeIn={true}
+          aria-hidden
         />
         <div className="absolute inset-0 bg-spacex-blue/20 blur-[100px] rounded-full" />
       </div>
@@ -178,10 +192,13 @@ export default function Hero() {
               className="group px-8 py-4 bg-white text-black font-semibold rounded hover:bg-white/90 transition-all duration-300 flex items-center gap-3"
             >
               开始探索
-              <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
             </button>
-            <button className="group px-8 py-4 border border-white/30 text-white font-semibold rounded hover:bg-white/10 transition-all duration-300 flex items-center gap-3">
-              <Play className="w-5 h-5" />
+            <button
+              className="group px-8 py-4 border border-white/30 text-white font-semibold rounded hover:bg-white/10 transition-all duration-300 flex items-center gap-3"
+              aria-label="观看演示视频"
+            >
+              <Play className="w-5 h-5" aria-hidden="true" />
               观看演示
             </button>
           </div>
@@ -192,6 +209,7 @@ export default function Hero() {
       <div
         ref={scrollIndicatorRef}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+        aria-hidden="true"
       >
         <span className="text-xs text-white/50 uppercase tracking-widest">
           向下滚动

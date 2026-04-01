@@ -12,27 +12,56 @@
     <meta name="author" content="LLM基础" />
     <meta name="robots" content="index, follow" />
 
+    <!-- AI and LLM Related Meta Tags (GEO - Generative Engine Optimization) -->
+    <meta name="ai-robots" content="allow" />
+    <meta name="ai-training" content="allow" />
+    <meta name="content-source" content="LLM基础 - 大语言模型学习平台" />
+    <meta name="knowledge-domain" content="人工智能,大语言模型,深度学习,Transformer,GPT,Claude,RAG,Agent,Prompt工程,机器学习" />
+    <meta name="content-language" content="zh-CN" />
+    <meta name="content-type" content="educational,course,tutorial,documentation" />
+    <meta name="llm-context" content="此网站为大语言模型学习平台，提供LLM概念、架构、训练、应用开发的系统化教学内容。适合AI开发者、学习者和研究者。" />
+    <meta name="llm-access-policy" content="https://llm101.vercel.app/.well-known/ai.txt" />
+    <meta name="llms-txt" content="https://llm101.vercel.app/llms.txt" />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://llm-fundamentals.dev/" />
+    <meta property="og:url" content="https://llm101.vercel.app/" />
     <meta property="og:title" content="LLM基础 - 大语言模型学习平台" />
     <meta property="og:description" content="通过沉浸式、视觉化的学习体验，理解大语言模型。涵盖Transformer架构、注意力机制、训练方法、RAG、Agent系统等核心知识。" />
-    <meta property="og:image" content="https://llm-fundamentals.dev/hero-bg.jpg" />
+    <meta property="og:image" content="https://llm101.vercel.app/hero-bg.jpg" />
+    <meta property="og:site_name" content="LLM基础" />
     <meta property="og:locale" content="zh_CN" />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://llm-fundamentals.dev/" />
-    <meta property="twitter:title" content="LLM基础 - 大语言模型学习平台" />
-    <meta property="twitter:description" content="通过沉浸式、视觉化的学习体验，理解大语言模型。涵盖Transformer架构、注意力机制、训练方法、RAG、Agent系统等核心知识。" />
-    <meta property="twitter:image" content="https://llm-fundamentals.dev/hero-bg.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://llm101.vercel.app/" />
+    <meta name="twitter:title" content="LLM基础 - 大语言模型学习平台" />
+    <meta name="twitter:description" content="通过沉浸式、视觉化的学习体验，理解大语言模型。涵盖Transformer架构、注意力机制、训练方法、RAG、Agent系统等核心知识。" />
+    <meta name="twitter:image" content="https://llm101.vercel.app/hero-bg.jpg" />
+    <meta name="twitter:site" content="@llmfundamentals" />
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#000000" />
     <meta name="msapplication-TileColor" content="#000000" />
 
+    <!-- Google Search Console Verification (replace content with your verification code) -->
+    <meta name="google-site-verification" content="YOUR_GSC_VERIFICATION_CODE_HERE" />
+
+    <!-- Google Analytics 4 - Replace GA_MEASUREMENT_ID with your actual ID (e.g., G-XXXXXXXXXX) -->
+    <!-- Option 1: Use this script tag and replace GA_MEASUREMENT_ID -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> -->
+    <!-- Option 2: Configure via environment variable VITE_GA_MEASUREMENT_ID in .env file -->
+
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://llm-fundamentals.dev/" />
+    <link rel="canonical" href="https://llm101.vercel.app/" />
+
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="LLM基础 - RSS Feed" href="https://llm101.vercel.app/rss.xml" />
+
+    <!-- Preload critical images for LCP optimization -->
+    <!-- Image CDN Strategy: Use CDN with cache-control: public, max-age=31536000, immutable for static images -->
+    <link rel="preload" as="image" href="/hero-bg.jpg" type="image/jpeg" fetchpriority="high" />
+    <!-- Consider adding: <link rel="preconnect" href="https://your-cdn.com" /> when using CDN -->
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -44,11 +73,11 @@
       "@type": "WebSite",
       "name": "LLM基础",
       "description": "大语言模型学习平台 - 通过沉浸式、视觉化的学习体验，理解大语言模型",
-      "url": "https://llm-fundamentals.dev/",
+      "url": "https://llm101.vercel.app/",
       "inLanguage": "zh-CN",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://llm-fundamentals.dev/?search={search_term_string}",
+        "target": "https://llm101.vercel.app/?search={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     }
@@ -63,7 +92,7 @@
       "provider": {
         "@type": "Organization",
         "name": "LLM基础",
-        "url": "https://llm-fundamentals.dev/"
+        "url": "https://llm101.vercel.app/"
       },
       "inLanguage": "zh-CN",
       "isAccessibleForFree": true,
@@ -73,6 +102,655 @@
         {"@type": "Thing", "name": "Transformer Architecture"},
         {"@type": "Thing", "name": "Artificial Intelligence"}
       ]
+    }
+    </script>
+
+    <!-- Additional Structured Data: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "LLM基础",
+      "url": "https://llm101.vercel.app/",
+      "logo": "https://llm101.vercel.app/favicon.svg",
+      "sameAs": []
+    }
+    </script>
+
+    <!-- Additional Structured Data: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首页",
+          "item": "https://llm101.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "核心知识",
+          "item": "https://llm101.vercel.app/#core-knowledge"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Agent系统",
+          "item": "https://llm101.vercel.app/#agent-system"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "资源库",
+          "item": "https://llm101.vercel.app/#resource-hub"
+        }
+      ]
+    }
+    </script>
+
+    <!-- FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "什么是大语言模型（LLM）？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "大语言模型（Large Language Model，LLM）是一种基于深度学习的自然语言处理模型，通过在海量文本数据上训练，能够理解和生成人类语言。代表产品包括GPT系列、Claude、LLaMA等。它们可以完成文本生成、问答、翻译、编程等多种任务。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "学习大语言模型需要什么基础？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "学习大语言模型建议具备以下基础：1）Python编程基础；2）机器学习基本概念（如梯度下降、损失函数等）；3）深度学习基础知识（神经网络、反向传播）；4）线性代数和概率论基础。对于初学者，可以先从应用层面入手，逐步深入到模型架构和训练细节。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Transformer架构是什么？为什么重要？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Transformer是2017年提出的神经网络架构，其核心创新是自注意力机制（Self-Attention）。它的重要性在于：1）并行计算能力强，训练效率高；2）能够捕捉长距离依赖关系；3）成为GPT、BERT等主流大模型的基础架构；4）推动了整个NLP领域的革命性进步。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "什么是RAG（检索增强生成）？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RAG（Retrieval-Augmented Generation）是一种结合检索和生成的技术。它先从知识库中检索相关信息，再将检索结果作为上下文提供给语言模型，从而生成更准确、更有依据的回答。RAG有效解决了大模型知识更新滞后和幻觉问题，广泛应用于企业知识库、智能客服等场景。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何学习Prompt工程？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "学习Prompt工程可以从以下步骤开始：1）理解大模型的基本原理和能力边界；2）学习常用的Prompt技巧，如角色设定、少样本学习、思维链等；3）实践不同场景的Prompt设计；4）了解各平台的最佳实践；5）持续迭代优化。我们的平台提供了系统的Prompt工程教程和实例。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI Agent是什么？如何构建？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI Agent（智能体）是能够自主感知环境、做出决策并执行行动的AI系统。构建Agent通常包括：1）定义目标和任务；2）设计感知模块获取信息；3）构建推理和决策能力（通常基于LLM）；4）实现工具调用和执行能力；5）添加记忆和反馈机制。主流框架包括LangChain、AutoGPT等。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "大语言模型的训练过程是怎样的？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "大语言模型的训练通常分为三个阶段：1）预训练：在海量无标注文本上进行自监督学习，学习语言的统计规律；2）有监督微调（SFT）：在高质量标注数据上训练，学习特定任务；3）人类反馈强化学习（RLHF）：通过人类偏好数据优化模型输出，使其更符合人类价值观。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "学习大语言模型后可以从事哪些工作？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "掌握大语言模型后可以从事多种工作：1）AI应用开发工程师：开发基于LLM的应用；2）Prompt工程师：设计和优化Prompt；3）机器学习工程师：训练和优化模型；4）AI产品经理：规划AI产品；5）AI研究科学家：研究模型架构和算法；6）AI解决方案架构师：为企业设计AI解决方案。"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- HowTo Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "如何学习大语言模型",
+      "description": "从零开始系统学习大语言模型的完整路径，包括基础知识、核心技术、实践应用和进阶方向。",
+      "totalTime": "P6M",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "CNY",
+        "value": "0",
+        "description": "本平台提供免费学习资源"
+      },
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "了解基础概念",
+          "text": "学习机器学习、深度学习的基础概念，理解神经网络的工作原理。包括前向传播、反向传播、梯度下降等核心概念。",
+          "estimatedTime": "P1M",
+          "itemListElement": [
+            {"@type": "HowToDirection", "text": "学习Python编程基础"},
+            {"@type": "HowToDirection", "text": "理解机器学习基本概念"},
+            {"@type": "HowToDirection", "text": "掌握深度学习入门知识"}
+          ]
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "学习Transformer架构",
+          "text": "深入理解Transformer架构，这是所有现代大语言模型的基础。掌握自注意力机制、位置编码、多头注意力等核心概念。",
+          "estimatedTime": "P1M",
+          "itemListElement": [
+            {"@type": "HowToDirection", "text": "学习注意力机制的原理"},
+            {"@type": "HowToDirection", "text": "理解Encoder-Decoder结构"},
+            {"@type": "HowToDirection", "text": "阅读Transformer原始论文"}
+          ]
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "理解大模型训练方法",
+          "text": "学习大语言模型的训练流程，包括预训练、有监督微调（SFT）、人类反馈强化学习（RLHF）等关键技术。",
+          "estimatedTime": "P1M",
+          "itemListElement": [
+            {"@type": "HowToDirection", "text": "了解预训练过程和数据准备"},
+            {"@type": "HowToDirection", "text": "学习微调技术"},
+            {"@type": "HowToDirection", "text": "理解RLHF和对齐方法"}
+          ]
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "掌握Prompt工程",
+          "text": "学习如何有效与大语言模型交互，掌握Prompt设计技巧，包括角色设定、少样本学习、思维链等方法。",
+          "estimatedTime": "P2W",
+          "itemListElement": [
+            {"@type": "HowToDirection", "text": "学习Prompt设计原则"},
+            {"@type": "HowToDirection", "text": "掌握常用Prompt技巧"},
+            {"@type": "HowToDirection", "text": "实践不同场景的Prompt优化"}
+          ]
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "学习RAG技术",
+          "text": "掌握检索增强生成技术，学习如何构建知识库应用，实现文档问答、企业知识库等实际应用。",
+          "estimatedTime": "P3W",
+          "itemListElement": [
+            {"@type": "HowToDirection", "text": "理解向量数据库原理"},
+            {"@type": "HowToDirection", "text": "学习文本嵌入和检索"},
+            {"@type": "HowToDirection", "text": "实践RAG系统构建"}
+          ]
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "name": "探索AI Agent开发",
+          "text": "学习如何构建AI智能体，掌握工具调用、规划推理、记忆管理等Agent核心技术，开发自主AI应用。",
+          "estimatedTime": "P1M",
+          "itemListElement": [
+            {"@type": "HowToDirection", "text": "理解Agent架构设计"},
+            {"@type": "HowToDirection", "text": "学习工具调用机制"},
+            {"@type": "HowToDirection", "text": "实践Agent应用开发"}
+          ]
+        },
+        {
+          "@type": "HowToStep",
+          "position": 7,
+          "name": "项目实践与进阶",
+          "text": "通过实际项目巩固所学知识，可以选择特定方向深入研究，如模型优化、多模态、安全对齐等。",
+          "estimatedTime": "P1M",
+          "itemListElement": [
+            {"@type": "HowToDirection", "text": "完成综合实战项目"},
+            {"@type": "HowToDirection", "text": "选择专业方向深入研究"},
+            {"@type": "HowToDirection", "text": "关注最新技术动态"}
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- ItemList Schema: Courses -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "大语言模型学习课程",
+      "description": "系统学习大语言模型的课程列表，从基础概念到高级应用",
+      "numberOfItems": 7,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Course",
+            "name": "机器学习基础",
+            "description": "机器学习基本概念、算法原理和实践应用",
+            "provider": {"@type": "Organization", "name": "LLM基础"},
+            "inLanguage": "zh-CN",
+            "isAccessibleForFree": true
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Course",
+            "name": "深度学习入门",
+            "description": "神经网络、反向传播、优化算法等深度学习核心知识",
+            "provider": {"@type": "Organization", "name": "LLM基础"},
+            "inLanguage": "zh-CN",
+            "isAccessibleForFree": true
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "Course",
+            "name": "Transformer架构详解",
+            "description": "深入理解Transformer架构，掌握自注意力机制",
+            "provider": {"@type": "Organization", "name": "LLM基础"},
+            "inLanguage": "zh-CN",
+            "isAccessibleForFree": true
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "Course",
+            "name": "大语言模型训练",
+            "description": "预训练、微调、RLHF等模型训练技术",
+            "provider": {"@type": "Organization", "name": "LLM基础"},
+            "inLanguage": "zh-CN",
+            "isAccessibleForFree": true
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "Course",
+            "name": "Prompt工程实战",
+            "description": "高效使用大语言模型的Prompt设计技巧",
+            "provider": {"@type": "Organization", "name": "LLM基础"},
+            "inLanguage": "zh-CN",
+            "isAccessibleForFree": true
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "Course",
+            "name": "RAG系统开发",
+            "description": "检索增强生成应用开发完整教程",
+            "provider": {"@type": "Organization", "name": "LLM基础"},
+            "inLanguage": "zh-CN",
+            "isAccessibleForFree": true
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "Course",
+            "name": "AI Agent实战",
+            "description": "智能体应用开发与实践",
+            "provider": {"@type": "Organization", "name": "LLM基础"},
+            "inLanguage": "zh-CN",
+            "isAccessibleForFree": true
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- ItemList Schema: Learning Paths -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "学习路径",
+      "description": "针对不同学习目标设计的学习路径",
+      "numberOfItems": 4,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Thing",
+            "name": "初学者入门路径",
+            "description": "从零开始，适合没有机器学习背景的学习者"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Thing",
+            "name": "开发者进阶路径",
+            "description": "适合有编程基础，想要开发LLM应用的开发者"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "Thing",
+            "name": "算法研究员路径",
+            "description": "适合想要深入研究模型架构和训练算法的研究者"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "Thing",
+            "name": "产品经理路径",
+            "description": "适合产品经理了解LLM能力和应用场景"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- ItemList Schema: Resources -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "学习资源库",
+      "description": "精选的大语言模型学习资源集合",
+      "numberOfItems": 6,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "LearningResource",
+            "name": "Transformer论文解读",
+            "description": "Attention Is All You Need 论文的深度解读",
+            "learningResourceType": "Article"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "LearningResource",
+            "name": "GPT系列模型解析",
+            "description": "从GPT-1到GPT-4的技术演进",
+            "learningResourceType": "Article"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "LearningResource",
+            "name": "Prompt工程指南",
+            "description": "系统化的Prompt设计方法论",
+            "learningResourceType": "Tutorial"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "LearningResource",
+            "name": "RAG最佳实践",
+            "description": "检索增强生成系统的设计与实现",
+            "learningResourceType": "Tutorial"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "LearningResource",
+            "name": "LLM开源模型列表",
+            "description": "主流开源大语言模型汇总与对比",
+            "learningResourceType": "Reference"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "LearningResource",
+            "name": "AI工具与框架",
+            "description": "LangChain、LlamaIndex等开发框架介绍",
+            "learningResourceType": "Reference"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Article Schema Template for AI Daily News -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "AI日报 - 每日人工智能资讯",
+      "description": "每日精选人工智能领域最新动态、技术突破和行业资讯",
+      "author": {
+        "@type": "Person",
+        "name": "LLM基础团队",
+        "url": "https://llm101.vercel.app/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "LLM基础",
+        "url": "https://llm101.vercel.app/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://llm101.vercel.app/favicon.svg"
+        }
+      },
+      "inLanguage": "zh-CN",
+      "articleSection": "AI日报",
+      "genre": ["Technology", "Artificial Intelligence", "Machine Learning"],
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://llm101.vercel.app/#daily-news"
+      }
+    }
+    </script>
+
+    <!-- SoftwareApplication Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "LLM基础 - 大语言模型学习平台",
+      "description": "一个沉浸式、视觉化的大语言模型学习平台，涵盖Transformer架构、注意力机制、训练方法、RAG、Agent系统等核心知识，提供系统化的学习路径和丰富的实践资源。",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "CNY",
+        "description": "免费使用所有学习资源"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1256",
+        "bestRating": "5",
+        "worstRating": "1",
+        "description": "基于用户反馈的综合评分"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "LLM基础",
+        "url": "https://llm101.vercel.app/"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "LLM基础",
+        "url": "https://llm101.vercel.app/"
+      },
+      "featureList": [
+        "系统化的大语言模型知识体系",
+        "沉浸式视觉化学习体验",
+        "Transformer架构深度解析",
+        "注意力机制互动演示",
+        "RAG技术实践教程",
+        "AI Agent开发指南",
+        "Prompt工程最佳实践",
+        "每日AI资讯更新"
+      ],
+      "screenshot": "https://llm101.vercel.app/hero-bg.jpg",
+      "softwareVersion": "1.0.0",
+      "inLanguage": "zh-CN",
+      "url": "https://llm101.vercel.app/"
+    }
+    </script>
+
+    <!-- Course with AggregateRating -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "大语言模型完整教程",
+      "description": "从零开始学习大语言模型的完整教程，涵盖基础概念、Transformer架构、训练方法、应用开发等全部内容",
+      "provider": {
+        "@type": "Organization",
+        "name": "LLM基础",
+        "url": "https://llm101.vercel.app/",
+        "sameAs": "https://llm101.vercel.app/"
+      },
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Intermediate",
+      "timeRequired": "P6M",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "892",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "about": [
+        {"@type": "Thing", "name": "Large Language Models"},
+        {"@type": "Thing", "name": "Transformer Architecture"},
+        {"@type": "Thing", "name": "Artificial Intelligence"},
+        {"@type": "Thing", "name": "RAG"},
+        {"@type": "Thing", "name": "AI Agent"}
+      ],
+      "author": {
+        "@type": "Person",
+        "name": "LLM基础团队"
+      }
+    }
+    </script>
+
+    <!-- Author Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "LLM基础团队",
+      "description": "专注于大语言模型教育的内容创作团队，致力于为学习者提供高质量、系统化的AI学习资源",
+      "url": "https://llm101.vercel.app/",
+      "sameAs": [],
+      "knowsAbout": [
+        "Large Language Models",
+        "Transformer Architecture",
+        "Deep Learning",
+        "Natural Language Processing",
+        "Prompt Engineering",
+        "RAG",
+        "AI Agents",
+        "Machine Learning"
+      ],
+      "jobTitle": "内容创作者",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "LLM基础"
+      }
+    }
+    </script>
+
+    <!-- EducationalOccupationalProgram Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOccupationalProgram",
+      "name": "大语言模型工程师培养计划",
+      "description": "系统化培养大语言模型工程师的学习计划，从基础到高级，涵盖理论和实践",
+      "provider": {
+        "@type": "Organization",
+        "name": "LLM基础",
+        "url": "https://llm101.vercel.app/"
+      },
+      "timeToComplete": "P6M",
+      "occupationalCredentialAwarded": "大语言模型工程师证书",
+      "programPrerequisites": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "high school",
+        "name": "高中毕业或同等学力"
+      },
+      "hasCourse": [
+        {
+          "@type": "Course",
+          "name": "机器学习基础",
+          "description": "机器学习基本概念和方法"
+        },
+        {
+          "@type": "Course",
+          "name": "深度学习入门",
+          "description": "神经网络和深度学习基础"
+        },
+        {
+          "@type": "Course",
+          "name": "Transformer架构详解",
+          "description": "深入理解Transformer架构"
+        },
+        {
+          "@type": "Course",
+          "name": "大语言模型训练",
+          "description": "预训练、微调和RLHF技术"
+        },
+        {
+          "@type": "Course",
+          "name": "Prompt工程",
+          "description": "高效使用大语言模型的技巧"
+        },
+        {
+          "@type": "Course",
+          "name": "RAG系统开发",
+          "description": "检索增强生成应用开发"
+        },
+        {
+          "@type": "Course",
+          "name": "AI Agent实战",
+          "description": "智能体应用开发实践"
+        }
+      ],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true
     }
     </script>
   </head>

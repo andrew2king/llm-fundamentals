@@ -116,7 +116,7 @@ export default function Footer() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
             {/* Brand */}
             <div className="col-span-2 md:col-span-1 footer-item opacity-0">
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-4" aria-hidden="true">
                 <svg
                   width="32"
                   height="32"

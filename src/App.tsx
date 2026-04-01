@@ -12,6 +12,9 @@ import Footer from './sections/Footer';
 import SiteSearch from './components/SiteSearch';
 import SectionNav from './sections/SectionNav';
 
+// Error Boundary for sections - prevents section errors from crashing the entire page
+import SectionErrorBoundary from './components/SectionErrorBoundary';
+
 // Lazy loaded components - loaded on demand
 const DailyNews = lazy(() => import('./sections/DailyNews'));
 const LearningPath = lazy(() => import('./sections/LearningPath'));
@@ -111,8 +114,16 @@ function App() {
   return (
     <UserProvider>
       <div className="relative bg-black text-white min-h-screen overflow-x-hidden">
+      {/* Skip to content link for accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-spacex-orange focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
+      >
+        跳转到主要内容
+      </a>
+
       {/* Background gradient overlay */}
-      <div className="fixed inset-0 pointer-events-none z-0">
+      <div className="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
         <div
           className="absolute inset-0"
           style={{
@@ -133,203 +144,299 @@ function App() {
       <Navbar onOpenSearch={() => setIsSearchOpen(true)} />
 
       {/* Main content */}
-      <main className="relative z-10">
+      <main id="main-content" className="relative z-10" tabIndex={-1}>
         {/* Hero is critical - loaded immediately */}
         <Hero />
 
         {/* Daily News - AI日报 */}
-        <Suspense fallback={<SectionSkeleton />}>
-          <DailyNews />
-        </Suspense>
+        <SectionErrorBoundary sectionName="AI日报">
+          <Suspense fallback={<SectionSkeleton />}>
+            <DailyNews />
+          </Suspense>
+        </SectionErrorBoundary>
 
         {/* Lazy loaded sections with Suspense */}
-        <Suspense fallback={<SectionSkeleton />}>
-          <LearningPath />
-        </Suspense>
+        <SectionErrorBoundary sectionName="学习路径">
+          <Suspense fallback={<SectionSkeleton />}>
+            <LearningPath />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton cardCount={3} />}>
-          <Courses />
-        </Suspense>
+        <SectionErrorBoundary sectionName="课程">
+          <Suspense fallback={<SectionSkeleton cardCount={3} />}>
+            <Courses />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <CourseViewer />
-        </Suspense>
+        <SectionErrorBoundary sectionName="课程学习中心">
+          <Suspense fallback={<SectionSkeleton />}>
+            <CourseViewer />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <CoreKnowledgeHub />
-        </Suspense>
+        <SectionErrorBoundary sectionName="核心知识">
+          <Suspense fallback={<SectionSkeleton />}>
+            <CoreKnowledgeHub />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <WhatIsLLM />
-        </Suspense>
+        <SectionErrorBoundary sectionName="什么是LLM">
+          <Suspense fallback={<SectionSkeleton />}>
+            <WhatIsLLM />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <CoreConcepts />
-        </Suspense>
+        <SectionErrorBoundary sectionName="核心概念">
+          <Suspense fallback={<SectionSkeleton />}>
+            <CoreConcepts />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <Architecture />
-        </Suspense>
+        <SectionErrorBoundary sectionName="架构">
+          <Suspense fallback={<SectionSkeleton />}>
+            <Architecture />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton cardCount={2} />}>
-          <AttentionVisualizer />
-        </Suspense>
+        <SectionErrorBoundary sectionName="注意力可视化">
+          <Suspense fallback={<SectionSkeleton cardCount={2} />}>
+            <AttentionVisualizer />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <Training />
-        </Suspense>
+        <SectionErrorBoundary sectionName="训练">
+          <Suspense fallback={<SectionSkeleton />}>
+            <Training />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <CodeExamples />
-        </Suspense>
+        <SectionErrorBoundary sectionName="代码示例">
+          <Suspense fallback={<SectionSkeleton />}>
+            <CodeExamples />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <Stats />
-        </Suspense>
+        <SectionErrorBoundary sectionName="统计">
+          <Suspense fallback={<SectionSkeleton />}>
+            <Stats />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton cardCount={5} />}>
-          <ModelComparison />
-        </Suspense>
+        <SectionErrorBoundary sectionName="模型对比">
+          <Suspense fallback={<SectionSkeleton cardCount={5} />}>
+            <ModelComparison />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <EvaluationSafetyHub />
-        </Suspense>
+        <SectionErrorBoundary sectionName="评估与安全">
+          <Suspense fallback={<SectionSkeleton />}>
+            <EvaluationSafetyHub />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <EvaluationBenchmarks />
-        </Suspense>
+        <SectionErrorBoundary sectionName="评估基准">
+          <Suspense fallback={<SectionSkeleton />}>
+            <EvaluationBenchmarks />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <SafetyAlignment />
-        </Suspense>
+        <SectionErrorBoundary sectionName="安全对齐">
+          <Suspense fallback={<SectionSkeleton />}>
+            <SafetyAlignment />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <ApplicationsHub />
-        </Suspense>
+        <SectionErrorBoundary sectionName="应用中心">
+          <Suspense fallback={<SectionSkeleton />}>
+            <ApplicationsHub />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <RAGDeepDive />
-        </Suspense>
+        <SectionErrorBoundary sectionName="RAG深入">
+          <Suspense fallback={<SectionSkeleton />}>
+            <RAGDeepDive />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <RAGEvaluation />
-        </Suspense>
+        <SectionErrorBoundary sectionName="RAG评估">
+          <Suspense fallback={<SectionSkeleton />}>
+            <RAGEvaluation />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <ToolCalling />
-        </Suspense>
+        <SectionErrorBoundary sectionName="工具调用">
+          <Suspense fallback={<SectionSkeleton />}>
+            <ToolCalling />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <StructuredOutput />
-        </Suspense>
+        <SectionErrorBoundary sectionName="结构化输出">
+          <Suspense fallback={<SectionSkeleton />}>
+            <StructuredOutput />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <LongContext />
-        </Suspense>
+        <SectionErrorBoundary sectionName="长上下文">
+          <Suspense fallback={<SectionSkeleton />}>
+            <LongContext />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <DeploymentEngineering />
-        </Suspense>
+        <SectionErrorBoundary sectionName="部署工程">
+          <Suspense fallback={<SectionSkeleton />}>
+            <DeploymentEngineering />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <Applications />
-        </Suspense>
+        <SectionErrorBoundary sectionName="应用">
+          <Suspense fallback={<SectionSkeleton />}>
+            <Applications />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <CaseStudies />
-        </Suspense>
+        <SectionErrorBoundary sectionName="案例研究">
+          <Suspense fallback={<SectionSkeleton />}>
+            <CaseStudies />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton cardCount={4} />}>
-          <AgentSystemHub />
-        </Suspense>
+        <SectionErrorBoundary sectionName="Agent系统">
+          <Suspense fallback={<SectionSkeleton cardCount={4} />}>
+            <AgentSystemHub />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <AgentModule />
-        </Suspense>
+        <SectionErrorBoundary sectionName="Agent模块">
+          <Suspense fallback={<SectionSkeleton />}>
+            <AgentModule />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <AgentFlowVisualizer />
-        </Suspense>
+        <SectionErrorBoundary sectionName="Agent流程">
+          <Suspense fallback={<SectionSkeleton />}>
+            <AgentFlowVisualizer />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <AgentTeams />
-        </Suspense>
+        <SectionErrorBoundary sectionName="Agent团队">
+          <Suspense fallback={<SectionSkeleton />}>
+            <AgentTeams />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <PromptSkillHub />
-        </Suspense>
+        <SectionErrorBoundary sectionName="提示与技能">
+          <Suspense fallback={<SectionSkeleton />}>
+            <PromptSkillHub />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <PromptEngineering />
-        </Suspense>
+        <SectionErrorBoundary sectionName="提示工程">
+          <Suspense fallback={<SectionSkeleton />}>
+            <PromptEngineering />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <PromptLibrary />
-        </Suspense>
+        <SectionErrorBoundary sectionName="提示库">
+          <Suspense fallback={<SectionSkeleton />}>
+            <PromptLibrary />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <SkillTool />
-        </Suspense>
+        <SectionErrorBoundary sectionName="技能工具">
+          <Suspense fallback={<SectionSkeleton />}>
+            <SkillTool />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <SkillLibrary />
-        </Suspense>
+        <SectionErrorBoundary sectionName="技能库">
+          <Suspense fallback={<SectionSkeleton />}>
+            <SkillLibrary />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <SkillEcosystem />
-        </Suspense>
+        <SectionErrorBoundary sectionName="技能生态">
+          <Suspense fallback={<SectionSkeleton />}>
+            <SkillEcosystem />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <MultimodalHub />
-        </Suspense>
+        <SectionErrorBoundary sectionName="多模态">
+          <Suspense fallback={<SectionSkeleton />}>
+            <MultimodalHub />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <MultimodalSections />
-        </Suspense>
+        <SectionErrorBoundary sectionName="多模态内容">
+          <Suspense fallback={<SectionSkeleton />}>
+            <MultimodalSections />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <MultimodalPlaybook />
-        </Suspense>
+        <SectionErrorBoundary sectionName="多模态指南">
+          <Suspense fallback={<SectionSkeleton />}>
+            <MultimodalPlaybook />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <PaperLibrary />
-        </Suspense>
+        <SectionErrorBoundary sectionName="论文库">
+          <Suspense fallback={<SectionSkeleton />}>
+            <PaperLibrary />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <VideoTutorials />
-        </Suspense>
+        <SectionErrorBoundary sectionName="视频教程">
+          <Suspense fallback={<SectionSkeleton />}>
+            <VideoTutorials />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <Glossary />
-        </Suspense>
+        <SectionErrorBoundary sectionName="术语表">
+          <Suspense fallback={<SectionSkeleton />}>
+            <Glossary />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton cardCount={2} />}>
-          <Quiz />
-        </Suspense>
+        <SectionErrorBoundary sectionName="测验">
+          <Suspense fallback={<SectionSkeleton cardCount={2} />}>
+            <Quiz />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <ParamCalculator />
-        </Suspense>
+        <SectionErrorBoundary sectionName="参数计算器">
+          <Suspense fallback={<SectionSkeleton />}>
+            <ParamCalculator />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton cardCount={5} />}>
-          <ResourceHub />
-        </Suspense>
+        <SectionErrorBoundary sectionName="资源中心">
+          <Suspense fallback={<SectionSkeleton cardCount={5} />}>
+            <ResourceHub />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <ResourceLibrary />
-        </Suspense>
+        <SectionErrorBoundary sectionName="资源库">
+          <Suspense fallback={<SectionSkeleton />}>
+            <ResourceLibrary />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <Resources />
-        </Suspense>
+        <SectionErrorBoundary sectionName="资源">
+          <Suspense fallback={<SectionSkeleton />}>
+            <Resources />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <Progress />
-        </Suspense>
+        <SectionErrorBoundary sectionName="进度">
+          <Suspense fallback={<SectionSkeleton />}>
+            <Progress />
+          </Suspense>
+        </SectionErrorBoundary>
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <Certificate />
-        </Suspense>
+        <SectionErrorBoundary sectionName="证书">
+          <Suspense fallback={<SectionSkeleton />}>
+            <Certificate />
+          </Suspense>
+        </SectionErrorBoundary>
       </main>
 
       {/* Footer */}

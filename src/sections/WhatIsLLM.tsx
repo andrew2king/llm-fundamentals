@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Brain, Database, Layers, MessageSquare } from 'lucide-react';
+import OptimizedImage, { IMAGE_DIMENSIONS } from '@/components/OptimizedImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -240,10 +241,15 @@ export default function WhatIsLLM() {
             style={{ perspective: '1000px' }}
           >
             <div className="relative rounded-2xl overflow-hidden group">
-              <img
+              <OptimizedImage
                 src="/llm-concept.jpg"
                 alt="AI Brain Visualization"
+                width={IMAGE_DIMENSIONS['llm-concept'].width}
+                height={IMAGE_DIMENSIONS['llm-concept'].height}
                 className="w-full h-auto transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+                placeholder={true}
+                fadeIn={true}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-spacex-blue/10" />

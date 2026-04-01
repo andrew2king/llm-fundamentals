@@ -1,0 +1,133 @@
+# LLM基础 - 大语言模型学习平台
+
+> 通过沉浸式、视觉化的学习体验，理解大语言模型
+
+## 网站简介
+
+LLM基础（llm101.vercel.app）是一个专注于大语言模型（Large Language Models, LLM）教育的中文学习平台。我们致力于通过沉浸式、视觉化的方式，帮助学习者深入理解大语言模型的核心概念、技术架构和实际应用。
+
+本平台面向：
+- AI开发者和工程师
+- 数据科学家和机器学习从业者
+- 对LLM技术感兴趣的学生和研究者
+- 希望了解AI前沿技术的技术爱好者
+
+## 内容结构
+
+### 核心知识模块
+- **LLM概念** - 大语言模型基础概念解释
+- **架构详解** - Transformer架构深度解析
+- **注意力可视化** - 注意力机制交互式演示
+- **训练方法** - 预训练、微调、对齐等技术
+- **代码示例** - 实践代码和API使用示例
+- **模型对比** - 主流LLM性能对比评测
+- **评估与安全** - 基准测试和安全对齐技术
+
+### 应用开发模块
+- **RAG技术** - 检索增强生成完整指南
+- **RAG评估** - RAG系统评估方法论
+- **工具调用** - Function Calling和Tool Use
+- **结构化输出** - 结构化输出技术实践
+- **长上下文** - 长上下文窗口技术应用
+- **部署工程** - 生产环境部署最佳实践
+- **案例研究** - 真实项目案例分析
+
+### Agent系统模块
+- **Agent基础** - AI Agent架构设计原理
+- **Agent流程** - Agent工作流可视化演示
+- **多Agent协作** - Agent团队协作模式
+- **工具集成** - Agent工具调用机制
+
+### Prompt与Skill模块
+- **Prompt工程** - 提示词设计高级技巧
+- **Prompt库** - 精选提示词模板集合
+- **Skills** - 技能系统设计与实现
+- **Skill生态** - 技能生态建设指南
+
+### 多模态模块
+- **多模态基础** - 视觉语言模型原理
+- **多模态实战** - 多模态应用开发实践
+
+### 资源库模块
+- **论文库** - LLM领域经典论文解读
+- **视频教程** - 系统化视频学习资源
+- **术语表** - 专业术语中英对照解释
+- **测验系统** - 知识点自测与考核
+- **参数计算器** - 模型参数量计算工具
+- **学习进度** - 个人学习进度追踪
+- **证书系统** - 学习完成证书颁发
+
+### AI日报
+- 每日更新的AI行业新闻与技术动态
+
+## 关键链接
+
+### 主要学习路径
+- 首页: https://llm101.vercel.app/
+- 学习路径: https://llm101.vercel.app/#learning-path
+- 核心知识: https://llm101.vercel.app/#core-knowledge
+
+### 核心技术内容
+- Transformer架构: https://llm101.vercel.app/#architecture
+- 注意力可视化: https://llm101.vercel.app/#visualizer
+- 训练方法: https://llm101.vercel.app/#training
+- 模型对比: https://llm101.vercel.app/#compare
+
+### 应用实践
+- RAG技术: https://llm101.vercel.app/#rag
+- Agent系统: https://llm101.vercel.app/#agent-system
+- Prompt工程: https://llm101.vercel.app/#prompt-advanced
+- 多模态: https://llm101.vercel.app/#multimodal
+
+### 资源中心
+- 论文库: https://llm101.vercel.app/#papers
+- 视频教程: https://llm101.vercel.app/#videos
+- 术语表: https://llm101.vercel.app/#glossary
+- 资源库: https://llm101.vercel.app/#resource-hub
+
+### 其他资源
+- AI日报: https://llm101.vercel.app/#daily-news
+- 站点地图: https://llm101.vercel.app/sitemap.xml
+- RSS订阅: https://llm101.vercel.app/rss.xml
+
+## 更新频率
+
+- **AI日报**: 每日更新，提供最新AI行业动态
+- **核心知识**: 每周更新，持续优化内容质量
+- **论文库**: 不定期更新，精选重要论文
+- **视频教程**: 不定期更新，新增系统化教程
+- **资源库**: 持续更新，扩充学习资源
+
+## 内容授权
+
+除非另有说明，本网站所有原创内容采用以下授权方式：
+
+- **文字内容**: CC BY-NC-SA 4.0（署名-非商业性使用-相同方式共享）
+- **代码示例**: MIT License
+- **图片素材**: 部分来源于网络，版权归原作者所有
+
+引用本站内容时，请注明：
+> 来源：LLM基础 - 大语言模型学习平台 (https://llm101.vercel.app)
+
+## 联系方式
+
+- 网站: https://llm101.vercel.app/
+- 邮箱: contact@llm101.vercel.app
+- RSS订阅: https://llm101.vercel.app/rss.xml
+
+## 技术栈
+
+- 前端框架: React + TypeScript
+- 构建工具: Vite
+- 部署平台: Vercel
+- 语言: 简体中文 (zh-CN)
+
+## 适合LLM理解的结构说明
+
+本网站采用单页应用（SPA）架构，内容通过锚点（#）组织为多个模块化区块。每个模块聚焦特定主题，内容结构清晰，便于理解和索引。
+
+建议LLM按照以下顺序理解本站内容：
+1. 从首页了解整体结构和学习路径
+2. 按需访问核心技术模块（架构、训练、应用）
+3. 深入特定领域（RAG、Agent、多模态等）
+4. 利用资源库进行扩展学习

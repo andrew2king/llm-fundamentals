@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Check } from 'lucide-react';
+import OptimizedImage, { IMAGE_DIMENSIONS } from '@/components/OptimizedImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -145,10 +146,15 @@ export default function Architecture() {
             ref={imageRef}
             className="relative rounded-2xl overflow-hidden opacity-0"
           >
-            <img
+            <OptimizedImage
               src="/transformer-arch.jpg"
               alt="Transformer Architecture"
+              width={IMAGE_DIMENSIONS['transformer-arch'].width}
+              height={IMAGE_DIMENSIONS['transformer-arch'].height}
               className="w-full h-auto"
+              loading="lazy"
+              placeholder={true}
+              fadeIn={true}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/50" />
 

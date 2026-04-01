@@ -1,0 +1,94 @@
+# robots.txt for LLM基础 - 大语言模型学习平台
+# https://llm101.vercel.app
+
+# ===========================================
+# AI 爬虫规则
+# ===========================================
+
+# OpenAI GPTBot
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 1
+
+# OpenAI ChatGPT User
+User-agent: ChatGPT-User
+Allow: /
+Crawl-delay: 1
+
+# Anthropic Claude
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 1
+
+# Anthropic AI
+User-agent: Anthropic-AI
+Allow: /
+Crawl-delay: 1
+
+# Google Extended (用于AI训练)
+User-agent: Google-Extended
+Allow: /
+
+# Common Crawl Bot
+User-agent: CCBot
+Allow: /
+Crawl-delay: 1
+
+# Perplexity AI
+User-agent: Perplexity
+Allow: /
+Crawl-delay: 1
+
+# Perplexity Bot
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 1
+
+# ===========================================
+# 传统搜索引擎爬虫规则
+# ===========================================
+
+# 允许所有搜索引擎爬虫访问
+User-agent: *
+
+# 允许爬取所有内容
+Allow: /
+
+# 禁止爬取以下路径（如果有敏感内容可以添加）
+# Disallow: /api/
+# Disallow: /admin/
+
+# Sitemap 位置
+Sitemap: https://llm101.vercel.app/sitemap.xml
+
+# LLM内容索引文件
+# https://llm101.vercel.app/llms.txt
+
+# 爬取延迟（秒）- 可选，根据需要调整
+Crawl-delay: 1
+
+# 主要搜索引擎特定配置
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# 百度
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 1
+
+# 搜狗
+User-agent: Sogou
+Allow: /
+Crawl-delay: 2
+
+# 360搜索
+User-agent: 360Spider
+Allow: /
+Crawl-delay: 1

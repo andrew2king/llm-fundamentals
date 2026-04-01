@@ -1,7 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { BookOpen, Clock, ArrowRight, CheckCircle, Lock, Play } from 'lucide-react';
+import { useAnalytics } from '@/hooks/useAnalytics';
+import { ConversionFunnels } from '@/lib/analytics-events';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -85,6 +87,68 @@ const courses = [
 
 export default function Courses() {
   const sectionRef = useRef<HTMLElement>(null);
+  const viewedCoursesRef = useRef<Set<string>>(new Set());
+  const funnelStepsRef = useRef<Record<string, number>>({});
+  const {
+    trackCourseView,
+    trackPurchaseClick,
+    trackCTA,
+    trackFunnelStep,
+  } = useAnalytics();
+
+  // Track course view when card becomes visible
+  const handleCourseCardView = useCallback((courseId: string, courseName: string, price: number) => {
+    if (!viewedCoursesRef.current.has(courseId)) {
+      viewedCoursesRef.current.add(courseId);
+      trackCourseView(courseId, courseName, { coursePrice: price });
+
+      // Track funnel step 1: View Course
+      const funnel = ConversionFunnels.COURSE_PURCHASE;
+      if (!funnelStepsRef.current[courseId]) {
+        funnelStepsRef.current[courseId] = 1;
+        trackFunnelStep(funnel.name, 1, funnel.stepNames[0], funnel.steps.length, {
+          courseId,
+          courseName,
+          price,
+        });
+      }
+    }
+  }, [trackCourseView, trackFunnelStep]);
+
+  // Track purchase button click
+  const handlePurchaseClick = useCallback(
+    (courseId: string, courseName: string, price: number, buyUrl: string) => {
+      trackPurchaseClick(courseId, courseName, price, { targetUrl: buyUrl });
+
+      // Track funnel step 3: Click Purchase
+      const funnel = ConversionFunnels.COURSE_PURCHASE;
+      trackFunnelStep(funnel.name, 3, funnel.stepNames[2], funnel.steps.length, {
+        courseId,
+        courseName,
+        price,
+      });
+    },
+    [trackPurchaseClick, trackFunnelStep]
+  );
+
+  // Track "Start Learning" button click
+  const handleStartLearningClick = useCallback(
+    (courseId: string, courseName: string, price: number) => {
+      trackCTA('start_learning', 'courses_section', '#course-viewer', { courseId, courseName });
+
+      // Track funnel step 2: Start Preview Lesson
+      const funnel = ConversionFunnels.COURSE_PURCHASE;
+      if (funnelStepsRef.current[courseId] < 2) {
+        funnelStepsRef.current[courseId] = 2;
+        trackFunnelStep(funnel.name, 2, funnel.stepNames[1], funnel.steps.length, {
+          courseId,
+          courseName,
+          price,
+        });
+      }
+    },
+    [trackCTA, trackFunnelStep]
+  );
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -99,6 +163,11 @@ export default function Courses() {
               { y: 40, opacity: 0 },
               { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'expo.out' }
             );
+
+            // Track course views when section becomes visible
+            courses.forEach((course) => {
+              handleCourseCardView(course.id, course.title, course.price);
+            });
           }
         },
         once: true,
@@ -106,7 +175,7 @@ export default function Courses() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [handleCourseCardView]);
 
   return (
     <section ref={sectionRef} id="courses" className="relative py-32 overflow-hidden">
@@ -126,11 +195,11 @@ export default function Courses() {
         </div>
 
         {/* Course Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {courses.map((course) => (
             <div
               key={course.id}
-              className="course-item group relative rounded-2xl bg-white/[0.03] border border-white/10 overflow-hidden hover:border-spacex-orange/50 transition-all duration-300 opacity-0"
+              className="course-item group relative rounded-2xl bg-white/[0.03] border border-white/10 overflow-hidden hover:border-spacex-orange/50 transition-all duration-300 opacity-0 active:scale-[0.98]"
             >
               {/* Status Badge */}
               {course.status === 'coming_soon' && (
@@ -200,9 +269,10 @@ export default function Courses() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => {
+                        handleStartLearningClick(course.id, course.title, course.price);
                         document.querySelector('#course-viewer')?.scrollIntoView({ behavior: 'smooth' });
                       }}
-                      className="flex-1 py-3 rounded-xl bg-white/10 text-white font-medium hover:bg-white/20 transition-colors flex items-center justify-center gap-2"
+                      className="flex-1 py-3 min-h-[44px] rounded-xl bg-white/10 text-white font-medium hover:bg-white/20 active:scale-95 transition-all flex items-center justify-center gap-2"
                     >
                       <Play className="w-4 h-4" />
                       开始学习
@@ -211,7 +281,8 @@ export default function Courses() {
                       href={course.buyUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 py-3 rounded-xl bg-spacex-orange text-white font-medium hover:bg-spacex-orange/80 transition-colors flex items-center justify-center gap-2"
+                      onClick={() => handlePurchaseClick(course.id, course.title, course.price, course.buyUrl)}
+                      className="flex-1 py-3 min-h-[44px] rounded-xl bg-spacex-orange text-white font-medium hover:bg-spacex-orange/80 active:scale-95 transition-all flex items-center justify-center gap-2"
                     >
                       购买完整版
                       <ArrowRight className="w-4 h-4" />
@@ -220,7 +291,7 @@ export default function Courses() {
                 ) : (
                   <button
                     disabled
-                    className="w-full py-3 rounded-xl bg-white/10 text-white/50 font-medium cursor-not-allowed flex items-center justify-center gap-2"
+                    className="w-full py-3 min-h-[44px] rounded-xl bg-white/10 text-white/50 font-medium cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     <Lock className="w-4 h-4" />
                     敬请期待
@@ -245,7 +316,7 @@ export default function Courses() {
             href="https://t.zsxq.com/llm-fundamentals"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 min-h-[44px] rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 active:scale-95 transition-all"
           >
             加入学习社群
             <ArrowRight className="w-4 h-4" />

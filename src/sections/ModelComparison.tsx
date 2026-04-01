@@ -1,49 +1,14 @@
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useEffect, useMemo, lazy, Suspense } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  Radar,
-} from 'recharts';
-import { Scale, Database, Zap, Globe, Check } from 'lucide-react';
+import { Scale, Database, Zap, Check } from 'lucide-react';
+import { TableView, type ModelData } from '@/components/model-comparison';
+
+// Lazy load chart views (recharts only loaded when needed)
+const BarChartView = lazy(() => import('@/components/model-comparison/BarChartView').then(m => ({ default: m.BarChartView })));
+const RadarChartView = lazy(() => import('@/components/model-comparison/RadarChartView').then(m => ({ default: m.RadarChartView })));
 
 gsap.registerPlugin(ScrollTrigger);
-
-type ModelScore = {
-  reasoning: number;
-  coding: number;
-  multilingual: number;
-  speed: number;
-  cost: number;
-};
-
-type ModelEntry = {
-  name: string;
-  company: string;
-  release: string;
-  params: { display: string; valueB: number | null };
-  context: { display: string; valueK: number | null };
-  strengths: string[];
-  weaknesses: string[];
-  scores: ModelScore;
-  color: string;
-};
-
-type ModelData = {
-  lastUpdated: string;
-  source: string;
-  models: ModelEntry[];
-};
 
 const fallbackData: ModelData = {
   lastUpdated: '2026-02-28',
@@ -106,6 +71,15 @@ const fallbackData: ModelData = {
   },
   ],
 };
+
+// Chart loading skeleton
+function ChartSkeleton() {
+  return (
+    <div className="w-full h-[300px] flex items-center justify-center rounded-2xl bg-white/[0.03] border border-white/10">
+      <div className="animate-pulse text-white/40">Loading charts...</div>
+    </div>
+  );
+}
 
 export default function ModelComparison() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -172,35 +146,6 @@ export default function ModelComparison() {
     };
   }, []);
 
-  const comparisonData = useMemo(
-    () =>
-      modelData.models.map((m) => ({
-        name: m.name,
-        参数量: m.params.valueB ?? 0,
-        上下文: m.context.valueK ?? 0,
-      })),
-    [modelData.models]
-  );
-
-  const radarData = useMemo(() => {
-    const subjects = [
-      { label: '推理能力', key: 'reasoning' },
-      { label: '代码生成', key: 'coding' },
-      { label: '多语言', key: 'multilingual' },
-      { label: '响应速度', key: 'speed' },
-      { label: '成本效益', key: 'cost' },
-    ] as const;
-
-    const selected = modelData.models.filter((m) => validSelectedModels.includes(m.name));
-    return subjects.map((subject) => {
-      const row: Record<string, string | number> = { subject: subject.label };
-      selected.forEach((model) => {
-        row[model.name] = model.scores[subject.key];
-      });
-      return row;
-    });
-  }, [modelData.models, validSelectedModels]);
-
   const toggleModel = (name: string) => {
     if (selectedModels.includes(name)) {
       setSelectedModels(selectedModels.filter((m) => m !== name));
@@ -208,6 +153,12 @@ export default function ModelComparison() {
       setSelectedModels([...selectedModels, name]);
     }
   };
+
+  // Filter models for chart views
+  const filteredModels = useMemo(() =>
+    modelData.models.filter((m) => selectedModels.length === 0 || selectedModels.includes(m.name)),
+    [modelData.models, selectedModels]
+  );
 
   return (
     <section ref={sectionRef} id="compare" className="relative py-32 overflow-hidden">
@@ -249,7 +200,7 @@ export default function ModelComparison() {
         <div className="compare-item flex items-center justify-center gap-2 mb-8 opacity-0">
           {[
             { id: 'table', label: '表格', icon: Database },
-            { id: 'chart', label: '图表', icon: BarChart },
+            { id: 'chart', label: '图表', icon: Database },
             { id: 'radar', label: '雷达图', icon: Zap },
           ].map((mode) => (
             <button
@@ -270,158 +221,19 @@ export default function ModelComparison() {
         {/* Content */}
         <div className="compare-item opacity-0">
           {viewMode === 'table' && (
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-white/10">
-                    <th className="text-left py-4 px-4 text-white/60 font-medium">模型</th>
-                    <th className="text-left py-4 px-4 text-white/60 font-medium">参数量</th>
-                    <th className="text-left py-4 px-4 text-white/60 font-medium">上下文</th>
-                    <th className="text-left py-4 px-4 text-white/60 font-medium">发布</th>
-                    <th className="text-left py-4 px-4 text-white/60 font-medium">优势</th>
-                    <th className="text-left py-4 px-4 text-white/60 font-medium">劣势</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {modelData.models
-                    .filter((m) => selectedModels.length === 0 || selectedModels.includes(m.name))
-                    .map((model) => (
-                      <tr
-                        key={model.name}
-                        className="border-b border-white/5 hover:bg-white/[0.03] transition-colors"
-                      >
-                        <td className="py-4 px-4">
-                          <div className="font-semibold">{model.name}</div>
-                          <div className="text-sm text-white/40">{model.company}</div>
-                        </td>
-                        <td className="py-4 px-4 font-mono">{model.params.display}</td>
-                        <td className="py-4 px-4 font-mono">{model.context.display}</td>
-                        <td className="py-4 px-4">{model.release}</td>
-                        <td className="py-4 px-4">
-                          <div className="flex flex-wrap gap-1">
-                            {model.strengths.map((s) => (
-                              <span
-                                key={s}
-                                className="px-2 py-0.5 rounded text-xs bg-green-500/20 text-green-400"
-                              >
-                                {s}
-                              </span>
-                            ))}
-                          </div>
-                        </td>
-                        <td className="py-4 px-4">
-                          <div className="flex flex-wrap gap-1">
-                            {model.weaknesses.map((w) => (
-                              <span
-                                key={w}
-                                className="px-2 py-0.5 rounded text-xs bg-red-500/20 text-red-400"
-                              >
-                                {w}
-                              </span>
-                            ))}
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
+            <TableView models={modelData.models} selectedModels={selectedModels} />
           )}
 
           {viewMode === 'chart' && (
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10">
-                <h4 className="text-lg font-semibold mb-6 flex items-center gap-2">
-                  <Database className="w-5 h-5 text-spacex-orange" />
-                  参数量对比 (B)
-                </h4>
-                <ResponsiveContainer width="100%" height={250}>
-                  <BarChart data={comparisonData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                    <XAxis dataKey="name" stroke="rgba(255,255,255,0.4)" fontSize={12} />
-                    <YAxis stroke="rgba(255,255,255,0.4)" fontSize={12} />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: 'rgba(0,0,0,0.9)',
-                        border: '1px solid rgba(255,255,255,0.2)',
-                        borderRadius: '8px',
-                      }}
-                    />
-                    <Bar dataKey="参数量" fill="#005288" radius={[4, 4, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10">
-                <h4 className="text-lg font-semibold mb-6 flex items-center gap-2">
-                  <Globe className="w-5 h-5 text-spacex-orange" />
-                  上下文长度对比 (K tokens)
-                </h4>
-                <ResponsiveContainer width="100%" height={250}>
-                  <BarChart data={comparisonData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                    <XAxis dataKey="name" stroke="rgba(255,255,255,0.4)" fontSize={12} />
-                    <YAxis stroke="rgba(255,255,255,0.4)" fontSize={12} />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: 'rgba(0,0,0,0.9)',
-                        border: '1px solid rgba(255,255,255,0.2)',
-                        borderRadius: '8px',
-                      }}
-                    />
-                    <Bar dataKey="上下文" fill="#FF6B35" radius={[4, 4, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
+            <Suspense fallback={<ChartSkeleton />}>
+              <BarChartView models={filteredModels} />
+            </Suspense>
           )}
 
           {viewMode === 'radar' && (
-            <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10">
-              <h4 className="text-lg font-semibold mb-6 text-center">综合能力雷达图</h4>
-              <ResponsiveContainer width="100%" height={400}>
-                <RadarChart data={radarData}>
-                  <PolarGrid stroke="rgba(255,255,255,0.1)" />
-                  <PolarAngleAxis dataKey="subject" stroke="rgba(255,255,255,0.6)" />
-                  <PolarRadiusAxis angle={90} domain={[0, 100]} stroke="rgba(255,255,255,0.2)" />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: 'rgba(0,0,0,0.9)',
-                      border: '1px solid rgba(255,255,255,0.2)',
-                      borderRadius: '8px',
-                    }}
-                  />
-                  {selectedModels.map((name) => {
-                    const model = modelData.models.find((m) => m.name === name);
-                    if (!model) return null;
-                    return (
-                      <Radar
-                        key={model.name}
-                        name={model.name}
-                        dataKey={model.name}
-                        stroke={model.color}
-                        fill={model.color}
-                        fillOpacity={0.2}
-                      />
-                    );
-                  })}
-                </RadarChart>
-              </ResponsiveContainer>
-              <div className="flex flex-wrap justify-center gap-4 mt-4">
-                {selectedModels.map((name) => (
-                  <div key={name} className="flex items-center gap-2">
-                    <div
-                      className="w-3 h-3 rounded-full"
-                      style={{
-                        backgroundColor:
-                          modelData.models.find((m) => m.name === name)?.color ?? '#ffffff',
-                      }}
-                    />
-                    <span className="text-sm text-white/60">{name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <Suspense fallback={<ChartSkeleton />}>
+              <RadarChartView models={modelData.models} selectedModels={validSelectedModels} />
+            </Suspense>
           )}
         </div>
 

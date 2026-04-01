@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Database, Split, Brain, Sliders, Users } from 'lucide-react';
+import { BackgroundImage } from '@/components/OptimizedImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -176,14 +177,12 @@ export default function Training() {
       className="relative py-32 overflow-hidden"
     >
       {/* Background */}
-      <div className="absolute inset-0">
-        <img
-          src="/training-data.jpg"
-          alt="Training Data"
-          className="w-full h-full object-cover opacity-20"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black" />
-      </div>
+      <BackgroundImage
+        src="/training-data.jpg"
+        alt="Training Data"
+        opacity={0.2}
+        gradientOverlay="from-black via-black/95 to-black"
+      />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Header */}

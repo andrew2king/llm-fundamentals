@@ -364,7 +364,7 @@ export default function LearningPath() {
               <button
                 key={path.id}
                 onClick={() => setSelectedPath(path.id)}
-                className={`relative p-6 rounded-2xl border transition-all duration-300 text-left w-full sm:w-auto sm:min-w-[280px] ${
+                className={`relative p-4 sm:p-6 rounded-2xl border transition-all duration-300 text-left w-full sm:w-auto sm:min-w-[280px] min-h-[44px] active:scale-95 ${
                   isSelected
                     ? 'bg-white/10 border-spacex-orange'
                     : 'bg-white/[0.03] border-white/10 hover:border-white/30'
@@ -436,7 +436,7 @@ export default function LearningPath() {
                     {/* Clickable Header */}
                     <button
                       onClick={() => toggleExpand(currentPath.id, index)}
-                      className="w-full p-6 flex items-start gap-4 text-left"
+                      className="w-full p-4 sm:p-6 min-h-[44px] flex items-start gap-4 text-left active:scale-95 transition-all"
                     >
                       <div
                         onClick={(e) => {
@@ -446,7 +446,7 @@ export default function LearningPath() {
                         className={`mt-1 w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-all ${
                           isCompleted
                             ? 'bg-green-500 text-white'
-                            : 'bg-white/10 text-white/40 hover:bg-white/20'
+                            : 'bg-white/10 text-white/40 hover:bg-white/20 active:scale-90'
                         }`}
                       >
                         {isCompleted ? <CheckCircle className="w-4 h-4" /> : <Circle className="w-4 h-4" />}
@@ -505,13 +505,13 @@ export default function LearningPath() {
         )}
 
         {/* Certifications */}
-        <div className="path-item opacity-0">
+        <div className="path-item opacity-0 mb-[80px]">
           <h3 className="text-xl font-semibold mb-6">认证体系</h3>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
             {certifications.map((cert) => (
               <div
                 key={cert.name}
-                className="p-6 rounded-xl bg-white/[0.03] border border-white/10 hover:border-spacex-orange/50 transition-all"
+                className="p-4 sm:p-6 rounded-xl bg-white/[0.03] border border-white/10 hover:border-spacex-orange/50 active:scale-95 transition-all"
               >
                 <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center mb-4">
                   <cert.icon className="w-7 h-7 text-white" />
