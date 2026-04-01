@@ -12,6 +12,7 @@ import {
   Rocket,
   Award,
   ChevronRight,
+  ChevronDown,
   Clock,
   Star,
 } from 'lucide-react';
@@ -248,6 +249,7 @@ export default function LearningPath() {
     }
     return {};
   });
+  const [expandedSteps, setExpandedSteps] = useState<Record<string, boolean>>({});
   const [data, setData] = useState<LearningData>(fallbackData);
   const [loadError, setLoadError] = useState<string | null>(null);
 
@@ -316,6 +318,14 @@ export default function LearningPath() {
   const toggleStep = (pathId: string, stepIndex: number) => {
     const key = `${pathId}-${stepIndex}`;
     setCompletedSteps((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
+
+  const toggleExpand = (pathId: string, stepIndex: number) => {
+    const key = `${pathId}-${stepIndex}`;
+    setExpandedSteps((prev) => ({
       ...prev,
       [key]: !prev[key],
     }));
@@ -412,19 +422,27 @@ export default function LearningPath() {
             <div className="space-y-4">
               {currentPath.steps.map((step, index) => {
                 const isCompleted = completedSteps[`${currentPath.id}-${index}`];
+                const isExpanded = expandedSteps[`${currentPath.id}-${index}`];
 
                 return (
                   <div
                     key={index}
-                    className={`p-6 rounded-xl border transition-all duration-300 ${
+                    className={`rounded-xl border transition-all duration-300 ${
                       isCompleted
                         ? 'bg-green-500/5 border-green-500/30'
                         : 'bg-white/[0.03] border-white/10 hover:border-white/30'
                     }`}
                   >
-                    <div className="flex items-start gap-4">
-                      <button
-                        onClick={() => toggleStep(currentPath.id, index)}
+                    {/* Clickable Header */}
+                    <button
+                      onClick={() => toggleExpand(currentPath.id, index)}
+                      className="w-full p-6 flex items-start gap-4 text-left"
+                    >
+                      <div
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleStep(currentPath.id, index);
+                        }}
                         className={`mt-1 w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-all ${
                           isCompleted
                             ? 'bg-green-500 text-white'
@@ -432,10 +450,10 @@ export default function LearningPath() {
                         }`}
                       >
                         {isCompleted ? <CheckCircle className="w-4 h-4" /> : <Circle className="w-4 h-4" />}
-                      </button>
+                      </div>
 
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-3">
                           <h4
                             className={`font-semibold ${
                               isCompleted ? 'text-green-400 line-through opacity-60' : ''
@@ -447,6 +465,22 @@ export default function LearningPath() {
                             {step.time}
                           </span>
                         </div>
+                        {/* Always show short description */}
+                        <p className={`text-sm mt-1 truncate ${isCompleted ? 'text-white/40' : 'text-white/60'}`}>
+                          {step.description}
+                        </p>
+                      </div>
+
+                      {isExpanded ? (
+                        <ChevronDown className={`w-5 h-5 flex-shrink-0 ${isCompleted ? 'text-green-500' : 'text-spacex-orange'}`} />
+                      ) : (
+                        <ChevronRight className={`w-5 h-5 flex-shrink-0 transition-transform ${isCompleted ? 'text-green-500' : 'text-white/40'}`} />
+                      )}
+                    </button>
+
+                    {/* Expandable Content */}
+                    {isExpanded && (
+                      <div className="px-6 pb-6 pt-0 ml-10">
                         <p className={`text-sm mb-3 ${isCompleted ? 'text-white/40' : 'text-white/60'}`}>
                           {step.description}
                         </p>
@@ -454,7 +488,7 @@ export default function LearningPath() {
                           {step.resources.map((resource) => (
                             <span
                               key={resource}
-                              className="px-2 py-1 rounded text-xs bg-white/5 text-white/50 flex items-center gap-1"
+                              className="px-3 py-1.5 rounded-lg text-xs bg-white/5 text-white/60 flex items-center gap-2 hover:bg-white/10 transition-colors cursor-pointer"
                             >
                               <BookOpen className="w-3 h-3" />
                               {resource}
@@ -462,13 +496,7 @@ export default function LearningPath() {
                           ))}
                         </div>
                       </div>
-
-                      <ChevronRight
-                        className={`w-5 h-5 transition-transform ${
-                          isCompleted ? 'text-green-500' : 'text-white/20'
-                        }`}
-                      />
-                    </div>
+                    )}
                   </div>
                 );
               })}
