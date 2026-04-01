@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Newspaper, BookOpen, ExternalLink, Calendar, ChevronRight } from 'lucide-react';
+import { Newspaper, BookOpen, ExternalLink, Calendar, ChevronRight, X, ChevronLeft } from 'lucide-react';
 import type { DailyData, DailyNewsItem, DailyPaperItem } from '@/types/daily';
-import { getLatestDaily, formatDate, getRelativeTime } from '@/lib/daily';
+import { getLatestDaily, getDailyByDate, formatDate, getRelativeTime } from '@/lib/daily';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,6 +21,43 @@ export default function DailyNews() {
   const contentRef = useRef<HTMLDivElement>(null);
   const [dailyData, setDailyData] = useState<DailyData>(DEFAULT_DATA);
   const [isLoading, setIsLoading] = useState(true);
+  const [showArchive, setShowArchive] = useState(false);
+  const [archiveData, setArchiveData] = useState<DailyData | null>(null);
+  const [archiveLoading, setArchiveLoading] = useState(false);
+  const [currentArchiveDate, setCurrentArchiveDate] = useState<string>('');
+
+  const handleOpenArchive = () => {
+    setShowArchive(true);
+    // 默认加载昨天的日报
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    loadArchiveDate(yesterday.toISOString().split('T')[0]);
+  };
+
+  const loadArchiveDate = async (date: string) => {
+    setArchiveLoading(true);
+    setCurrentArchiveDate(date);
+    const data = await getDailyByDate(date);
+    setArchiveData(data);
+    setArchiveLoading(false);
+  };
+
+  const handlePrevDay = () => {
+    if (!currentArchiveDate) return;
+    const date = new Date(currentArchiveDate);
+    date.setDate(date.getDate() - 1);
+    loadArchiveDate(date.toISOString().split('T')[0]);
+  };
+
+  const handleNextDay = () => {
+    if (!currentArchiveDate) return;
+    const date = new Date(currentArchiveDate);
+    date.setDate(date.getDate() + 1);
+    const today = new Date().toISOString().split('T')[0];
+    if (date.toISOString().split('T')[0] <= today) {
+      loadArchiveDate(date.toISOString().split('T')[0]);
+    }
+  };
 
   useEffect(() => {
     // 加载日报数据
@@ -162,13 +199,100 @@ export default function DailyNews() {
 
         {/* Archive Link */}
         <div className="mt-12 text-center">
-          <button className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/20 text-white/70 hover:bg-white/5 hover:text-white transition-all duration-300 group">
+          <button
+            onClick={handleOpenArchive}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/20 text-white/70 hover:bg-white/5 hover:text-white transition-all duration-300 group"
+          >
             <Calendar className="w-4 h-4" />
             <span>查看历史日报</span>
             <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </button>
         </div>
       </div>
+
+      {/* Archive Modal */}
+      {showArchive && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+          <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-gray-900 rounded-2xl border border-white/10">
+            {/* Modal Header */}
+            <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 bg-gray-900/95 border-b border-white/10 backdrop-blur-sm">
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={handlePrevDay}
+                  className="p-2 rounded-lg hover:bg-white/10 transition-colors"
+                  title="前一天"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <h3 className="text-lg font-semibold">
+                  {archiveLoading ? '加载中...' : archiveData ? formatDate(currentArchiveDate) : '历史日报'}
+                </h3>
+                <button
+                  onClick={handleNextDay}
+                  className="p-2 rounded-lg hover:bg-white/10 transition-colors"
+                  title="后一天"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+              <button
+                onClick={() => setShowArchive(false)}
+                className="p-2 rounded-lg hover:bg-white/10 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6">
+              {archiveLoading ? (
+                <div className="flex items-center justify-center py-20">
+                  <div className="w-8 h-8 border-2 border-spacex-orange border-t-transparent rounded-full animate-spin" />
+                </div>
+              ) : !archiveData ? (
+                <div className="text-center py-20 text-white/50">
+                  <Newspaper className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                  <p>该日期暂无日报</p>
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  <p className="text-white/60">{archiveData.summary}</p>
+
+                  {/* News */}
+                  {archiveData.news.length > 0 && (
+                    <div>
+                      <h4 className="flex items-center gap-2 text-lg font-semibold mb-4">
+                        <Newspaper className="w-5 h-5 text-spacex-orange" />
+                        行业新闻 ({archiveData.news.length})
+                      </h4>
+                      <div className="space-y-3">
+                        {archiveData.news.map((item, index) => (
+                          <NewsCard key={item.id} item={item} index={index + 1} />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Papers */}
+                  {archiveData.papers.length > 0 && (
+                    <div>
+                      <h4 className="flex items-center gap-2 text-lg font-semibold mb-4">
+                        <BookOpen className="w-5 h-5 text-blue-400" />
+                        arXiv 论文 ({archiveData.papers.length})
+                      </h4>
+                      <div className="space-y-3">
+                        {archiveData.papers.map((item, index) => (
+                          <PaperCard key={item.id} item={item} index={index + 1} />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
