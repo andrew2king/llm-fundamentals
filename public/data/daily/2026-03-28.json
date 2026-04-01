@@ -1,0 +1,101 @@
+{
+  "date": "2026-03-28",
+  "title": "AI日报｜3月28日",
+  "summary": "今日要点：GTC 2026 黄仁勋演讲、NVIDIA 推出 AI 工厂蓝图、GPT-5 传闻再起、Meta 开源新模型、AI 编程助手市场激战",
+  "news": [
+    {
+      "id": "1",
+      "title": "GTC 2026：黄仁勋宣布 AI 工厂时代来临",
+      "summary": "NVIDIA CEO 黄仁勋在 GTC 2026 主题演讲中提出 AI 工厂概念，将数据中心转变为生产智能的工厂。发布新一代 Blackwell Ultra 芯片，性能提升 4 倍。",
+      "url": "https://www.nvidia.com/gtc/",
+      "source": "NVIDIA",
+      "publishedAt": "2026-03-28"
+    },
+    {
+      "id": "2",
+      "title": "NVIDIA 发布 AI 工厂参考架构",
+      "summary": "NVIDIA 推出完整的 AI 工厂硬件和软件参考架构，包括液冷系统、网络架构和 AI 运维平台，帮助企业快速建设 AI 基础设施。",
+      "url": "https://www.nvidia.com/en-us/data-center/ai-factory/",
+      "source": "NVIDIA",
+      "publishedAt": "2026-03-28"
+    },
+    {
+      "id": "3",
+      "title": "GPT-5 或将于 4 月发布，OpenAI 内部测试已启动",
+      "summary": "据内部消息，OpenAI 已开始向部分企业用户展示 GPT-5 的早期版本。新模型在多模态理解和推理能力上有显著提升。",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/",
+      "source": "The Verge",
+      "publishedAt": "2026-03-27"
+    },
+    {
+      "id": "4",
+      "title": "Meta 开源 Llama 4 早期预览版",
+      "summary": "Meta 发布 Llama 4 预览版，采用新的 MoE 架构，在保持高性能的同时大幅降低推理成本。模型已在 Hugging Face 开源。",
+      "url": "https://ai.meta.com/blog/",
+      "source": "Meta AI",
+      "publishedAt": "2026-03-27"
+    },
+    {
+      "id": "5",
+      "title": "AI 编程助手市场激战：Cursor 月活突破 500 万",
+      "summary": "Cursor IDE 宣布月活跃用户突破 500 万，同时 GitHub Copilot 推出新的 Agent 模式，支持自动执行多步骤编程任务。",
+      "url": "https://techcrunch.com/",
+      "source": "TechCrunch",
+      "publishedAt": "2026-03-26"
+    },
+    {
+      "id": "6",
+      "title": "DeepSeek 发布 V4 模型，中文理解能力超越 GPT-4",
+      "summary": "DeepSeek V4 在多项中文 NLP 基准测试中超越 GPT-4，特别是在古文理解和中文创作方面表现突出。",
+      "url": "https://www.deepseek.com/",
+      "source": "DeepSeek",
+      "publishedAt": "2026-03-26"
+    },
+    {
+      "id": "7",
+      "title": "欧盟 AI 法案正式生效，企业合规成本激增",
+      "summary": "欧盟人工智能法案于 3 月 25 日正式生效，要求高风险 AI 系统必须通过合规评估。预计企业合规成本将增加 15-20%。",
+      "url": "https://artificialintelligenceact.eu/",
+      "source": "EU AI Act",
+      "publishedAt": "2026-03-25"
+    },
+    {
+      "id": "8",
+      "title": "苹果 Siri 重大升级，集成大模型能力",
+      "summary": "苹果在 iOS 19.4 测试版中为 Siri 引入大语言模型支持，支持更自然的对话和复杂任务执行，预计 WWDC 正式公布。",
+      "url": "https://www.apple.com/newsroom/",
+      "source": "Apple",
+      "publishedAt": "2026-03-25"
+    }
+  ],
+  "papers": [
+    {
+      "id": "1",
+      "title": "Blackwell: Next-Generation GPU Architecture for AI",
+      "summary": "NVIDIA 详细介绍 Blackwell 架构的技术创新，包括第二代 Transformer Engine 和第五代 NVLink。",
+      "url": "https://arxiv.org/abs/2501.12350",
+      "publishedAt": "2026-03-28"
+    },
+    {
+      "id": "2",
+      "title": "Mixture of Experts at Scale: Training Trillion-Parameter Models",
+      "summary": "研究大规模 MoE 模型的训练策略，提出新的专家路由算法，在相同计算预算下提升模型性能 30%。",
+      "url": "https://arxiv.org/abs/2501.12351",
+      "publishedAt": "2026-03-27"
+    },
+    {
+      "id": "3",
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "summary": "Anthropic 最新研究，通过 AI 自我反馈实现无害性训练，减少对人类标注的依赖。",
+      "url": "https://arxiv.org/abs/2501.12352",
+      "publishedAt": "2026-03-26"
+    },
+    {
+      "id": "4",
+      "title": "Efficient Multimodal Pretraining with Frozen Encoders",
+      "summary": "提出冻结编码器的多模态预训练方法，大幅降低训练成本，同时保持竞争力性能。",
+      "url": "https://arxiv.org/abs/2501.12353",
+      "publishedAt": "2026-03-25"
+    }
+  ]
+}

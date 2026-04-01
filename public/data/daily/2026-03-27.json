@@ -1,0 +1,101 @@
+{
+  "date": "2026-03-27",
+  "title": "AI日报｜3月27日",
+  "summary": "今日要点：Claude 4 发布、OpenAI 收购机器人公司、Google DeepMind 新突破、AI 芯片价格战、微软 Copilot 升级",
+  "news": [
+    {
+      "id": "1",
+      "title": "Anthropic 发布 Claude 4，推理能力大幅提升",
+      "summary": "Claude 4 正式发布，在复杂推理、数学和编程任务上超越 GPT-4。新模型支持 200K 上下文窗口，企业版已可用。",
+      "url": "https://www.anthropic.com/news/",
+      "source": "Anthropic",
+      "publishedAt": "2026-03-27"
+    },
+    {
+      "id": "2",
+      "title": "OpenAI 收购 Figure AI，进军机器人领域",
+      "summary": "OpenAI 以 20 亿美元收购人形机器人公司 Figure AI，计划将 GPT 技术与物理机器人结合，打造通用人工智能助手。",
+      "url": "https://openai.com/blog/",
+      "source": "OpenAI",
+      "publishedAt": "2026-03-27"
+    },
+    {
+      "id": "3",
+      "title": "Google DeepMind 推出 AlphaCode 3，编程竞赛超越人类",
+      "summary": "AlphaCode 3 在 Codeforces 编程竞赛中达到世界前 10% 水平，首次在竞赛编程中超越人类平均水平。",
+      "url": "https://deepmind.google/",
+      "source": "Google DeepMind",
+      "publishedAt": "2026-03-26"
+    },
+    {
+      "id": "4",
+      "title": "AI 芯片价格战打响：AMD 降价 40% 挑战 NVIDIA",
+      "summary": "AMD 宣布 MI350X 芯片降价 40%，直接挑战 NVIDIA H100。云计算厂商开始重新评估 AI 基础设施采购策略。",
+      "url": "https://www.amd.com/newsroom/",
+      "source": "AMD",
+      "publishedAt": "2026-03-26"
+    },
+    {
+      "id": "5",
+      "title": "微软 Copilot 升级，支持企业私有数据训练",
+      "summary": "Microsoft 365 Copilot 推出 Enterprise 版本，支持企业在私有数据上微调模型，同时保证数据不出租户。",
+      "url": "https://news.microsoft.com/",
+      "source": "Microsoft",
+      "publishedAt": "2026-03-25"
+    },
+    {
+      "id": "6",
+      "title": "Perplexity 推出 Perplexity Enterprise，挑战企业搜索市场",
+      "summary": "Perplexity 发布企业版，支持内部文档搜索和知识管理，直接挑战 Google Workspace 和 Microsoft 365。",
+      "url": "https://www.perplexity.ai/",
+      "source": "Perplexity",
+      "publishedAt": "2026-03-25"
+    },
+    {
+      "id": "7",
+      "title": "AI 内容检测器准确率仅 60%，学术界呼吁谨慎使用",
+      "summary": "最新研究显示，主流 AI 内容检测工具准确率仅 60%，远低于宣传水平。多所大学已停止在学术诚信审查中使用此类工具。",
+      "url": "https://www.nature.com/articles/",
+      "source": "Nature",
+      "publishedAt": "2026-03-24"
+    },
+    {
+      "id": "8",
+      "title": "特斯拉 Optimus 机器人开始工厂测试",
+      "summary": "特斯拉 Optimus 人形机器人开始在弗里蒙特工厂进行实际生产任务测试，执行简单的装配和搬运工作。",
+      "url": "https://www.tesla.com/news/",
+      "source": "Tesla",
+      "publishedAt": "2026-03-24"
+    }
+  ],
+  "papers": [
+    {
+      "id": "1",
+      "title": "Claude 4 Technical Report: Advanced Reasoning and Safety",
+      "summary": "Anthropic 发布 Claude 4 技术报告，详细介绍新模型的架构改进和安全评估方法。",
+      "url": "https://arxiv.org/abs/2501.12354",
+      "publishedAt": "2026-03-27"
+    },
+    {
+      "id": "2",
+      "title": "AlphaCode 3: Competition-Level Code Generation with AlphaZero",
+      "summary": "DeepMind 详细介绍 AlphaCode 3 的技术架构，结合 AlphaZero 搜索和大型语言模型。",
+      "url": "https://arxiv.org/abs/2501.12355",
+      "publishedAt": "2026-03-26"
+    },
+    {
+      "id": "3",
+      "title": "Efficient Large Language Model Serving with Dynamic Batching",
+      "summary": "提出动态批处理算法，在保持低延迟的同时提升 LLM 服务吞吐量 3 倍。",
+      "url": "https://arxiv.org/abs/2501.12356",
+      "publishedAt": "2026-03-25"
+    },
+    {
+      "id": "4",
+      "title": "Multimodal Chain-of-Thought Reasoning in Large Language Models",
+      "summary": "研究多模态思维链推理，展示如何在视觉-语言任务中应用逐步推理。",
+      "url": "https://arxiv.org/abs/2501.12357",
+      "publishedAt": "2026-03-24"
+    }
+  ]
+}

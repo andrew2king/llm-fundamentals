@@ -1,0 +1,156 @@
+{
+  "lastUpdated": "2026-02-28",
+  "source": "综合最佳实践整理",
+  "items": [
+    {
+      "id": "summary",
+      "title": "摘要模板",
+      "category": "内容",
+      "prompt": "你是专业的内容分析师。请用 5 个要点总结以下内容，并给出 1 句结论：\n\n{{content}}"
+    },
+    {
+      "id": "analysis",
+      "title": "分析模板",
+      "category": "分析",
+      "prompt": "你是业务分析师。请从「背景、问题、原因、建议」四个部分分析：\n\n{{content}}"
+    },
+    {
+      "id": "qa",
+      "title": "问答模板",
+      "category": "知识",
+      "prompt": "请基于以下资料回答问题，并给出引用：\n资料：{{context}}\n问题：{{question}}"
+    },
+    {
+      "id": "json",
+      "title": "结构化输出模板",
+      "category": "结构化",
+      "prompt": "请严格输出 JSON，格式如下：\n{\"title\":\"\", \"summary\":\"\", \"tags\":[]}\n内容：{{content}}"
+    },
+    {
+      "id": "cot",
+      "title": "推理链模板",
+      "category": "推理",
+      "prompt": "请逐步推理并给出最终答案，使用清晰的步骤：\n\n问题：{{question}}"
+    },
+    {
+      "id": "react",
+      "title": "ReAct 模板",
+      "category": "Agent",
+      "prompt": "你将交替输出 Thought 和 Action。每次 Action 只能调用一个工具。\n\n问题：{{question}}"
+    },
+    {
+      "id": "compare",
+      "title": "对比模板",
+      "category": "分析",
+      "prompt": "请从【目标、优势、限制、适用场景】四个维度对比以下两个方案：\n\n方案A：{{optionA}}\n方案B：{{optionB}}"
+    },
+    {
+      "id": "rewrite",
+      "title": "改写模板",
+      "category": "内容",
+      "prompt": "请将以下内容改写为更简洁的版本，保留核心信息：\n\n{{content}}"
+    },
+    {
+      "id": "email",
+      "title": "邮件撰写模板",
+      "category": "写作",
+      "prompt": "请以正式商务风格写一封邮件：\n\n背景：{{background}}\n诉求：{{request}}\n收件人：{{recipient}}"
+    },
+    {
+      "id": "brainstorm",
+      "title": "创意发散模板",
+      "category": "创意",
+      "prompt": "请围绕主题进行 10 条创意发散，每条不超过 20 字：\n\n主题：{{topic}}"
+    },
+    {
+      "id": "checklist",
+      "title": "检查清单模板",
+      "category": "结构化",
+      "prompt": "请生成一份检查清单，包含步骤、风险点、验收标准：\n\n主题：{{topic}}"
+    },
+    {
+      "id": "meeting",
+      "title": "会议纪要模板",
+      "category": "写作",
+      "prompt": "请整理会议纪要，输出【议题、决策、待办、负责人】：\n\n记录：{{notes}}"
+    },
+    {
+      "id": "code-review",
+      "title": "代码审查模板",
+      "category": "代码",
+      "prompt": "请审查以下代码，从【可读性、性能、安全、最佳实践】四个方面给出建议：\n\n```{{language}}\n{{code}}\n```"
+    },
+    {
+      "id": "code-explain",
+      "title": "代码解释模板",
+      "category": "代码",
+      "prompt": "请用简单的语言解释以下代码的功能和逻辑流程：\n\n```{{language}}\n{{code}}\n```"
+    },
+    {
+      "id": "code-refactor",
+      "title": "代码重构模板",
+      "category": "代码",
+      "prompt": "请重构以下代码，使其更简洁、可读、高效。解释你的改动：\n\n```{{language}}\n{{code}}\n```"
+    },
+    {
+      "id": "unit-test",
+      "title": "单元测试模板",
+      "category": "代码",
+      "prompt": "请为以下函数编写单元测试，覆盖正常情况和边界情况：\n\n```{{language}}\n{{code}}\n```"
+    },
+    {
+      "id": "data-analysis",
+      "title": "数据分析模板",
+      "category": "数据",
+      "prompt": "你是一位数据分析师。请分析以下数据并给出洞察和建议：\n\n数据描述：{{description}}\n数据样本：{{sample}}"
+    },
+    {
+      "id": "sql-query",
+      "title": "SQL生成模板",
+      "category": "代码",
+      "prompt": "请根据需求生成 SQL 查询语句：\n\n表结构：{{schema}}\n查询需求：{{requirement}}"
+    },
+    {
+      "id": "api-doc",
+      "title": "API文档模板",
+      "category": "代码",
+      "prompt": "请为以下 API 生成文档，包含：请求方式、参数说明、响应示例、错误码：\n\nAPI描述：{{description}}"
+    },
+    {
+      "id": "blog-post",
+      "title": "博客文章模板",
+      "category": "写作",
+      "prompt": "请写一篇博客文章，要求：\n- 标题吸引人\n- 开头引人入胜\n- 结构清晰\n- 结尾有行动号召\n\n主题：{{topic}}\n目标读者：{{audience}}\n字数：约 {{wordCount}} 字"
+    },
+    {
+      "id": "social-post",
+      "title": "社交媒体文案模板",
+      "category": "写作",
+      "prompt": "请写一条社交媒体文案，要求：简洁有力、引发互动、包含话题标签：\n\n主题：{{topic}}\n平台：{{platform}}"
+    },
+    {
+      "id": "persona-expert",
+      "title": "专家角色模板",
+      "category": "角色扮演",
+      "prompt": "你是一位经验丰富的 {{expertise}} 专家，拥有 20 年行业经验。请用专业但易懂的方式回答：\n\n问题：{{question}}"
+    },
+    {
+      "id": "persona-teacher",
+      "title": "教师角色模板",
+      "category": "角色扮演",
+      "prompt": "你是一位耐心的小学老师，请用简单的语言、生动的比喻来解释：\n\n概念：{{concept}}\n目标听众：{{audience}}"
+    },
+    {
+      "id": "translate",
+      "title": "翻译模板",
+      "category": "内容",
+      "prompt": "请将以下内容翻译成 {{targetLanguage}}，保持原文的风格和语气：\n\n{{content}}"
+    },
+    {
+      "id": "grammar-check",
+      "title": "语法检查模板",
+      "category": "内容",
+      "prompt": "请检查以下文本的语法错误并给出修改建议：\n\n{{content}}"
+    }
+  ]
+}

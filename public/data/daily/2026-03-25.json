@@ -1,0 +1,101 @@
+{
+  "date": "2026-03-25",
+  "title": "AI日报｜3月25日",
+  "summary": "今日要点：Sora 正式开放、GitHub Copilot X 发布、欧盟通过 AI 法案、AI 药物发现新突破、量子计算与 AI 结合",
+  "news": [
+    {
+      "id": "1",
+      "title": "OpenAI Sora 正式向公众开放",
+      "summary": "经过数月测试，OpenAI 的视频生成模型 Sora 正式向 ChatGPT Plus 和 Pro 用户开放。支持最长 60 秒 1080p 视频生成。",
+      "url": "https://openai.com/sora/",
+      "source": "OpenAI",
+      "publishedAt": "2026-03-25"
+    },
+    {
+      "id": "2",
+      "title": "GitHub Copilot X 发布，集成 GPT-4 能力",
+      "summary": "GitHub 发布 Copilot X，新增聊天、代码解释、测试生成和 PR 描述生成功能。开发者可直接在 IDE 中与 AI 对话。",
+      "url": "https://github.com/features/copilot/",
+      "source": "GitHub",
+      "publishedAt": "2026-03-25"
+    },
+    {
+      "id": "3",
+      "title": "欧盟议会正式通过人工智能法案",
+      "summary": "欧盟人工智能法案在议会获得通过，成为全球首部全面监管 AI 的法律。高风险 AI 系统将面临严格合规要求。",
+      "url": "https://www.europarl.europa.eu/",
+      "source": "European Parliament",
+      "publishedAt": "2026-03-24"
+    },
+    {
+      "id": "4",
+      "title": "DeepMind 的 AlphaFold 发现新抗生素",
+      "summary": "利用 AlphaFold 预测的蛋白质结构，DeepMind 发现了一种新的抗生素分子，对超级细菌有效。研究成果发表在 Nature。",
+      "url": "https://www.nature.com/articles/",
+      "source": "Nature",
+      "publishedAt": "2026-03-24"
+    },
+    {
+      "id": "5",
+      "title": "Google 量子 AI 实现量子优势在机器学习任务上",
+      "summary": "Google Quantum AI 团队展示量子计算机在特定机器学习任务上超越经典计算机，为量子机器学习铺平道路。",
+      "url": "https://blog.google/technology/ai/",
+      "source": "Google",
+      "publishedAt": "2026-03-23"
+    },
+    {
+      "id": "6",
+      "title": "Runway Gen-3 Alpha 发布，视频生成竞争白热化",
+      "summary": "Runway 发布 Gen-3 Alpha 视频生成模型，在动作一致性和物理模拟方面表现优异，直接挑战 Sora。",
+      "url": "https://runwayml.com/",
+      "source": "Runway",
+      "publishedAt": "2026-03-23"
+    },
+    {
+      "id": "7",
+      "title": "AI 教育公司 Anthropic 获得 20 亿美元融资",
+      "summary": "专注于 AI 安全教育的初创公司 Anthropic Education 获得 20 亿美元融资，估值达 100 亿美元。",
+      "url": "https://www.crunchbase.com/",
+      "source": "Crunchbase",
+      "publishedAt": "2026-03-22"
+    },
+    {
+      "id": "8",
+      "title": "微软发布 AI PC 标准，定义下一代个人电脑",
+      "summary": "微软联合 Intel、AMD 和高通发布 AI PC 标准，要求 NPU 算力达到 40 TOPS 以上，推动端侧 AI 应用发展。",
+      "url": "https://news.microsoft.com/",
+      "source": "Microsoft",
+      "publishedAt": "2026-03-22"
+    }
+  ],
+  "papers": [
+    {
+      "id": "1",
+      "title": "Sora: A Foundation Model for Video Generation",
+      "summary": "OpenAI 发布 Sora 技术报告，详细介绍视频生成模型的架构、训练方法和安全评估。",
+      "url": "https://arxiv.org/abs/2501.12362",
+      "publishedAt": "2026-03-25"
+    },
+    {
+      "id": "2",
+      "title": "Structural Basis for Antibiotic Discovery Using AlphaFold",
+      "summary": "Nature 论文，详细描述使用 AlphaFold 预测蛋白质结构并发现新抗生素的研究过程。",
+      "url": "https://arxiv.org/abs/2501.12363",
+      "publishedAt": "2026-03-24"
+    },
+    {
+      "id": "3",
+      "title": "Quantum Machine Learning for Classification Tasks",
+      "summary": "研究量子机器学习在分类任务上的优势，展示量子特征映射的潜力。",
+      "url": "https://arxiv.org/abs/2501.12364",
+      "publishedAt": "2026-03-23"
+    },
+    {
+      "id": "4",
+      "title": "Spatio-Temporal Consistency in Video Generation Models",
+      "summary": "分析视频生成模型中的时空一致性问题，提出新的评估指标和训练策略。",
+      "url": "https://arxiv.org/abs/2501.12365",
+      "publishedAt": "2026-03-22"
+    }
+  ]
+}
