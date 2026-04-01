@@ -9,14 +9,19 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Certificate() {
   const sectionRef = useRef<HTMLElement>(null);
   const certificateRef = useRef<HTMLDivElement>(null);
-  const { user, learningProgress, getOverallProgress } = useUser();
+  const userContext = useUser();
   const [copied, setCopied] = useState(false);
   // 使用 useState 懒初始化，只在首次渲染时生成证书 ID
   const [certificateId] = useState(() => `LLM-${Date.now().toString(36).toUpperCase()}`);
 
+  // 防御性获取数据
+  const user = userContext?.user;
+  const getOverallProgress = userContext?.getOverallProgress || (() => 0);
+  const learningProgress = userContext?.learningProgress;
+
   const overallProgress = getOverallProgress();
   const canGetCertificate = overallProgress >= 80;
-  const completedCount = learningProgress.completedSections.length;
+  const completedCount = learningProgress?.completedSections?.length || 0;
 
   const userName = user?.name || '学习者';
   const certificateDate = new Date().toLocaleDateString('zh-CN', {
