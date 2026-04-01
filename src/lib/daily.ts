@@ -3,28 +3,28 @@ import { dailyData as embeddedDailyData } from '@/data/daily';
 
 /**
  * 获取最新日报数据
- * 优先从 public/daily-YYYY-MM-DD.json 读取，失败时使用嵌入的数据
+ * 优先从 public/data/daily/YYYY-MM-DD.json 读取，失败时使用嵌入的数据
  */
 export async function getLatestDaily(): Promise<DailyData | null> {
   try {
     // 获取今天的日期作为默认
     const today = new Date().toISOString().split('T')[0];
-    
-    // 尝试获取今天的日报（使用扁平化路径）
-    const response = await fetch(`/daily-${today}.json`);
+
+    // 尝试获取今天的日报
+    const response = await fetch(`/data/daily/${today}.json`);
     if (response.ok) {
       return await response.json();
     }
-    
+
     // 如果今天没有，尝试获取最近几天的
     // 尝试昨天、前天等
     for (let i = 1; i <= 7; i++) {
       const date = new Date();
       date.setDate(date.getDate() - i);
       const dateStr = date.toISOString().split('T')[0];
-      
+
       try {
-        const resp = await fetch(`/daily-${dateStr}.json`);
+        const resp = await fetch(`/data/daily/${dateStr}.json`);
         if (resp.ok) {
           return await resp.json();
         }
@@ -32,7 +32,7 @@ export async function getLatestDaily(): Promise<DailyData | null> {
         // 继续尝试下一天
       }
     }
-    
+
     // 如果都失败了，使用嵌入的数据
     console.log('Using embedded daily data');
     return embeddedDailyData;

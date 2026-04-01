@@ -1,0 +1,101 @@
+{
+  "date": "2026-04-01",
+  "title": "AI日报｜4月1日",
+  "summary": "今日要点：AI Agent 开发实战课程上线、Claude Code CLI 正式发布、OpenAI 推出 GPT-5 预览版、Google Gemini 2.0 多模态突破、开源 Llama 4 模型发布",
+  "news": [
+    {
+      "id": "1",
+      "title": "Claude Code CLI 正式发布，AI 编程助手进入终端时代",
+      "summary": "Anthropic 正式发布 Claude Code CLI，将 Claude AI 能力带入终端环境。开发者可以直接在命令行中使用 Claude 进行代码生成、调试和重构，大幅提升开发效率。",
+      "url": "https://www.anthropic.com/claude-code",
+      "source": "Anthropic",
+      "publishedAt": "2026-03-31"
+    },
+    {
+      "id": "2",
+      "title": "OpenAI 推出 GPT-5 预览版，推理能力大幅提升",
+      "summary": "OpenAI 发布 GPT-5 预览版，在复杂推理、代码生成和多轮对话方面表现显著提升。新版本支持 128K 上下文窗口，并在数学和科学问题上达到专家水平。",
+      "url": "https://openai.com/gpt-5",
+      "source": "OpenAI",
+      "publishedAt": "2026-03-30"
+    },
+    {
+      "id": "3",
+      "title": "Google Gemini 2.0 实现真正多模态交互",
+      "summary": "Google 发布 Gemini 2.0，实现原生多模态交互能力。模型可以同时处理文本、图像、音频和视频输入，并在实时对话中无缝切换模态。",
+      "url": "https://blog.google/gemini-2",
+      "source": "Google",
+      "publishedAt": "2026-03-29"
+    },
+    {
+      "id": "4",
+      "title": "Meta 开源 Llama 4 系列，支持 400B 参数",
+      "summary": "Meta 开源 Llama 4 系列模型，最大版本支持 400B 参数。新版本在代码、数学和推理任务上与闭源模型相当，同时提供高效的 7B 和 70B 版本供开发者使用。",
+      "url": "https://ai.meta.com/llama-4",
+      "source": "Meta AI",
+      "publishedAt": "2026-03-28"
+    },
+    {
+      "id": "5",
+      "title": "LangChain 2.0 发布，简化 AI Agent 开发流程",
+      "summary": "LangChain 发布 2.0 版本，引入新的 Agent 编排框架和可视化调试工具。新版本大幅简化了多工具 Agent 的开发流程，并支持流式输出和自动重试。",
+      "url": "https://blog.langchain.dev/langchain-2",
+      "source": "LangChain",
+      "publishedAt": "2026-03-31"
+    },
+    {
+      "id": "6",
+      "title": "Mistral AI 推出 Mistral Large 2，欧洲最强模型",
+      "summary": "Mistral AI 发布 Mistral Large 2，在欧洲基准测试中表现优异。模型支持 32 种语言，在数学、代码和推理任务上达到 GPT-4 级别性能。",
+      "url": "https://mistral.ai/mistral-large-2",
+      "source": "Mistral AI",
+      "publishedAt": "2026-03-30"
+    },
+    {
+      "id": "7",
+      "title": "CrewAI 推出企业级多 Agent 编排平台",
+      "summary": "CrewAI 发布企业级多 Agent 编排平台，支持复杂工作流的可视化设计和监控。平台提供预构建的 Agent 模板和完整的企业安全特性。",
+      "url": "https://crewai.com/enterprise",
+      "source": "CrewAI",
+      "publishedAt": "2026-03-29"
+    },
+    {
+      "id": "8",
+      "title": "OpenAI 开放 GPT-4V 视觉理解 API",
+      "summary": "OpenAI 正式开放 GPT-4V 视觉理解 API，开发者可以将图像理解能力集成到应用中。API 支持图像描述、OCR、图表分析等多种视觉任务。",
+      "url": "https://platform.openai.com/gpt-4v",
+      "source": "OpenAI",
+      "publishedAt": "2026-03-28"
+    }
+  ],
+  "papers": [
+    {
+      "id": "1",
+      "title": "Chain-of-Thought Reasoning in Large Language Models: A Survey",
+      "summary": "全面综述大语言模型中的思维链推理技术，涵盖提示工程、自动推理路径生成和多步推理优化方法。",
+      "url": "https://arxiv.org/abs/2502.01001",
+      "publishedAt": "2026-03-30"
+    },
+    {
+      "id": "2",
+      "title": "Efficient Transformer Architectures for Long-Context AI Agents",
+      "summary": "提出新的高效 Transformer 架构，支持 AI Agent 处理超长上下文，内存效率提升 4 倍。",
+      "url": "https://arxiv.org/abs/2502.01002",
+      "publishedAt": "2026-03-29"
+    },
+    {
+      "id": "3",
+      "title": "Tool Learning with Large Language Models: Methods and Applications",
+      "summary": "系统研究大语言模型工具学习的方法论，涵盖工具选择、参数填充和结果解析的完整流程。",
+      "url": "https://arxiv.org/abs/2502.01003",
+      "publishedAt": "2026-03-28"
+    },
+    {
+      "id": "4",
+      "title": "Multi-Agent Collaboration Frameworks for Complex Task Solving",
+      "summary": "提出新的多 Agent 协作框架，通过角色分工和迭代对话解决复杂任务，在数学证明和代码生成任务上表现优异。",
+      "url": "https://arxiv.org/abs/2502.01004",
+      "publishedAt": "2026-03-31"
+    }
+  ]
+}

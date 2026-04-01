@@ -1,0 +1,71 @@
+{
+  "date": "2026-03-31",
+  "title": "AI日报｜3月31日",
+  "summary": "今日要点：Claude Code CLI 测试版发布、OpenAI 推出 Agent SDK、LangGraph 正式版上线、微软 Copilot 升级多模态能力",
+  "news": [
+    {
+      "id": "1",
+      "title": "Claude Code CLI 测试版发布，终端编程新体验",
+      "summary": "Anthropic 发布 Claude Code CLI 测试版，开发者可在终端中直接使用 Claude 进行代码编写、调试和重构。",
+      "url": "https://anthropic.com/claude-code-beta",
+      "source": "Anthropic",
+      "publishedAt": "2026-03-30"
+    },
+    {
+      "id": "2",
+      "title": "OpenAI 推出 Agent SDK，简化 AI Agent 开发",
+      "summary": "OpenAI 发布官方 Agent SDK，提供工具调用、多轮对话和状态管理的完整解决方案。",
+      "url": "https://platform.openai.com/agent-sdk",
+      "source": "OpenAI",
+      "publishedAt": "2026-03-29"
+    },
+    {
+      "id": "3",
+      "title": "LangGraph 正式版上线，复杂 Agent 工作流可视化构建",
+      "summary": "LangChain 发布 LangGraph 正式版，支持复杂 Agent 工作流的可视化设计和实时调试。",
+      "url": "https://langchain.com/langgraph",
+      "source": "LangChain",
+      "publishedAt": "2026-03-30"
+    },
+    {
+      "id": "4",
+      "title": "微软 Copilot 升级多模态能力，支持图像和语音交互",
+      "summary": "微软宣布 Copilot 全面升级多模态能力，用户可以通过图像和语音与 AI 进行自然交互。",
+      "url": "https://microsoft.com/copilot-multimodal",
+      "source": "Microsoft",
+      "publishedAt": "2026-03-28"
+    },
+    {
+      "id": "5",
+      "title": "Google Gemini 支持实时代码执行",
+      "summary": "Google 宣布 Gemini 支持实时代码执行功能，可以在对话中直接运行 Python 代码并查看结果。",
+      "url": "https://blog.google/gemini-code-execution",
+      "source": "Google",
+      "publishedAt": "2026-03-29"
+    },
+    {
+      "id": "6",
+      "title": "Hugging Face 发布 SmolLM，轻量级开源模型新选择",
+      "summary": "Hugging Face 发布 SmolLM 系列，提供 135M 到 1.7B 参数的轻量级模型，适合边缘设备部署。",
+      "url": "https://huggingface.co/smollm",
+      "source": "Hugging Face",
+      "publishedAt": "2026-03-30"
+    }
+  ],
+  "papers": [
+    {
+      "id": "1",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive AI Agents",
+      "summary": "研究检索增强生成在知识密集型 AI Agent 中的应用，提出新的检索策略和知识融合方法。",
+      "url": "https://arxiv.org/abs/2502.00901",
+      "publishedAt": "2026-03-29"
+    },
+    {
+      "id": "2",
+      "title": "Constitutional AI: Training Language Models with Explicit Values",
+      "summary": "探索宪法 AI 方法，通过显式价值观指导语言模型训练，提高模型安全性和可控性。",
+      "url": "https://arxiv.org/abs/2502.00902",
+      "publishedAt": "2026-03-28"
+    }
+  ]
+}
