@@ -1,0 +1,92 @@
+{
+  "date": "2026-04-02",
+  "title": "AI日报｜4月2日",
+  "summary": "OpenAI获122亿美元融资加速AI发展，Anthropic发布Claude Opus 4.6，Slack推出30项AI功能创Salesforce历史最快采用记录",
+  "news": [
+    {
+      "id": "1",
+      "title": "OpenAI获122亿美元融资加速下一代AI发展",
+      "summary": "OpenAI宣布完成122亿美元新融资，用于扩展前沿AI全球布局、投资下一代计算基础设施，并满足ChatGPT、Codex及企业AI日益增长的需求。",
+      "url": "https://openai.com/index/accelerating-the-next-phase-ai",
+      "source": "OpenAI",
+      "publishedAt": "2026-03-31"
+    },
+    {
+      "id": "2",
+      "title": "Anthropic发布Claude Opus 4.6升级最智能模型",
+      "summary": "Anthropic宣布升级其最智能模型Claude Opus至4.6版本，在代理编码、计算机使用、工具使用、搜索和金融等领域达到行业领先水平。",
+      "url": "https://www.anthropic.com/news",
+      "source": "Anthropic",
+      "publishedAt": "2026-02-05"
+    },
+    {
+      "id": "3",
+      "title": "Slack推出30项AI功能创Salesforce历史最快采用记录",
+      "summary": "Slack宣布为Slackbot添加30项AI功能，这是自Salesforce收购以来最大规模的更新。该功能有望成为Salesforce 27年历史上采用最快的产品，部分用户每天可节省90分钟。",
+      "url": "https://venturebeat.com/orchestration/slack-adds-30-ai-features-to-slackbot-its-most-ambitious-update-since-the",
+      "source": "VentureBeat",
+      "publishedAt": "2026-03-31"
+    },
+    {
+      "id": "4",
+      "title": "Nvidia支持的ThinkLabs AI融资2800万美元解决电网危机",
+      "summary": "ThinkLabs AI获得Nvidia支持的2800万美元融资，专注于使用物理信息AI实时建模电网行为，将原本需要数周或数月的工程研究压缩至几分钟。",
+      "url": "https://venturebeat.com/infrastructure/nvidia-backed-thinklabs-ai-raises-usd28-million-to-tackle-a-growing-power",
+      "source": "VentureBeat",
+      "publishedAt": "2026-03-31"
+    },
+    {
+      "id": "5",
+      "title": "OpenAI推出安全漏洞赏金计划",
+      "summary": "OpenAI启动安全漏洞赏金计划，旨在识别AI滥用和安全风险，包括代理漏洞、提示注入和数据泄露等问题，以加强AI系统的安全性。",
+      "url": "https://openai.com/index/safety-bug-bounty",
+      "source": "OpenAI",
+      "publishedAt": "2026-03-25"
+    },
+    {
+      "id": "6",
+      "title": "Softr推出AI原生平台帮助非技术团队无代码构建商业应用",
+      "summary": "Softr发布AI Co-Builder平台，允许非技术用户用自然语言描述所需软件，平台即可生成包含数据库、用户界面、权限和业务逻辑的完整集成系统。",
+      "url": "https://venturebeat.com/technology/softr-launches-ai-native-platform-to-help-nontechnical-teams-build-business",
+      "source": "VentureBeat",
+      "publishedAt": "2026-03-31"
+    }
+  ],
+  "papers": [
+    {
+      "id": "1",
+      "title": "Triadic Cognitive Architecture: 通过时空与认知摩擦限定自主行动",
+      "summary": "提出TCA统一数学框架，将机器推理建立在连续时间物理学基础上，通过非线性滤波理论、黎曼路由几何和最优控制定义认知摩擦概念，在紧急医疗诊断网格模拟中验证可减少行动时间同时提高患者存活率。",
+      "url": "https://arxiv.org/abs/2603.30031",
+      "publishedAt": "2026-03-31"
+    },
+    {
+      "id": "2",
+      "title": "何时可以安全优化思维链(CoT)？",
+      "summary": "提出概念框架预测CoT监控能力何时及为何会受到训练影响，将奖励分解为依赖最终输出和依赖CoT的两项，分类为对齐、正交或冲突三类，验证冲突奖励项会降低CoT可监控性。",
+      "url": "https://arxiv.org/abs/2603.30036",
+      "publishedAt": "2026-03-31"
+    },
+    {
+      "id": "3",
+      "title": "近似注意力机制的推广：Tucker Attention",
+      "summary": "提出Tucker Attention参数高效方案，通过广义低秩分解策略，在LLM和ViT测试用例中仅需GQA和MLA十分之一的参数即可达到可比验证指标，且完全兼容flash-attention和RoPE。",
+      "url": "https://arxiv.org/abs/2603.30033",
+      "publishedAt": "2026-03-31"
+    },
+    {
+      "id": "4",
+      "title": "扩展MONA在Camera Dropbox中的应用：奖励黑客缓解的复现、学习批准与设计启示",
+      "summary": "复现并扩展MONA（非近视优化与近视批准）方法，引入模块化学习批准套件，在减少预算实验中发现最佳校准学习监督运行可实现零奖励黑客但预期行为率较低，为构建保持足够远见的学习批准模型提供实验基础。",
+      "url": "https://arxiv.org/abs/2603.29993",
+      "publishedAt": "2026-03-31"
+    },
+    {
+      "id": "5",
+      "title": "通过数据驱动的语音时序自适应隐蔽提升可懂度",
+      "summary": "利用机器生成语音的精确语速控制，系统研究针对性语速调整如何改善理解，发现语速影响呈现剪刀模式，构建数据驱动TTS算法在多种句子和元音对比中显著帮助可懂度而不被察觉。",
+      "url": "https://arxiv.org/abs/2603.30032",
+      "publishedAt": "2026-03-31"
+    }
+  ]
+}
