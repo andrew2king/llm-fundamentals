@@ -190,6 +190,13 @@ export function UserProvider({ children }: UserProviderProps) {
 
   // 计算整体进度
   const getOverallProgress = () => {
+    // 防御性检查
+    if (!ALL_SECTIONS || !Array.isArray(ALL_SECTIONS) || ALL_SECTIONS.length === 0) {
+      return 0;
+    }
+    if (!learningProgress?.completedSections || !Array.isArray(learningProgress.completedSections)) {
+      return 0;
+    }
     const completedCount = learningProgress.completedSections.length;
     return Math.round((completedCount / ALL_SECTIONS.length) * 100);
   };

@@ -125,8 +125,8 @@ export default function Progress() {
   const completedCount = progress.completedSections.length;
 
   const displayedSections = showAll
-    ? ALL_SECTIONS
-    : ALL_SECTIONS.slice(0, 12);
+    ? (ALL_SECTIONS || [])
+    : (ALL_SECTIONS || []).slice(0, 12);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -255,12 +255,12 @@ export default function Progress() {
             })}
           </div>
 
-          {!showAll && ALL_SECTIONS.length > 12 && (
+          {!showAll && (ALL_SECTIONS || []).length > 12 && (
             <button
               onClick={() => setShowAll(true)}
               className="mt-4 mx-auto block text-sm text-spacex-orange hover:underline"
             >
-              显示全部 {ALL_SECTIONS.length} 个模块
+              显示全部 {(ALL_SECTIONS || []).length} 个模块
             </button>
           )}
         </div>
