@@ -1,0 +1,77 @@
+{
+  "date": "2026-04-01",
+  "title": "AI日报｜4月1日",
+  "summary": "OpenAI获122亿美元融资加速AI全球化；Slack推出30项AI功能；Anthropic发布Claude Opus 4.6；多篇arXiv论文聚焦多模态推理与AI科研自动化",
+  "news": [
+    {
+      "id": "1",
+      "title": "OpenAI获122亿美元融资，加速AI全球化",
+      "summary": "OpenAI宣布获得122亿美元新融资，用于扩展前沿AI技术、投资下一代计算能力，并满足ChatGPT、Codex和企业AI日益增长的需求。",
+      "url": "https://openai.com/index/accelerating-the-next-phase-ai",
+      "source": "OpenAI",
+      "publishedAt": "2026-03-31"
+    },
+    {
+      "id": "2",
+      "title": "Slack推出30项AI功能，成为Salesforce史上最快采用产品",
+      "summary": "Slack新增30项AI功能，Slackbot在不到三个月内成为Salesforce 27年历史上最快采用的产品。客户员工报告每天可节省90分钟，Salesforce内部团队每周节省高达20小时。",
+      "url": "https://venturebeat.com/ai/slack-adds-30-ai-features-to-slackbot/",
+      "source": "VentureBeat",
+      "publishedAt": "2026-03-31"
+    },
+    {
+      "id": "3",
+      "title": "Anthropic发布Claude Opus 4.6，全面升级智能模型",
+      "summary": "Anthropic发布Claude Opus 4.6，在代理编码、计算机使用、工具使用、搜索和金融领域成为行业领先模型，在多个任务上大幅领先。",
+      "url": "https://www.anthropic.com/news/claude-opus-4-6",
+      "source": "Anthropic",
+      "publishedAt": "2026-02-05"
+    },
+    {
+      "id": "4",
+      "title": "Softr推出AI原生平台，无代码构建业务应用",
+      "summary": "Softr发布AI Co-Builder平台，让非技术用户用自然语言描述需求即可生成完整系统，包括数据库、用户界面、权限和业务逻辑。",
+      "url": "https://venturebeat.com/ai/softr-launches-ai-native-platform/",
+      "source": "VentureBeat",
+      "publishedAt": "2026-03-31"
+    },
+    {
+      "id": "5",
+      "title": "Nvidia支持的ThinkLabs AI融资2800万美元，解决电网压力",
+      "summary": "ThinkLabs AI获得2800万美元融资，使用物理信息AI实时建模电网行为，将原本需要数周或数月的工程研究压缩到几分钟。",
+      "url": "https://venturebeat.com/ai/nvidia-backed-thinklabs-ai-raises-28-million/",
+      "source": "VentureBeat",
+      "publishedAt": "2026-03-31"
+    }
+  ],
+  "papers": [
+    {
+      "id": "1",
+      "title": "ScholScan: 面向学术论文扫描式推理的MLLM基准测试",
+      "summary": "提出ScholScan基准，用于评估多模态大语言模型在扫描式学术文献推理任务上的表现，包含1800个问题和9种错误类型，揭示当前MLLM在扫描式任务上的系统性缺陷。",
+      "url": "https://arxiv.org/abs/2603.28651",
+      "publishedAt": "2026-03-27"
+    },
+    {
+      "id": "2",
+      "title": "PRCO: 感知-推理协同进化的多模态推理框架",
+      "summary": "提出PRCO框架，通过Observer和Solver双角色协作，使用角色特定奖励信号解决多模态大语言模型中的感知瓶颈问题，在8个基准上平均提升超过7个点。",
+      "url": "https://arxiv.org/abs/2603.28618",
+      "publishedAt": "2026-03-30"
+    },
+    {
+      "id": "3",
+      "title": "MonitorBench: 大语言模型思维链可监控性综合基准",
+      "summary": "提出MonitorBench基准，包含1514个测试实例和19个任务，用于评估LLM思维链的可监控性，发现闭源模型可监控性较低且与模型能力呈负相关。",
+      "url": "https://arxiv.org/abs/2603.28590",
+      "publishedAt": "2026-03-30"
+    },
+    {
+      "id": "4",
+      "title": "Medical AI Scientist: 首个面向临床的自主科研框架",
+      "summary": "提出Medical AI Scientist，首个针对临床医学的自主科研框架，支持文献驱动的创新、论文复现和任务驱动探索三种模式，生成稿件质量接近MICCAI水平。",
+      "url": "https://arxiv.org/abs/2603.28589",
+      "publishedAt": "2026-03-30"
+    }
+  ]
+}
