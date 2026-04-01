@@ -415,7 +415,8 @@ export default function CourseViewer() {
       setCurrentModule(currentModule + 1);
       setCurrentLesson(0);
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // 滚动到课程区域而不是页面顶部
+    document.getElementById('course-viewer')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handlePrevLesson = () => {
@@ -426,7 +427,7 @@ export default function CourseViewer() {
       setCurrentModule(currentModule - 1);
       setCurrentLesson(prevModule.items.length - 1);
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('course-viewer')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleMarkComplete = () => {
@@ -439,7 +440,7 @@ export default function CourseViewer() {
   const handleSelectLesson = (moduleIndex: number, lessonIndex: number) => {
     setCurrentModule(moduleIndex);
     setCurrentLesson(lessonIndex);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('course-viewer')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
