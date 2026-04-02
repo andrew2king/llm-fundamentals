@@ -60,6 +60,7 @@ const Progress = lazy(() => import('./sections/Progress'));
 const Certificate = lazy(() => import('./sections/Certificate'));
 const PaperLibrary = lazy(() => import('./sections/PaperLibrary'));
 const VideoTutorials = lazy(() => import('./sections/VideoTutorials'));
+const SiliconOrigin = lazy(() => import('./sections/SiliconOrigin'));
 const Glossary = lazy(() => import('./sections/Glossary'));
 const Quiz = lazy(() => import('./sections/Quiz'));
 const ParamCalculator = lazy(() => import('./sections/ParamCalculator'));
@@ -439,6 +440,13 @@ function App() {
         <SectionErrorBoundary sectionName="证书">
           <Suspense fallback={<SectionSkeleton />}>
             <Certificate />
+          </Suspense>
+        </SectionErrorBoundary>
+
+        {/* 硅基起源 - 内容品牌 */}
+        <SectionErrorBoundary sectionName="硅基起源">
+          <Suspense fallback={<SectionSkeleton />}>
+            <SiliconOrigin />
           </Suspense>
         </SectionErrorBoundary>
       </main>

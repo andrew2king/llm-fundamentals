@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Twitter, Linkedin, Github } from 'lucide-react';
+import { Github } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,17 +16,14 @@ const footerLinks = {
     { label: '课程', href: '#resources' },
     { label: '工具', href: '#resources' },
   ],
-  company: [
-    { label: '关于', href: '#' },
-    { label: '联系', href: '#' },
-    { label: '隐私', href: '#' },
+  brand: [
+    { label: '硅基起源公众号', href: 'https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NzQxNzY2NA==' },
+    { label: '亿喆科技', href: 'https://52oak.vercel.app' },
   ],
 };
 
 const socialLinks = [
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Github, href: '#', label: 'GitHub' },
+  { icon: Github, href: 'https://github.com/yizhe-tech', label: 'GitHub' },
 ];
 
 export default function Footer() {
@@ -181,17 +178,19 @@ export default function Footer() {
 
             <div className="footer-item opacity-0">
               <h4 className="text-sm font-semibold uppercase tracking-wider mb-4">
-                公司
+                品牌
               </h4>
               <ul className="space-y-3">
-                {footerLinks.company.map((link) => (
+                {footerLinks.brand.map((link) => (
                   <li key={link.label}>
-                    <button
-                      onClick={() => scrollToSection(link.href)}
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-sm text-white/50 hover:text-spacex-orange hover:translate-x-1 transition-all duration-200 inline-block"
                     >
                       {link.label}
-                    </button>
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -201,7 +200,7 @@ export default function Footer() {
           {/* Bottom bar */}
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="footer-item text-sm text-white/40 opacity-0">
-              © 2024 LLM基础。保留所有权利。
+              © 2024 硅基起源 · LLM101。保留所有权利。
             </p>
 
             {/* Social links */}
