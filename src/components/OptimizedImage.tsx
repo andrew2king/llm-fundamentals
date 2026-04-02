@@ -9,7 +9,7 @@
  * - Priority loading for critical images
  */
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 
 // Image dimensions configuration - prevents CLS by specifying sizes upfront
 export const IMAGE_DIMENSIONS = {
@@ -84,7 +84,7 @@ export default function OptimizedImage({
 }: OptimizedImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [useWebP, setUseWebP] = useState(true);
+  const [useWebP, setUseWebP] = useState(true); // WebP is widely supported
   const imgRef = useRef<HTMLImageElement>(null);
 
   // Get dimensions from config if not provided
@@ -92,17 +92,6 @@ export default function OptimizedImage({
   const configDimensions = IMAGE_DIMENSIONS[imageName as keyof typeof IMAGE_DIMENSIONS];
   const finalWidth = width || configDimensions?.width;
   const finalHeight = height || configDimensions?.height;
-
-  // Check WebP support on mount
-  useEffect(() => {
-    // WebP is widely supported now, but check for edge cases
-    const checkWebPSupport = () => {
-      // Most modern browsers support WebP
-      // We'll try WebP first and fallback on error
-      return true;
-    };
-    setUseWebP(checkWebPSupport());
-  }, []);
 
   // Determine loading strategy
   const effectiveLoading = priority ? 'eager' : loading;

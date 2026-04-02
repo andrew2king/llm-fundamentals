@@ -25,8 +25,16 @@ export function GlobalAnalyticsProvider({ children }: GlobalAnalyticsProviderPro
   const { enterPage, trackAction, getPathSummary, getDropOffAnalysis } = useBehaviorPathTracker();
 
   const scrollMilestonesRef = useRef<Set<number>>(new Set());
-  const pageStartTimeRef = useRef<number>(Date.now());
-  const currentPathRef = useRef<string>(window.location.pathname + window.location.search);
+  const pageStartTimeRef = useRef<number>(0);
+  const currentPathRef = useRef<string>('');
+
+  // Initialize refs on first render (lazy initialization pattern)
+  /* eslint-disable react-hooks/purity */
+  if (pageStartTimeRef.current === 0) {
+    pageStartTimeRef.current = Date.now();
+    currentPathRef.current = window.location.pathname + window.location.search;
+  }
+  /* eslint-enable react-hooks/purity */
 
   // Track page views on initial load and hash changes
   useEffect(() => {
@@ -82,7 +90,9 @@ export function GlobalAnalyticsProvider({ children }: GlobalAnalyticsProviderPro
             timeOnPage: Date.now() - pageStartTimeRef.current,
           });
 
-          trackEvent('scroll_depth' as any, {
+          // Custom scroll depth event
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (trackEvent as any)('scroll_depth', {
             depth: threshold,
             scrollPercent,
             path: currentPathRef.current,
@@ -114,8 +124,9 @@ export function GlobalAnalyticsProvider({ children }: GlobalAnalyticsProviderPro
       const summary = getPathSummary();
       const dropOff = getDropOffAnalysis();
 
-      // Track session end
-      trackEvent('session_end' as any, {
+      // Track session end (custom event)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (trackEvent as any)('session_end', {
         totalTime: summary.totalTime,
         totalPages: summary.uniquePages,
         averageTimePerPage: summary.averageTimePerPage,
@@ -211,15 +222,16 @@ export function GlobalAnalyticsProvider({ children }: GlobalAnalyticsProviderPro
 
   // Track search events from search component
   useEffect(() => {
-    const handleSearch = (e: CustomEvent) => {
-      trackAction('search', e.detail?.searchTerm || 'search', {
-        resultCount: e.detail?.resultCount,
-        searchType: e.detail?.searchType,
+    const handleSearch = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      trackAction('search', customEvent.detail?.searchTerm || 'search', {
+        resultCount: customEvent.detail?.resultCount,
+        searchType: customEvent.detail?.searchType,
       });
     };
 
-    window.addEventListener('site-search' as any, handleSearch);
-    return () => window.removeEventListener('site-search' as any, handleSearch);
+    window.addEventListener('site-search', handleSearch);
+    return () => window.removeEventListener('site-search', handleSearch);
   }, [trackAction]);
 
   return <>{children}</>;

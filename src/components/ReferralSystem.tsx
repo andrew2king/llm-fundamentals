@@ -7,7 +7,7 @@
  * - Display referral rewards
  */
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { Gift, Link, Users, Copy, Check, Share2, ChevronRight } from 'lucide-react';
 import { useAnalytics } from '@/hooks/useAnalytics';
 
@@ -33,41 +33,32 @@ interface ReferralReward {
   claimed: boolean;
 }
 
+// Helper to generate random referral code
+function generateRandomCode(): string {
+  return `LLM${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+}
+
 // ============================================
 // Referral Link Generator
 // ============================================
 
 interface ReferralLinkProps {
   referralCode?: string;
-  onGenerateCode?: () => Promise<string>;
   className?: string;
 }
 
 export function ReferralLink({
   referralCode: initialCode,
-  onGenerateCode,
   className = '',
 }: ReferralLinkProps) {
-  const [referralCode, setReferralCode] = useState(initialCode || '');
+  // Generate code on initial render if not provided
+  const [referralCode] = useState<string>(() => initialCode || generateRandomCode());
   const [copied, setCopied] = useState(false);
-  const { trackShare, trackCTA } = useAnalytics();
+  const { trackShare } = useAnalytics();
 
   const referralLink = referralCode
     ? `${typeof window !== 'undefined' ? window.location.origin : ''}/?ref=${referralCode}`
     : '';
-
-  const generateCode = useCallback(async () => {
-    if (onGenerateCode) {
-      const code = await onGenerateCode();
-      setReferralCode(code);
-    } else {
-      // Generate a random code for demo
-      const code = `LLM${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
-      setReferralCode(code);
-    }
-
-    trackCTA('generate_referral_code', 'referral_system', undefined, {});
-  }, [onGenerateCode, trackCTA]);
 
   const copyLink = useCallback(async () => {
     if (!referralLink) return;
@@ -77,19 +68,13 @@ export function ReferralLink({
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
 
-      trackShare('achievement' as any, referralCode, 'copy_link', {
+      trackShare('achievement', referralCode, 'copy_link', {
         referralLink,
       });
     } catch (err) {
       console.error('Failed to copy:', err);
     }
   }, [referralLink, referralCode, trackShare]);
-
-  useEffect(() => {
-    if (!referralCode) {
-      generateCode();
-    }
-  }, [referralCode, generateCode]);
 
   return (
     <div className={`p-4 rounded-xl bg-white/5 border border-white/10 ${className}`}>
@@ -406,7 +391,7 @@ export function ShareToFriends({
       id: 'wechat',
       name: '微信',
       action: () => {
-        trackShare('achievement' as any, referralCode, 'wechat', {});
+        trackShare('achievement', referralCode, 'wechat', {});
         // In real app, would use WeChat JS-SDK
         alert('请复制链接后在微信中分享');
       },
@@ -415,7 +400,7 @@ export function ShareToFriends({
       id: 'weibo',
       name: '微博',
       action: () => {
-        trackShare('achievement' as any, referralCode, 'weibo', {});
+        trackShare('achievement', referralCode, 'weibo', {});
         const url = `${window.location.origin}/?ref=${referralCode}`;
         window.open(
           `https://service.weibo.com/share/share.php?url=${encodeURIComponent(url)}&title=${encodeURIComponent(message)}`,

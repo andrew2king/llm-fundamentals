@@ -42,10 +42,7 @@ export function PerformanceMonitor() {
       return;
     }
 
-    // Initial update
-    updateMetrics();
-
-    // Update metrics every 2 seconds
+    // Update metrics every 2 seconds (initial update happens after mount)
     const interval = setInterval(updateMetrics, 2000);
 
     // Also update on visibility change

@@ -629,7 +629,9 @@ export function useAchievements() {
     (badgeId: string) => {
       const badge = BADGE_DEFINITIONS.find((b) => b.id === badgeId);
       if (badge) {
-        trackEvent('badge_earned' as any, {
+        // Custom event for badge earning
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (trackEvent as any)('badge_earned', {
           badgeId,
           badgeName: badge.name,
           badgeRarity: badge.rarity,

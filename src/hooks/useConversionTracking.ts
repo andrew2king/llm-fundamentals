@@ -89,10 +89,12 @@ export function usePurchaseFunnelDeep(
     timeSpentOnPreview: 0,
   });
 
-  // Initialize startedAt on first render
+  // Initialize startedAt on first render (lazy initialization pattern for refs)
+  /* eslint-disable react-hooks/purity */
   if (stateRef.current.startedAt === 0) {
     stateRef.current.startedAt = Date.now();
   }
+  /* eslint-enable react-hooks/purity */
 
   const previewStartTimeRef = useRef<number>(0);
 
@@ -155,7 +157,8 @@ export function usePurchaseFunnelDeep(
         lessonIndex: 0,
       });
 
-      // Track preview completion as a custom event
+      // Track preview completion as a custom event (extra properties for analytics)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (trackEvent as any)(AnalyticsEvent.COMPLETE_LESSON, {
         courseId,
         lessonId,
@@ -172,7 +175,9 @@ export function usePurchaseFunnelDeep(
   const trackPurchaseIntent = useCallback(() => {
     stateRef.current.purchaseIntentTimestamp = Date.now();
 
-    trackEvent('purchase_intent' as any, {
+    // Custom event for purchase intent tracking
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (trackEvent as any)('purchase_intent', {
       courseId,
       courseName,
       price,
@@ -215,8 +220,9 @@ export function usePurchaseFunnelDeep(
 
       trackStep('complete_purchase', 4, { transactionId });
 
-      // Track conversion value
-      trackEvent('purchase_conversion' as any, {
+      // Track conversion value (custom event)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (trackEvent as any)('purchase_conversion', {
         courseId,
         courseName,
         price,
@@ -266,10 +272,12 @@ export function useLearningMilestoneTracker(
   const milestonesRef = useRef<Map<number, LearningMilestone>>(new Map());
   const lastProgressRef = useRef<number>(0);
 
-  // Initialize start time on first render
+  // Initialize start time on first render (lazy initialization pattern for refs)
+  /* eslint-disable react-hooks/purity */
   if (startTimeRef.current === 0) {
     startTimeRef.current = Date.now();
   }
+  /* eslint-enable react-hooks/purity */
 
   const trackMilestone = useCallback(
     (progressPercent: number) => {
@@ -374,10 +382,12 @@ export function useCertificateFunnelTracker(
     startedAt: 0,
   });
 
-  // Initialize startedAt on first use
+  // Initialize startedAt on first use (lazy initialization pattern for refs)
+  /* eslint-disable react-hooks/purity */
   if (stateRef.current.startedAt === 0) {
     stateRef.current.startedAt = Date.now();
   }
+  /* eslint-enable react-hooks/purity */
 
   const funnel = ConversionFunnels.CERTIFICATE_EARN;
 
@@ -453,8 +463,9 @@ export function useCertificateFunnelTracker(
           totalTime: Date.now() - stateRef.current.startedAt,
         });
 
-        // Track certificate conversion
-        trackEvent('certificate_conversion' as any, {
+        // Track certificate conversion (custom event)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (trackEvent as any)('certificate_conversion', {
           courseId,
           courseName,
           certificateId,

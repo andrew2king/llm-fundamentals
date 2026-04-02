@@ -79,7 +79,8 @@ export function ShareButton({
 
   const handleShare = useCallback(
     (method: ShareMethod) => {
-      // Track the share event
+      // Track the share event (method.id is guaranteed to be a valid shareMethod)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       trackShare(contentType, contentId, method.id as any, {
         contentName,
         shareUrl: url,

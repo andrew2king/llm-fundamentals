@@ -119,7 +119,9 @@ function loadFromStorage<T>(key: string, defaultValue: T): T {
     // 清除损坏的数据
     try {
       localStorage.removeItem(key);
-    } catch {}
+    } catch {
+      // Ignore errors when removing corrupted data
+    }
   }
   return defaultValue;
 }
