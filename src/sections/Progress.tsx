@@ -96,6 +96,29 @@ export default function Progress() {
   const userContext = useUser();
   const [showAll, setShowAll] = useState(false);
 
+  // GSAP animation effect - must be before any early returns
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: 'top 80%',
+        onEnter: () => {
+          const items = sectionRef.current?.querySelectorAll('.progress-item');
+          if (items && items.length > 0) {
+            gsap.fromTo(
+              items,
+              { y: 40, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'expo.out' }
+            );
+          }
+        },
+        once: true,
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   // 确保 learningProgress 有默认值 - 使用多重保护
   const learningProgress = userContext?.learningProgress;
   const getOverallProgress = userContext?.getOverallProgress || (() => 0);
@@ -127,28 +150,6 @@ export default function Progress() {
   const displayedSections = showAll
     ? (ALL_SECTIONS || [])
     : (ALL_SECTIONS || []).slice(0, 12);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: 'top 80%',
-        onEnter: () => {
-          const items = sectionRef.current?.querySelectorAll('.progress-item');
-          if (items && items.length > 0) {
-            gsap.fromTo(
-              items,
-              { y: 40, opacity: 0 },
-              { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'expo.out' }
-            );
-          }
-        },
-        once: true,
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);

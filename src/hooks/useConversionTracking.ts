@@ -84,18 +84,17 @@ export function usePurchaseFunnelDeep(
     price,
     currentStep: 0,
     stepsCompleted: new Set(),
-    startedAt: Date.now(),
+    startedAt: 0, // Will be set on first use
     previewCompleted: false,
     timeSpentOnPreview: 0,
   });
 
-  const previewStartTimeRef = useRef<number>(0);
+  // Initialize startedAt on first render
+  if (stateRef.current.startedAt === 0) {
+    stateRef.current.startedAt = Date.now();
+  }
 
-  // Step 1: View Course (automatic when component mounts)
-  useEffect(() => {
-    trackStep('view_course', 1);
-    trackCourseView(courseId, courseName, { price });
-  }, [courseId, courseName, price]);
+  const previewStartTimeRef = useRef<number>(0);
 
   const trackStep = useCallback(
     (stepName: string, stepIndex: number, extras?: Record<string, unknown>) => {
@@ -115,6 +114,12 @@ export function usePurchaseFunnelDeep(
     },
     [courseId, courseName, price, trackFunnelStep]
   );
+
+  // Step 1: View Course (automatic when component mounts)
+  useEffect(() => {
+    trackStep('view_course', 1);
+    trackCourseView(courseId, courseName, { price });
+  }, [courseId, courseName, price, trackStep, trackCourseView]);
 
   // Step 2: Start Preview Lesson
   const startPreviewLesson = useCallback(
@@ -257,9 +262,14 @@ export function useLearningMilestoneTracker(
 ) {
   const { trackLessonProgress, trackFunnelStep } = useAnalytics();
 
-  const startTimeRef = useRef<number>(Date.now());
+  const startTimeRef = useRef<number>(0);
   const milestonesRef = useRef<Map<number, LearningMilestone>>(new Map());
   const lastProgressRef = useRef<number>(0);
+
+  // Initialize start time on first render
+  if (startTimeRef.current === 0) {
+    startTimeRef.current = Date.now();
+  }
 
   const trackMilestone = useCallback(
     (progressPercent: number) => {
@@ -361,8 +371,13 @@ export function useCertificateFunnelTracker(
     completedAllLessons: false,
     passedQuiz: false,
     earnedCertificate: false,
-    startedAt: Date.now(),
+    startedAt: 0,
   });
+
+  // Initialize startedAt on first use
+  if (stateRef.current.startedAt === 0) {
+    stateRef.current.startedAt = Date.now();
+  }
 
   const funnel = ConversionFunnels.CERTIFICATE_EARN;
 

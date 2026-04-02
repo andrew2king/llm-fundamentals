@@ -402,7 +402,7 @@ export default function CourseViewer() {
   const [currentModule, setCurrentModule] = useState(0);
   const [currentLesson, setCurrentLesson] = useState(0);
   const [showSidebar, setShowSidebar] = useState(true);
-  const [lessonStartTime, setLessonStartTime] = useState<number>(Date.now());
+  const [lessonStartTime, setLessonStartTime] = useState<number>(() => Date.now());
   const { markSectionCompleted, learningProgress } = useUser();
   const {
     trackLessonStart,

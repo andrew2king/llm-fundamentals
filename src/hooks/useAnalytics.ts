@@ -115,7 +115,8 @@ const defaultProviders: AnalyticsProvider[] = [];
 // Global providers registry
 let providers: AnalyticsProvider[] = [...defaultProviders];
 
-// Global config
+// Global config (mutable for runtime configuration)
+// eslint-disable-next-line prefer-const
 let globalConfig: AnalyticsConfig = { ...defaultAnalyticsConfig };
 
 // ============================================
@@ -136,7 +137,9 @@ export function unregisterAnalyticsProvider(name: string): void {
 // GA4 Integration Helper
 // ============================================
 
-export function createGA4Provider(_ga4MeasurementId: string): AnalyticsProvider {
+export function createGA4Provider(ga4MeasurementId: string): AnalyticsProvider {
+  // Measurement ID is used for initialization in a real implementation
+  void ga4MeasurementId;
   return {
     name: 'ga4',
     trackEvent: (eventName: string, params?: Record<string, unknown>) => {
@@ -165,7 +168,9 @@ export function createGA4Provider(_ga4MeasurementId: string): AnalyticsProvider 
 // Baidu Analytics Integration Helper
 // ============================================
 
-export function createBaiduAnalyticsProvider(_siteId: string): AnalyticsProvider {
+export function createBaiduAnalyticsProvider(siteId: string): AnalyticsProvider {
+  // Site ID is used for initialization in a real implementation
+  void siteId;
   return {
     name: 'baidu',
     trackEvent: (eventName: string, params?: Record<string, unknown>) => {
@@ -180,7 +185,9 @@ export function createBaiduAnalyticsProvider(_siteId: string): AnalyticsProvider
         ]);
       }
     },
-    trackPageView: (pagePath: string, _params?: Record<string, unknown>) => {
+    trackPageView: (pagePath: string, params?: Record<string, unknown>) => {
+      // params unused but kept for API consistency
+      void params;
       if (typeof window !== 'undefined' && '_hmt' in window) {
         (window as Window & { _hmt: { push: (args: unknown[]) => void } })._hmt.push([
           '_trackPageview',
@@ -188,7 +195,10 @@ export function createBaiduAnalyticsProvider(_siteId: string): AnalyticsProvider
         ]);
       }
     },
-    trackConversion: (conversionName: string, _value?: number, _currency?: string, params?: Record<string, unknown>) => {
+    trackConversion: (conversionName: string, value?: number, currency?: string, params?: Record<string, unknown>) => {
+      // value and currency unused but kept for API consistency
+      void value;
+      void currency;
       if (typeof window !== 'undefined' && '_hmt' in window) {
         const p = params || {};
         (window as Window & { _hmt: { push: (args: unknown[]) => void } })._hmt.push([
@@ -623,12 +633,12 @@ export function usePurchaseFunnel(courseId: string, courseName: string, price: n
     trackFunnelStep,
   } = useAnalytics();
   const funnel = ConversionFunnels.COURSE_PURCHASE;
-  const stepRef = useRef(0);
+  const [currentStep, setCurrentStep] = useState(0);
 
   const trackStep = useCallback(
     (stepIndex: number, extras?: Record<string, unknown>) => {
-      if (stepIndex > stepRef.current) {
-        stepRef.current = stepIndex;
+      if (stepIndex > currentStep) {
+        setCurrentStep(stepIndex);
         trackFunnelStep(funnel.name, stepIndex + 1, funnel.stepNames[stepIndex], funnel.steps.length, {
           courseId,
           courseName,
@@ -637,7 +647,7 @@ export function usePurchaseFunnel(courseId: string, courseName: string, price: n
         });
       }
     },
-    [funnel, trackFunnelStep, courseId, courseName, price]
+    [funnel, trackFunnelStep, courseId, courseName, price, currentStep]
   );
 
   const trackViewCourse = useCallback(
@@ -677,7 +687,7 @@ export function usePurchaseFunnel(courseId: string, courseName: string, price: n
     trackStartPreview,
     trackClickPurchase,
     trackCompletePurchase,
-    currentStep: stepRef.current,
+    currentStep,
     totalSteps: funnel.steps.length,
   };
 }
@@ -689,7 +699,7 @@ export function usePurchaseFunnel(courseId: string, courseName: string, price: n
 export function useLearningProgressFunnel(courseId: string, lessonId: string, lessonName: string) {
   const { trackLessonStart, trackLessonComplete, trackLessonProgress, trackFunnelStep } = useAnalytics();
   const funnel = ConversionFunnels.LEARNING_PROGRESS;
-  const milestonesRef = useRef<Set<number>>(new Set());
+  const [reachedMilestones, setReachedMilestones] = useState<number[]>([]);
 
   const trackStart = useCallback(
     (extras?: Record<string, unknown>) => {
@@ -714,8 +724,8 @@ export function useLearningProgressFunnel(courseId: string, lessonId: string, le
       ];
 
       milestonesToCheck.forEach(({ threshold, step }) => {
-        if (progressPercent >= threshold && !milestonesRef.current.has(threshold)) {
-          milestonesRef.current.add(threshold);
+        if (progressPercent >= threshold && !reachedMilestones.includes(threshold)) {
+          setReachedMilestones((prev) => [...prev, threshold]);
           trackFunnelStep(funnel.name, step, funnel.stepNames[step - 1], funnel.steps.length, {
             courseId,
             lessonId,
@@ -728,7 +738,7 @@ export function useLearningProgressFunnel(courseId: string, lessonId: string, le
 
       trackLessonProgress(courseId, lessonId, lessonName, progressPercent, extras);
     },
-    [trackLessonProgress, trackFunnelStep, funnel, courseId, lessonId, lessonName]
+    [trackLessonProgress, trackFunnelStep, funnel, courseId, lessonId, lessonName, reachedMilestones]
   );
 
   const trackComplete = useCallback(
@@ -748,7 +758,7 @@ export function useLearningProgressFunnel(courseId: string, lessonId: string, le
     trackStart,
     trackProgress,
     trackComplete,
-    reachedMilestones: Array.from(milestonesRef.current),
+    reachedMilestones,
   };
 }
 

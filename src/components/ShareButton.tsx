@@ -55,7 +55,10 @@ const shareMethods: ShareMethod[] = [
     name: 'LinkedIn',
     icon: <Linkedin className="w-5 h-5" />,
     color: '#0A66C2',
-    shareUrl: (url, _title) => `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+    shareUrl: (url, title) => {
+      void title; // LinkedIn share API doesn't use title
+      return `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+    },
   },
 ];
 

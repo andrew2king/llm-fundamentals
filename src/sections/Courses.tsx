@@ -103,8 +103,9 @@ export default function Courses() {
     if (!purchaseIntentRef.current.has(courseId)) {
       purchaseIntentRef.current.add(courseId);
 
-      // Track purchase intent as custom event
-      trackEvent('purchase_intent' as any, {
+      // Track purchase intent as custom event (not a standard event type)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (trackEvent as any)('purchase_intent', {
         courseId,
         courseName,
         price,

@@ -148,44 +148,44 @@ export function GlobalAnalyticsProvider({ children }: GlobalAnalyticsProviderPro
   }, [trackAction]);
 
   // Track clicks on important elements
+  const handleClick = useCallback((e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    const tagName = target.tagName.toLowerCase();
+
+    // Track link clicks
+    if (tagName === 'a' || target.closest('a')) {
+      const link = (target.closest('a') as HTMLAnchorElement) || (target as HTMLAnchorElement);
+      const href = link.href;
+      const isExternal = href && !href.includes(window.location.hostname);
+
+      trackAction('click', link.textContent || 'link', {
+        href,
+        isExternal,
+        linkType: isExternal ? 'external' : 'internal',
+      });
+    }
+
+    // Track button clicks
+    if (tagName === 'button' || target.closest('button')) {
+      const button = target.closest('button') as HTMLButtonElement;
+      trackAction('click', button.textContent || button.id || 'button', {
+        buttonType: button.type,
+        buttonText: button.textContent,
+      });
+    }
+
+    // Track CTA clicks (elements with specific classes)
+    if (target.classList.contains('cta') || target.closest('.cta')) {
+      trackAction('click', 'cta_click', {
+        ctaElement: target.textContent || target.id,
+      });
+    }
+  }, [trackAction]);
+
   useEffect(() => {
-    const handleClick = useCallback((e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const tagName = target.tagName.toLowerCase();
-
-      // Track link clicks
-      if (tagName === 'a' || target.closest('a')) {
-        const link = (target.closest('a') as HTMLAnchorElement) || (target as HTMLAnchorElement);
-        const href = link.href;
-        const isExternal = href && !href.includes(window.location.hostname);
-
-        trackAction('click', link.textContent || 'link', {
-          href,
-          isExternal,
-          linkType: isExternal ? 'external' : 'internal',
-        });
-      }
-
-      // Track button clicks
-      if (tagName === 'button' || target.closest('button')) {
-        const button = target.closest('button') as HTMLButtonElement;
-        trackAction('click', button.textContent || button.id || 'button', {
-          buttonType: button.type,
-          buttonText: button.textContent,
-        });
-      }
-
-      // Track CTA clicks (elements with specific classes)
-      if (target.classList.contains('cta') || target.closest('.cta')) {
-        trackAction('click', 'cta_click', {
-          ctaElement: target.textContent || target.id,
-        });
-      }
-    }, [trackAction]);
-
     document.addEventListener('click', handleClick);
     return () => document.removeEventListener('click', handleClick);
-  }, [trackAction]);
+  }, [handleClick]);
 
   // Track form submissions
   useEffect(() => {
