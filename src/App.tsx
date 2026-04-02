@@ -5,6 +5,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // User Context Provider
 import { UserProvider } from './contexts/UserContext';
 
+// Global Analytics Provider
+import { GlobalAnalyticsProvider } from './components/GlobalAnalyticsProvider';
+
 // Critical components - loaded immediately
 import Navbar from './sections/Navbar';
 import Hero from './sections/Hero';
@@ -113,7 +116,8 @@ function App() {
 
   return (
     <UserProvider>
-      <div className="relative bg-black text-white min-h-screen overflow-x-hidden">
+      <GlobalAnalyticsProvider>
+        <div className="relative bg-black text-white min-h-screen overflow-x-hidden">
       {/* Skip to content link for accessibility */}
       <a
         href="#main-content"
@@ -448,6 +452,7 @@ function App() {
       {/* Mobile Section Nav */}
       <SectionNav />
     </div>
+      </GlobalAnalyticsProvider>
     </UserProvider>
   );
 }

@@ -89,12 +89,30 @@ export default function Courses() {
   const sectionRef = useRef<HTMLElement>(null);
   const viewedCoursesRef = useRef<Set<string>>(new Set());
   const funnelStepsRef = useRef<Record<string, number>>({});
+  const purchaseIntentRef = useRef<Set<string>>(new Set());
   const {
     trackCourseView,
     trackPurchaseClick,
     trackCTA,
     trackFunnelStep,
+    trackEvent,
   } = useAnalytics();
+
+  // Track purchase intent when user hovers over purchase button
+  const handlePurchaseIntent = useCallback((courseId: string, courseName: string, price: number) => {
+    if (!purchaseIntentRef.current.has(courseId)) {
+      purchaseIntentRef.current.add(courseId);
+
+      // Track purchase intent as custom event
+      trackEvent('purchase_intent' as any, {
+        courseId,
+        courseName,
+        price,
+        timeFromView: Date.now(),
+        funnelStage: 'purchase_intent',
+      });
+    }
+  }, [trackEvent]);
 
   // Track course view when card becomes visible
   const handleCourseCardView = useCallback((courseId: string, courseName: string, price: number) => {
@@ -281,6 +299,7 @@ export default function Courses() {
                       href={course.buyUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onMouseEnter={() => handlePurchaseIntent(course.id, course.title, course.price)}
                       onClick={() => handlePurchaseClick(course.id, course.title, course.price, course.buyUrl)}
                       className="flex-1 py-3 min-h-[44px] rounded-xl bg-spacex-orange text-white font-medium hover:bg-spacex-orange/80 active:scale-95 transition-all flex items-center justify-center gap-2"
                     >
