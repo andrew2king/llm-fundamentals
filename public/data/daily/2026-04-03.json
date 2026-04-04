@@ -1,0 +1,92 @@
+{
+  "date": "2026-04-03",
+  "title": "AI日报｜4月3日",
+  "summary": "OpenAI收购TBPN加速全球AI对话，Slack推出30项AI新功能，Nvidia支持ThinkLabs AI融资2800万美元应对电网危机。",
+  "news": [
+    {
+      "id": "1",
+      "title": "OpenAI收购TBPN加速全球AI对话",
+      "summary": "OpenAI宣布收购TBPN，以加速全球AI对话并支持独立媒体，扩大与建设者、企业和更广泛技术社区的对话。",
+      "url": "https://openai.com/index/openai-acquires-tbpn",
+      "source": "OpenAI",
+      "publishedAt": "2026-04-02"
+    },
+    {
+      "id": "2",
+      "title": "Slack推出30项AI新功能，成为Salesforce收购后最大更新",
+      "summary": "Slack宣布为Slackbot添加超过30项新功能，包括会议记录、桌面端操作、MCP协议支持等，有望成为Salesforce 27年历史上采用最快的产品。",
+      "url": "https://venturebeat.com/orchestration/slack-adds-30-ai-features-to-slackbot-its-most-ambitious-update-since-the",
+      "source": "VentureBeat",
+      "publishedAt": "2026-04-02"
+    },
+    {
+      "id": "3",
+      "title": "Nvidia支持ThinkLabs AI融资2800万美元应对电网危机",
+      "summary": "ThinkLabs AI完成2800万美元A轮融资，由Energy Impact Partners领投，Nvidia NVentures参与。该公司使用物理信息AI实时模拟电网行为。",
+      "url": "https://venturebeat.com/infrastructure/nvidia-backed-thinklabs-ai-raises-usd28-million-to-tackle-a-growing-power",
+      "source": "VentureBeat",
+      "publishedAt": "2026-04-02"
+    },
+    {
+      "id": "4",
+      "title": "Meta新提示技术使LLM代码审查准确率达93%",
+      "summary": "Meta研究人员推出\"半形式化推理\"结构化提示技术，要求AI代理在回答前明确陈述前提、追踪执行路径，代码审查准确率提升至93%。",
+      "url": "https://venturebeat.com/orchestration/metas-new-structured-prompting-technique-makes-llms-significantly-better-at",
+      "source": "VentureBeat",
+      "publishedAt": "2026-04-02"
+    },
+    {
+      "id": "5",
+      "title": "Intuit AI代理重复使用率85%，秘诀是保持人机协作",
+      "summary": "Intuit向300万客户推出AI代理后，85%用户重复使用。公司EVP表示，AI与人类智能(AI-HI)结合比纯AI效果更好。",
+      "url": "https://venturebeat.com/orchestration/intuits-ai-agents-hit-85-repeat-usage-the-secret-was-keeping-humans-involved",
+      "source": "VentureBeat",
+      "publishedAt": "2026-04-02"
+    },
+    {
+      "id": "6",
+      "title": "OpenAI Codex为企业团队推出灵活定价",
+      "summary": "OpenAI为ChatGPT Business和Enterprise推出按需付费定价，为团队提供更灵活的选择来启动和扩展采用。",
+      "url": "https://openai.com/index/codex-flexible-pricing-for-teams",
+      "source": "OpenAI",
+      "publishedAt": "2026-04-02"
+    }
+  ],
+  "papers": [
+    {
+      "id": "1",
+      "title": "HippoCamp：个人电脑上下文代理基准测试",
+      "summary": "新基准测试评估代理在多模态文件管理中的能力，包含42.4GB真实数据，581个QA对，评估搜索、证据感知和多步推理能力。",
+      "url": "https://arxiv.org/abs/2604.01221",
+      "publishedAt": "2026-04-02"
+    },
+    {
+      "id": "2",
+      "title": "Therefore I am. I Think：推理模型决策机制研究",
+      "summary": "研究发现大语言推理模型在生成思维链之前就已编码决策，通过线性探针可在预生成激活中解码工具调用决策。",
+      "url": "https://arxiv.org/abs/2604.01202",
+      "publishedAt": "2026-04-02"
+    },
+    {
+      "id": "3",
+      "title": "NARCBench：多智能体合谋检测基准",
+      "summary": "引入多智能体合谋检测基准和五种探测技术，在分布内达到1.00 AUROC，零样本迁移到不同场景达0.60-0.86 AUROC。",
+      "url": "https://arxiv.org/abs/2604.01151",
+      "publishedAt": "2026-04-02"
+    },
+    {
+      "id": "4",
+      "title": "Universal YOCO：高效深度扩展架构",
+      "summary": "结合YOCO解码器-解码器架构与递归计算，实现全局恒定KV缓存和线性预填充，在通用和长上下文基准测试中保持竞争力。",
+      "url": "https://arxiv.org/abs/2604.01220",
+      "publishedAt": "2026-04-02"
+    },
+    {
+      "id": "5",
+      "title": "LAPIS-SHRED：短时序列潜在相位推断",
+      "summary": "模块化架构从稀疏传感器观测中重建/预测完整时空动态，支持双向推断，在湍流、燃烧等复杂物理实验中验证。",
+      "url": "https://arxiv.org/abs/2604.01216",
+      "publishedAt": "2026-04-02"
+    }
+  ]
+}

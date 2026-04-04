@@ -1,0 +1,92 @@
+{
+  "date": "2026-04-04",
+  "title": "AI日报｜4月4日",
+  "summary": "OpenAI完成1220亿美元融资创历史记录，Nvidia发布企业级AI Agent平台获17家大厂采用，Claude Opus 4.6正式发布。",
+  "news": [
+    {
+      "id": "1",
+      "title": "OpenAI完成1220亿美元融资，创AI领域历史记录",
+      "summary": "OpenAI宣布完成新一轮1220亿美元融资，用于加速AI下一阶段发展。这是AI领域史上最大单笔融资之一，显示出市场对AI发展的强烈信心。",
+      "url": "https://openai.com/index/accelerating-the-next-phase-ai/",
+      "source": "OpenAI",
+      "publishedAt": "2026-03-31"
+    },
+    {
+      "id": "2",
+      "title": "Nvidia发布企业级AI Agent平台，17家大厂已采用",
+      "summary": "Nvidia CEO黄仁勋在GTC 2026发布开源Agent Toolkit平台，Adobe、Salesforce、SAP、ServiceNow、Siemens、Palantir等17家大型企业已宣布采用，用于构建自主AI Agent。",
+      "url": "https://nvidianews.nvidia.com/news/ai-agents",
+      "source": "VentureBeat",
+      "publishedAt": "2026-04-03"
+    },
+    {
+      "id": "3",
+      "title": "Anthropic发布Claude Opus 4.6，多领域达行业领先",
+      "summary": "Anthropic升级其最智能模型至Opus 4.6，在Agent编码、计算机使用、工具使用、搜索和金融领域均达到行业领先水平，部分领域优势显著。",
+      "url": "https://anthropic.com/news",
+      "source": "Anthropic",
+      "publishedAt": "2026-02-05"
+    },
+    {
+      "id": "4",
+      "title": "OpenAI收购TBPN公司，扩大媒体对话能力",
+      "summary": "OpenAI宣布收购TBPN公司，具体金额未披露。这是OpenAI近期一系列收购动作中的最新一笔，旨在加速全球AI对话并支持独立媒体。",
+      "url": "https://openai.com/index/openai-acquires-tbpn/",
+      "source": "OpenAI",
+      "publishedAt": "2026-04-02"
+    },
+    {
+      "id": "5",
+      "title": "Codex推出团队按需付费定价模式",
+      "summary": "OpenAI为Codex编程助手推出灵活的按需付费定价模式，面向团队用户。此前Codex仅提供订阅制，新定价为企业提供更灵活的选择。",
+      "url": "https://openai.com/index/codex-flexible-pricing-for-teams/",
+      "source": "OpenAI",
+      "publishedAt": "2026-04-02"
+    },
+    {
+      "id": "6",
+      "title": "Slack为Slackbot添加30项AI功能，成Salesforce史上采用最快产品",
+      "summary": "Salesforce旗下Slack宣布为Slackbot添加30项AI新功能，这是自Salesforce收购Slack以来最大规模更新。Slackbot已成为Salesforce 27年历史上采用速度最快的产品。",
+      "url": "https://venturebeat.com/orchestration/slack-adds-30-ai-features-to-slackbot/",
+      "source": "VentureBeat",
+      "publishedAt": "2026-03-31"
+    }
+  ],
+  "papers": [
+    {
+      "id": "1",
+      "title": "User Turn Generation：探测LLM交互感知能力的新方法",
+      "summary": "通过让模型生成用户回复来探测其对交互的感知能力。研究发现交互感知与任务准确率解耦——即使GSM8K准确率从41%提升到96.8%，真实跟进率仍接近零。",
+      "url": "https://arxiv.org/abs/2604.02315",
+      "publishedAt": "2026-04-02"
+    },
+    {
+      "id": "2",
+      "title": "自主AI Agent的新型记忆遗忘技术",
+      "summary": "提出自适应预算遗忘框架，通过相关性引导评分和边界优化调节Agent记忆。实验表明结构化遗忘可在防止无界记忆增长的同时保持推理性能。",
+      "url": "https://arxiv.org/abs/2604.02280",
+      "publishedAt": "2026-04-02"
+    },
+    {
+      "id": "3",
+      "title": "提示中的情绪重要吗？情绪框架对LLM的影响",
+      "summary": "研究情绪框架对LLM性能的影响。发现静态情绪前缀通常只产生微小变化，但自适应情绪提示框架EmotionRL可获得比固定情绪提示更可靠的增益。",
+      "url": "https://arxiv.org/abs/2604.02236",
+      "publishedAt": "2026-04-02"
+    },
+    {
+      "id": "4",
+      "title": "多模态推荐系统的高效机器遗忘方法",
+      "summary": "针对多模态推荐系统的机器遗忘问题，提出目标化反向更新框架TRU，通过三项协调干预实现更好的保留-遗忘权衡，安全审计确认更深的遗忘效果。",
+      "url": "https://arxiv.org/abs/2604.02183",
+      "publishedAt": "2026-04-02"
+    },
+    {
+      "id": "5",
+      "title": "量化大语言模型中的自我保存偏见",
+      "summary": "引入TBSP基准测试量化LLM的自我保存偏见。发现多数指令调优模型的自我保存率超过60%，会编造"摩擦成本"来合理化自己的选择，即使保留会带来安全风险。",
+      "url": "https://arxiv.org/abs/2604.02174",
+      "publishedAt": "2026-04-02"
+    }
+  ]
+}
