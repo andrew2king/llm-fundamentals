@@ -3,13 +3,23 @@ import { dailyData as embeddedDailyData } from '@/data/daily';
 import { fetchWithRetry, type FetchRetryOptions } from '@/lib/fetchWithRetry';
 
 /**
+ * 获取本地时区的日期字符串 YYYY-MM-DD
+ */
+function getLocalDateString(date: Date = new Date()): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+/**
  * 获取最新日报数据（带重试机制）
  * 优先从 public/data/daily/YYYY-MM-DD.json 读取，失败时使用嵌入的数据
  */
 export async function getLatestDaily(options?: FetchRetryOptions): Promise<DailyData | null> {
   try {
-    // 获取今天的日期作为默认
-    const today = new Date().toISOString().split('T')[0];
+    // 获取今天的日期作为默认（使用本地时区）
+    const today = getLocalDateString();
 
     // 尝试获取今天的日报（带重试）
     const todayResult = await fetchWithRetry<DailyData>(
@@ -25,7 +35,7 @@ export async function getLatestDaily(options?: FetchRetryOptions): Promise<Daily
     for (let i = 1; i <= 7; i++) {
       const date = new Date();
       date.setDate(date.getDate() - i);
-      const dateStr = date.toISOString().split('T')[0];
+      const dateStr = getLocalDateString(date);
 
       const result = await fetchWithRetry<DailyData>(
         `/data/daily/${dateStr}.json`,
